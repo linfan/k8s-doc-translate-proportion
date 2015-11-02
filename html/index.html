@@ -25,32 +25,20 @@
 <style type="text/css">html {-webkit-filter: invert(0%) !important; }img, video, object {-webkit-filter: invert(0%) !important; }</style><style type="text/css">html {-webkit-filter: invert(0%) !important; }img, video, object {-webkit-filter: invert(0%) !important; }</style></head>
 
 <body>
-<div class="center">
-    <h1>Kubernetes文档翻译贡献比率</h1>
-    <u>目前大家一共翻译了 11766 个汉字 :D - [更新时间2015-11-02]</u>
-</div>
+<center>
+    <iframe src="title.html" width="800" height="100" class="center" frameborder="0" scrolling="no"> </iframe>
+</center>
 <div id="Main">
-    <div id="mainDiv" style="overflow: hidden; text-align: left;"><div style="overflow: hidden; position: relative; text-align: left; width: 800px; height: 500px;"></div></div>
+    <div id="mainDiv" style="overflow: hidden; text-align: left;">
+    </div>
 </div> 
 
 <script type="text/javascript" src="./proportion_files/amcharts.js"></script>
+<script type="text/javascript" src="./proportion_files/data.js"></script>
 <script type="text/javascript">
-window.onload=function(){
+window.onload=function() {
 	MakeChart(json);
 }
-var json=[
- {"name":"White","value":"26.16"},
- {"name":"it2afl0rd","value":"4.49"},
- {"name":"kz","value":"0.03"},
- {"name":"mr.art","value":"2.01"},
- {"name":"razr","value":"19.09"},
- {"name":"tiger","value":"8.48"},
- {"name":"李昂","value":"0.22"},
- {"name":"林帆","value":"7.57"},
- {"name":"王乐","value":"9.54"},
- {"name":"卢文泉","value":"13.45"},
- {"name":"安雪艳","value":"8.96"}
-  ]
 //根据json数据生成饼状图，并将饼状图显示到div中
 function MakeChart(value) {
     chartData = eval(value);
@@ -71,7 +59,6 @@ function MakeChart(value) {
     chart.angle = 30;
     chart.write("mainDiv");
 }
-
 </script>
 
 </body></html>
