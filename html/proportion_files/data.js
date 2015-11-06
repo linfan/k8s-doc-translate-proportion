@@ -10,7 +10,7 @@ var json=[
   {"name":"王乐", "value":"1092"},
   {"name":"卢文泉", "value":"1539"},
   {"name":"安雪艳", "value":"1662"},
-  {"name":"张以法", "value":"289"},
+  {"name":"张以法", "value":"1551"},
   {"name":"李加庆", "value":"0"},
   {"name":"钟健鑫", "value":"1124"}
 ]
