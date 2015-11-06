@@ -12,5 +12,5 @@ var json=[
   {"name":"安雪艳", "value":"1662"},
   {"name":"张以法", "value":"289"},
   {"name":"李加庆", "value":"0"},
-  {"name":"钟健鑫", "value":"1103"}
+  {"name":"钟健鑫", "value":"1124"}
 ]
