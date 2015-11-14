@@ -10,10 +10,11 @@ var json=[
   {"name":"李昂", "value":"25"},
   {"name":"林帆", "value":"3401"},
   {"name":"王乐", "value":"1092"},
-  {"name":"卢文泉", "value":"1539"},
+  {"name":"卢文泉", "value":"4401"},
   {"name":"安雪艳", "value":"1662"},
   {"name":"张以法", "value":"1569"},
-  {"name":"李加庆", "value":"2616"},
+  {"name":"李加庆", "value":"1991"},
   {"name":"贾澜鹏", "value":"1332"},
+  {"name":"赵帅龙", "value":"0"},
   {"name":"钟健鑫", "value":"2009"}
 ]
