@@ -1,5 +1,5 @@
 var json=[
-  {"name":"Nancy", "value":"0"},
+  {"name":"Nancy", "value":"861"},
   {"name":"White", "value":"5547"},
   {"name":"it2afl0rd", "value":"2519"},
   {"name":"kz", "value":"6781"},
@@ -13,7 +13,7 @@ var json=[
   {"name":"卢文泉", "value":"4401"},
   {"name":"安雪艳", "value":"1662"},
   {"name":"张以法", "value":"1569"},
-  {"name":"李加庆", "value":"1991"},
+  {"name":"李加庆", "value":"2697"},
   {"name":"贾澜鹏", "value":"1332"},
   {"name":"赵帅龙", "value":"0"},
   {"name":"钟健鑫", "value":"2009"}
