@@ -1,0 +1,2720 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>第3.1.6节  Labels | Kubernetes中文文档</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.6.4">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-splitter/splitter.css">
+        
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+
+        
+    
+    
+    <link rel="next" href="./037-Replication Controller.html" />
+    
+    
+    <link rel="prev" href="./035-Pods.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book"
+        data-level="4.6"
+        data-chapter-title="第3.1.6节  Labels"
+        data-filepath="036-Labels and Selectors.md"
+        data-basepath="."
+        data-revision="Fri Dec 11 2015 21:21:50 GMT+0800 (CST)"
+        data-innerlanguage="">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="./index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        介紹
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" >
+            
+            <span><b>1.</b> 第一章</span>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.1" data-path="002-whatisk8s.html">
+            
+                
+                    <a href="./002-whatisk8s.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.1.</b>
+                        
+                        第1.1节  什么是Kubernetes？
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2" >
+            
+            <span><b>2.</b> 第二章</span>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1" data-path="033-Overview and Concepts.html">
+            
+                
+                    <a href="./033-Overview and Concepts.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.1.</b>
+                        
+                        第2.1节  Kubernetes概览
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="003-Creating_Kubernetes_Clusters.html">
+            
+                
+                    <a href="./003-Creating_Kubernetes_Clusters.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.2.</b>
+                        
+                        第2.2节  创建Kubernetes集群
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="004-Local-machine Solutions.html">
+            
+                
+                    <a href="./004-Local-machine Solutions.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.3.</b>
+                        
+                        第2.3节  从本地环境起步
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="005-Local_Docker-based.html">
+            
+                
+                    <a href="./005-Local_Docker-based.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.4.</b>
+                        
+                        第2.4节 基于Docker本地运行Kubernetes
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="006-Vagrant.html">
+            
+                
+                    <a href="./006-Vagrant.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.5.</b>
+                        
+                        第2.5节 使用Vagrant
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="007-Local_No-VM.html">
+            
+                
+                    <a href="./007-Local_No-VM.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.6.</b>
+                        
+                        第2.6节 从本地运行k8s开始 v1.0
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="008-Hosted_Solution-Google_Container_Engine.html">
+            
+                
+                    <a href="./008-Hosted_Solution-Google_Container_Engine.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.7.</b>
+                        
+                        第2.7节 容器引擎
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.8" data-path="009-Turn-key Cloud Solutions.html">
+            
+                
+                    <a href="./009-Turn-key Cloud Solutions.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.8.</b>
+                        
+                        第2.8节 入门指南：完整的解决方案
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.9" data-path="010-GCE.html">
+            
+                
+                    <a href="./010-GCE.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.9.</b>
+                        
+                        第2.9节 Google Computer Engine入门
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.10" data-path="011-AWS.html">
+            
+                
+                    <a href="./011-AWS.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.10.</b>
+                        
+                        第2.10节 AWS EC2快速入门
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.11" data-path="012-Azure.html">
+            
+                
+                    <a href="./012-Azure.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.11.</b>
+                        
+                        第2.11节 在Azure上使用CoreOS和Weave的Kubernetes
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.12" >
+            
+            <span><b>2.12.</b> 第2.12节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.13" data-path="014-scratch.html">
+            
+                
+                    <a href="./014-scratch.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.13.</b>
+                        
+                        第2.13节  从零开始
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.14" data-path="015-AWS or GCE.html">
+            
+                
+                    <a href="./015-AWS or GCE.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.14.</b>
+                        
+                        第2.14节
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.15" data-path="016-AWS or Joyent.html">
+            
+                
+                    <a href="./016-AWS or Joyent.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.15.</b>
+                        
+                        第2.15节  Juju上部署入门
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.16" data-path="017-Racksepce.html">
+            
+                
+                    <a href="./017-Racksepce.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.16.</b>
+                        
+                        第2.16节  Racksapec上部署入门
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.17" data-path="019-CloudStack.html">
+            
+                
+                    <a href="./019-CloudStack.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.17.</b>
+                        
+                        第2.17节  CloudStack入门指南
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.18" data-path="020-VMware.html">
+            
+                
+                    <a href="./020-VMware.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.18.</b>
+                        
+                        第2.18节 vSphere的入门指南
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.19" data-path="022-libvirt_CoreOS.html">
+            
+                
+                    <a href="./022-libvirt_CoreOS.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.19.</b>
+                        
+                        第2.19节  libvirt CoreOS的入门指南
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.20" data-path="023-oVirt.html">
+            
+                
+                    <a href="./023-oVirt.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.20.</b>
+                        
+                        第2.20节
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.21" data-path="024-libvirt or KVM.html">
+            
+                
+                    <a href="./024-libvirt or KVM.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.21.</b>
+                        
+                        第2.21节
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.22" data-path="025-Offline.html">
+            
+                
+                    <a href="./025-Offline.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.22.</b>
+                        
+                        第2.22节  离线安装（使用裸机和CoreOS系统）
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.23" >
+            
+            <span><b>2.23.</b> 第2.23节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.24" data-path="027-fedora_single_node.html">
+            
+                
+                    <a href="./027-fedora_single_node.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.24.</b>
+                        
+                        第2.24节  从Ferdora入门Kubernetes
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.25" data-path="029-centos_manual_config.html">
+            
+                
+                    <a href="./029-centos_manual_config.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.25.</b>
+                        
+                        第2.25节  从CentOS入门Kubernetes
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.26" data-path="030-ubuntu.html">
+            
+                
+                    <a href="./030-ubuntu.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.26.</b>
+                        
+                        第2.26节  在Ubuntu物理节点上部署Kubernets
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.27" data-path="031-docker-multinode.html">
+            
+                
+                    <a href="./031-docker-multinode.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.27.</b>
+                        
+                        第2.27节  利用Docker安装多节点Kubernetes
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2.28" data-path="032-memsos.html">
+            
+                
+                    <a href="./032-memsos.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.28.</b>
+                        
+                        第2.28节  如何在Mesos上运行Kubernetes
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="3" >
+            
+            <span><b>3.</b> 第三章</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4" >
+            
+            <span><b>4.</b> 第3.1章</span>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.1" data-path="044-Overview and Concepts.html">
+            
+                
+                    <a href="./044-Overview and Concepts.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.1.</b>
+                        
+                        第3.1.1节 Kubernetes用户指南：应用程序管理
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" >
+            
+            <span><b>4.2.</b> 第3.1.2节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" >
+            
+            <span><b>4.3.</b> 第3.1.3节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4" >
+            
+            <span><b>4.4.</b> 第3.1.4节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.5" data-path="035-Pods.html">
+            
+                
+                    <a href="./035-Pods.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.5.</b>
+                        
+                        第3.1.5节  Pods
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="4.6" data-path="036-Labels and Selectors.html">
+            
+                
+                    <a href="./036-Labels and Selectors.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.6.</b>
+                        
+                        第3.1.6节  Labels
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.7" data-path="037-Replication Controller.html">
+            
+                
+                    <a href="./037-Replication Controller.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.7.</b>
+                        
+                        第3.1.7节  Replication Controller
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.8" data-path="038-Services.html">
+            
+                
+                    <a href="./038-Services.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.8.</b>
+                        
+                        第3.1.8节  Services in Kubernetes
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.9" data-path="039-Volumes.html">
+            
+                
+                    <a href="./039-Volumes.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.9.</b>
+                        
+                        第3.1.9节  Volumes
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.10" >
+            
+            <span><b>4.10.</b> 第3.1.10节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.11" data-path="040-Secrets.html">
+            
+                
+                    <a href="./040-Secrets.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.11.</b>
+                        
+                        第3.1.11节  Secrets
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.12" data-path="041-Names.html">
+            
+                
+                    <a href="./041-Names.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.12.</b>
+                        
+                        第3.1.12节  Identifiers
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.13" data-path="042-Namespaces.html">
+            
+                
+                    <a href="./042-Namespaces.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.13.</b>
+                        
+                        第3.1.13节  Namespaces
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.14" >
+            
+            <span><b>4.14.</b> 第3.1.14节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.15" data-path="043-Annotations.html">
+            
+                
+                    <a href="./043-Annotations.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.15.</b>
+                        
+                        第3.1.15节  Annotations
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.16" >
+            
+            <span><b>4.16.</b> 第3.1.16节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.17" >
+            
+            <span><b>4.17.</b> 第3.1.17节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.18" >
+            
+            <span><b>4.18.</b> 第3.1.18节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.19" >
+            
+            <span><b>4.19.</b> 第3.1.19节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.20" >
+            
+            <span><b>4.20.</b> 第3.1.20节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.21" >
+            
+            <span><b>4.21.</b> 第3.1.21节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.22" >
+            
+            <span><b>4.22.</b> 第3.1.22节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.23" data-path="045-Quick_Walkthrough_Basics_Tutorials.html">
+            
+                
+                    <a href="./045-Quick_Walkthrough_Basics_Tutorials.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.23.</b>
+                        
+                        第3.1.23节  基础教程
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.24" data-path="092-Kubernetes 101.html">
+            
+                
+                    <a href="./092-Kubernetes 101.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.24.</b>
+                        
+                        第3.1.24节  Kubernetes 101 - Kubectl CLI和Pods
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.25" data-path="093-Kubernetes 201.html">
+            
+                
+                    <a href="./093-Kubernetes 201.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.25.</b>
+                        
+                        第3.1.25节  Kubernetes 201 - 标签, 副本控制, 服务和健康检查
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.26" >
+            
+            <span><b>4.26.</b> 第3.1.26节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.27" data-path="048-Configuring Containers.html">
+            
+                
+                    <a href="./048-Configuring Containers.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.27.</b>
+                        
+                        第3.1.27节  配置kubernetes
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.28" >
+            
+            <span><b>4.28.</b> 第3.1.28节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.29" data-path="049-Managing_Applications-Deploying_continuously_running_applications.html">
+            
+                
+                    <a href="./049-Managing_Applications-Deploying_continuously_running_applications.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.29.</b>
+                        
+                        第3.1.29节 管理应用：部署持续运行的应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.30" data-path="050-Managing_Applications-Connecting_applications.html">
+            
+                
+                    <a href="./050-Managing_Applications-Connecting_applications.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.30.</b>
+                        
+                        第3.1.30节 管理应用：连接应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.31" data-path="051-Working with Containers.html">
+            
+                
+                    <a href="./051-Working with Containers.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.31.</b>
+                        
+                        第3.1.31节  管理应用： 在生产环境中使用Pods和容器
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.32" data-path="052-Kubernetes_User_Guide-Managing_Applications-Managing_deployments.html">
+            
+                
+                    <a href="./052-Kubernetes_User_Guide-Managing_Applications-Managing_deployments.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.32.</b>
+                        
+                        第3.1.32节 Kubernetes用户指南：管理应用：管理部署
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.33" >
+            
+            <span><b>4.33.</b> 第3.1.33节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.34" data-path="054-Web Interface.html">
+            
+                
+                    <a href="./054-Web Interface.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.34.</b>
+                        
+                        第3.1.34节  Kubernetes UI
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.35" >
+            
+            <span><b>4.35.</b> 第3.1.35节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.36" >
+            
+            <span><b>4.36.</b> 第3.1.36节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.37" data-path="057-Container_Access_exec.html">
+            
+                
+                    <a href="./057-Container_Access_exec.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.37.</b>
+                        
+                        第3.1.37节  使用kubectl exec检查容器中的环境变量
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.38" data-path="058-Connect with Proxies.html">
+            
+                
+                    <a href="./058-Connect with Proxies.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.38.</b>
+                        
+                        第3.1.38节  应用：kubectl proxy和apiserver proxy
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="4.39" data-path="059-Connect with Port Forwarding.html">
+            
+                
+                    <a href="./059-Connect with Port Forwarding.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.39.</b>
+                        
+                        第3.1.39节  应用：kubectl port-forward
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="5" >
+            
+            <span><b>5.</b> 第3.2章</span>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="5.1" data-path="060-Overview and Concepts.html">
+            
+                
+                    <a href="./060-Overview and Concepts.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.1.</b>
+                        
+                        第3.2.1节  Kubenetes集群管理员手册
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="034-Architecture.html">
+            
+                
+                    <a href="./034-Architecture.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.2.</b>
+                        
+                        第3.2.2节  Kubernetes架构
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="061-Planning and Designing.html">
+            
+                
+                    <a href="./061-Planning and Designing.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.3.</b>
+                        
+                        第3.2.3节
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.4" data-path="062-Security.html">
+            
+                
+                    <a href="./062-Security.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.4.</b>
+                        
+                        第3.2.4节
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.5" >
+            
+            <span><b>5.5.</b> 第3.2.5节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.6" data-path="063-Access Management.html">
+            
+                
+                    <a href="./063-Access Management.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.6.</b>
+                        
+                        第3.2.6节
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.7" data-path="064-Namespaces.html">
+            
+                
+                    <a href="./064-Namespaces.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.7.</b>
+                        
+                        第3.2.7节
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.8" data-path="065-Administering Clusters.html">
+            
+                
+                    <a href="./065-Administering Clusters.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.8.</b>
+                        
+                        第3.2.8节  Kubernetes集群管理指南：集群组件
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.9" >
+            
+            <span><b>5.9.</b> 第3.2.9节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.10" data-path="066-kube-apiserver Binary.html">
+            
+                
+                    <a href="./066-kube-apiserver Binary.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.10.</b>
+                        
+                        第3.2.10节  Kube-API Server
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.11" data-path="067-Authorization.html">
+            
+                
+                    <a href="./067-Authorization.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.11.</b>
+                        
+                        第3.2.11节  授权插件
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.12" data-path="068-Authentication.html">
+            
+                
+                    <a href="./068-Authentication.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.12.</b>
+                        
+                        第3.2.12节  认证插件
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.13" data-path="069-Accessing the API.html">
+            
+                
+                    <a href="./069-Accessing the API.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.13.</b>
+                        
+                        第3.2.13节  API Server端口配置
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.14" data-path="070-Admission Controllers.html">
+            
+                
+                    <a href="./070-Admission Controllers.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.14.</b>
+                        
+                        第3.2.14节  Admission Controller
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.15" data-path="071-Administrating Service Accounts.html">
+            
+                
+                    <a href="./071-Administrating Service Accounts.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.15.</b>
+                        
+                        第3.2.15节  Service Accounts集群管理指南
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.16" data-path="073-kube-scheduler Binary.html">
+            
+                
+                    <a href="./073-kube-scheduler Binary.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.16.</b>
+                        
+                        第3.2.16节  Kube调度器
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.17" >
+            
+            <span><b>5.17.</b> 第3.2.17节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.18" >
+            
+            <span><b>5.18.</b> 第3.2.18节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.19" >
+            
+            <span><b>5.19.</b> 第3.2.19节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.20" >
+            
+            <span><b>5.20.</b> 第3.2.20节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.21" data-path="079-networkingmd.html">
+            
+                
+                    <a href="./079-networkingmd.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.21.</b>
+                        
+                        第3.2.21节  网络
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.22" >
+            
+            <span><b>5.22.</b> 第3.2.22节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.23" >
+            
+            <span><b>5.23.</b> 第3.2.23节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.24" >
+            
+            <span><b>5.24.</b> 第3.2.24节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.25" >
+            
+            <span><b>5.25.</b> 第3.2.25节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.26" >
+            
+            <span><b>5.26.</b> 第3.2.26节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.27" >
+            
+            <span><b>5.27.</b> 第3.2.27节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.28" >
+            
+            <span><b>5.28.</b> 第3.2.28节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.29" >
+            
+            <span><b>5.29.</b> 第3.2.29节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.30" >
+            
+            <span><b>5.30.</b> 第3.2.30节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.31" >
+            
+            <span><b>5.31.</b> 第3.2.31节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.32" >
+            
+            <span><b>5.32.</b> 第3.2.32节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.33" >
+            
+            <span><b>5.33.</b> 第3.2.33节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.34" data-path="090-Logging.html">
+            
+                
+                    <a href="./090-Logging.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.34.</b>
+                        
+                        第3.2.34节  从集群级别日志到Google云日志平台
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5.35" >
+            
+            <span><b>5.35.</b> 第3.2.35节</span>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="6" >
+            
+            <span><b>6.</b> 第四章</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7" >
+            
+            <span><b>7.</b> 第4.1章</span>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="7.1" >
+            
+            <span><b>7.1.</b> 第4.1.1节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.2" data-path="095-Apache Cassandra Database.html">
+            
+                
+                    <a href="./095-Apache Cassandra Database.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.2.</b>
+                        
+                        第4.1.2节 使用Kubernetes在云上原生部署cassandra
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.3" data-path="096-Spark example.html">
+            
+                
+                    <a href="./096-Spark example.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.3.</b>
+                        
+                        第4.1.3节 Spark例子
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.4" data-path="097-Apache Storm.html">
+            
+                
+                    <a href="./097-Apache Storm.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.4.</b>
+                        
+                        第4.1.4节  Storm 示例
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.5" data-path="098-Distributed Task Queue.html">
+            
+                
+                    <a href="./098-Distributed Task Queue.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.5.</b>
+                        
+                        第4.1.5节  示例: 分布式任务队列 Celery, RabbitMQ和Flower
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.6" data-path="099-Hazelcast.html">
+            
+                
+                    <a href="./099-Hazelcast.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.6.</b>
+                        
+                        第4.1.6节 Kubernetes在Hazelcast平台上部署原生云应用
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.7" data-path="100-Meteor_Applications.html">
+            
+                
+                    <a href="./100-Meteor_Applications.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>7.7.</b>
+                        
+                        第4.1.7节 Meteor on Kuberenetes
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.8" >
+            
+            <span><b>7.8.</b> 第4.1.8节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.9" >
+            
+            <span><b>7.9.</b> 第4.1.9节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.10" >
+            
+            <span><b>7.10.</b> 第4.1.10节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.11" >
+            
+            <span><b>7.11.</b> 第4.1.11节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.12" >
+            
+            <span><b>7.12.</b> 第4.1.12节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.13" >
+            
+            <span><b>7.13.</b> 第4.1.13节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="7.14" >
+            
+            <span><b>7.14.</b> 第4.1.14节</span>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="8" >
+            
+            <span><b>8.</b> 第4.2章</span>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="8.1" >
+            
+            <span><b>8.1.</b> 第4.2.1节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="109-Getting started with config files.html">
+            
+                
+                    <a href="./109-Getting started with config files.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.2.</b>
+                        
+                        第4.2.2节 配置文件使用入门
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" data-path="110-Environment Guide Example.html">
+            
+                
+                    <a href="./110-Environment Guide Example.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.3.</b>
+                        
+                        第4.2.3节  环境向导示例
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.4" data-path="111-Downward API example.html">
+            
+                
+                    <a href="./111-Downward API example.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.4.</b>
+                        
+                        第4.2.4节 Downward API 范例
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.5" >
+            
+            <span><b>8.5.</b> 第4.2.5节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.6" >
+            
+            <span><b>8.6.</b> 第4.2.6节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.7" >
+            
+            <span><b>8.7.</b> 第4.2.7节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.8" >
+            
+            <span><b>8.8.</b> 第4.2.8节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.9" data-path="114-Running your first containers in Kubernetes.html">
+            
+                
+                    <a href="./114-Running your first containers in Kubernetes.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.9.</b>
+                        
+                        第4.2.9节 在Kubernetes上运行你的第一个容器
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.10" data-path="115-Kubernetes DNS example.html">
+            
+                
+                    <a href="./115-Kubernetes DNS example.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.10.</b>
+                        
+                        第4.2.10节 Kubernetes DNS 实例实战
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.11" >
+            
+            <span><b>8.11.</b> 第4.2.11节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.12" >
+            
+            <span><b>8.12.</b> 第4.2.12节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.13" >
+            
+            <span><b>8.13.</b> 第4.2.13节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.14" >
+            
+            <span><b>8.14.</b> 第4.2.14节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.15" >
+            
+            <span><b>8.15.</b> 第4.2.15节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.16" >
+            
+            <span><b>8.16.</b> 第4.2.16节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.17" >
+            
+            <span><b>8.17.</b> 第4.2.17节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.18" >
+            
+            <span><b>8.18.</b> 第4.2.18节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.19" >
+            
+            <span><b>8.19.</b> 第4.2.19节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.20" >
+            
+            <span><b>8.20.</b> 第4.2.20节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.21" >
+            
+            <span><b>8.21.</b> 第4.2.21节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.22" data-path="127-Exploring Pods.html">
+            
+                
+                    <a href="./127-Exploring Pods.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.22.</b>
+                        
+                        第4.2.22节  滚动升级示例
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="8.23" data-path="128-Updating Live Pods.html">
+            
+                
+                    <a href="./128-Updating Live Pods.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>8.23.</b>
+                        
+                        第4.2.23节  explorer
+                    </a>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="9" >
+            
+            <span><b>9.</b> 第五章</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="10" >
+            
+            <span><b>10.</b> 第5.1章</span>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="10.1" data-path="129-api_basicsmd.html">
+            
+                
+                    <a href="./129-api_basicsmd.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>10.1.</b>
+                        
+                        第5.1.1节
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="10.2" data-path="132-working_with_resourcesmd.html">
+            
+                
+                    <a href="./132-working_with_resourcesmd.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>10.2.</b>
+                        
+                        第5.1.2节
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="10.3" data-path="133-kubernetes_api_referencemd.html">
+            
+                
+                    <a href="./133-kubernetes_api_referencemd.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>10.3.</b>
+                        
+                        第5.1.3节
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="10.4" data-path="134-operations.html">
+            
+                
+                    <a href="./134-operations.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>10.4.</b>
+                        
+                        第5.1.4节  运维API
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="10.5" data-path="135-Definitions.html">
+            
+                
+                    <a href="./135-Definitions.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>10.5.</b>
+                        
+                        第5.1.5节  参数说明
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="10.6" >
+            
+            <span><b>10.6.</b> 第5.1.6节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="10.7" >
+            
+            <span><b>10.7.</b> 第5.1.7节</span>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="11" >
+            
+            <span><b>11.</b> 第5.2章</span>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="11.1" >
+            
+            <span><b>11.1.</b> 第5.2.1节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.2" data-path="136-Command Reference.html">
+            
+                
+                    <a href="./136-Command Reference.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.2.</b>
+                        
+                        第5.2.2节  kubectl
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.3" data-path="198-kubectl_annotate.html">
+            
+                
+                    <a href="./198-kubectl_annotate.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.3.</b>
+                        
+                        第5.2.3节  kubectl annotate
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.4" data-path="137-kubectl_api-versions.html">
+            
+                
+                    <a href="./137-kubectl_api-versions.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.4.</b>
+                        
+                        第5.2.4节  kubectl api-versions
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.5" data-path="199-kubectl_apply.html">
+            
+                
+                    <a href="./199-kubectl_apply.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.5.</b>
+                        
+                        第5.2.5节  kubectl apply
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.6" data-path="200-kubectl_attach.html">
+            
+                
+                    <a href="./200-kubectl_attach.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.6.</b>
+                        
+                        第5.2.6节  kubectl attach
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.7" data-path="138-kubectl_cluster-info.html">
+            
+                
+                    <a href="./138-kubectl_cluster-info.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.7.</b>
+                        
+                        第5.2.7节  kubectl cluster-info
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.8" data-path="145-kubectl_config.html">
+            
+                
+                    <a href="./145-kubectl_config.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.8.</b>
+                        
+                        第5.2.8节  kubectl config
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.9" data-path="139-kubectl_config_set-cluster.html">
+            
+                
+                    <a href="./139-kubectl_config_set-cluster.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.9.</b>
+                        
+                        第5.2.9节  kubectl config set-cluster
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.10" data-path="140-kubectl_config_set-context.html">
+            
+                
+                    <a href="./140-kubectl_config_set-context.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.10.</b>
+                        
+                        第5.2.10节  kubectl config set-context
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.11" data-path="141-kubectl_config_set-credentials.html">
+            
+                
+                    <a href="./141-kubectl_config_set-credentials.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.11.</b>
+                        
+                        第5.2.11节  kubectl config set-credentials
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.12" data-path="142-kubectl_config_set.html">
+            
+                
+                    <a href="./142-kubectl_config_set.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.12.</b>
+                        
+                        第5.2.12节  kubectl config set
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.13" data-path="143-kubectl_config_unset.html">
+            
+                
+                    <a href="./143-kubectl_config_unset.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.13.</b>
+                        
+                        第5.2.13节  kubectl config unset
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.14" data-path="144-kubectl_config_use-context.html">
+            
+                
+                    <a href="./144-kubectl_config_use-context.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.14.</b>
+                        
+                        第5.2.14节  kubectl config use-context
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.15" data-path="146-kubectl_config_view.html">
+            
+                
+                    <a href="./146-kubectl_config_view.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.15.</b>
+                        
+                        第5.2.15节  kubectl config view
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.16" data-path="147-kubectl_create.html">
+            
+                
+                    <a href="./147-kubectl_create.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.16.</b>
+                        
+                        第5.2.16节  kubectl create
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.17" data-path="148-kubectl_delete.html">
+            
+                
+                    <a href="./148-kubectl_delete.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.17.</b>
+                        
+                        第5.2.17节  kubectl delete
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.18" data-path="149-kubectl_describe.html">
+            
+                
+                    <a href="./149-kubectl_describe.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.18.</b>
+                        
+                        第5.2.18节  kubectl describe
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.19" data-path="201-kubectl_edit.html">
+            
+                
+                    <a href="./201-kubectl_edit.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.19.</b>
+                        
+                        第5.2.19节  kubectl edit
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.20" data-path="150-kubectl_exec.html">
+            
+                
+                    <a href="./150-kubectl_exec.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.20.</b>
+                        
+                        第5.2.20节  kubectl exec
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.21" >
+            
+            <span><b>11.21.</b> 第5.2.21节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.22" >
+            
+            <span><b>11.22.</b> 第5.2.22节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.23" >
+            
+            <span><b>11.23.</b> 第5.2.23节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.24" data-path="154-kubectl_logs.html">
+            
+                
+                    <a href="./154-kubectl_logs.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.24.</b>
+                        
+                        第5.2.24节  kubectl logs
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.25" >
+            
+            <span><b>11.25.</b> 第5.2.25节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.26" >
+            
+            <span><b>11.26.</b> 第5.2.26节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.27" >
+            
+            <span><b>11.27.</b> 第5.2.27节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.28" >
+            
+            <span><b>11.28.</b> 第5.2.28节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.29" >
+            
+            <span><b>11.29.</b> 第5.2.29节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.30" >
+            
+            <span><b>11.30.</b> 第5.2.30节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.31" >
+            
+            <span><b>11.31.</b> 第5.2.31节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.32" data-path="164-kubectl_version.html">
+            
+                
+                    <a href="./164-kubectl_version.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>11.32.</b>
+                        
+                        第5.2.32节  kubectl version
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.33" >
+            
+            <span><b>11.33.</b> 第5.2.33节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="11.34" >
+            
+            <span><b>11.34.</b> 第5.2.34节</span>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="12" >
+            
+            <span><b>12.</b> 第六章</span>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="12.1" data-path="165-Troubleshooting and Support.html">
+            
+                
+                    <a href="./165-Troubleshooting and Support.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>12.1.</b>
+                        
+                        第6.1节  故障排查
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="12.2" >
+            
+            <span><b>12.2.</b> 第6.2节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="12.3" data-path="166-Applications.html">
+            
+                
+                    <a href="./166-Applications.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>12.3.</b>
+                        
+                        第6.3节  应用程序相关的故障排查
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="12.4" data-path="167-Clusters.html">
+            
+                
+                    <a href="./167-Clusters.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>12.4.</b>
+                        
+                        第3.2.34节  集群相关的故障排查
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="12.5" data-path="168-User_FAQ.html">
+            
+                
+                    <a href="./168-User_FAQ.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>12.5.</b>
+                        
+                        第6.4节  日常使用的常见问题
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="12.6" data-path="169-Debugging_FAQ.html">
+            
+                
+                    <a href="./169-Debugging_FAQ.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>12.6.</b>
+                        
+                        第6.5节  开发和调试的常见问题
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="12.7" data-path="170-Services_FAQ.html">
+            
+                
+                    <a href="./170-Services_FAQ.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>12.7.</b>
+                        
+                        第6.6节  服务相关的常见问题
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="12.8" >
+            
+            <span><b>12.8.</b> 第6.7节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="12.9" >
+            
+            <span><b>12.9.</b> 第6.8节</span>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="13" >
+            
+            <span><b>13.</b> 第七章</span>
+            
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="13.1" >
+            
+            <span><b>13.1.</b> 第7.1节</span>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="13.2" >
+            
+            <span><b>13.2.</b> 第7.2节</span>
+            
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    本書使用 GitBook 釋出
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="./" >Kubernetes中文文档</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="labels">Labels</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;kz</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p><em>Labels</em> are key/value pairs that are attached to objects, such as pods.
+Labels are intended to be used to specify identifying attributes of objects that are meaningful and relevant to users, but which do not directly imply semantics to the core system.
+Labels can be used to organize and to select subsets of objects.  Labels can be attached to objects at creation time and subsequently added and modified at any time.
+Each object can have a set of key/value labels defined.  Each Key must be unique for a given object.</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;labels&quot;</span>: {
+  <span class="hljs-string">&quot;key1&quot;</span> : <span class="hljs-string">&quot;value1&quot;</span>,
+  <span class="hljs-string">&quot;key2&quot;</span> : <span class="hljs-string">&quot;value2&quot;</span>
+}
+</code></pre>
+<p>We&apos;ll eventually index and reverse-index labels for efficient queries and watches, use them to sort and group in UIs and CLIs, etc. We don&apos;t want to pollute labels with non-identifying, especially large and/or structured, data. Non-identifying information should be recorded using <a href="annotations.md">annotations</a>.</p>
+<p>Labels&#x662F;&#x9644;&#x52A0;&#x5230;&#x5982;pod&#x7B49;&#x5BF9;&#x8C61;&#x7684;&#x952E;&#x503C;&#x5BF9;&#x3002;Label&#x65E8;&#x5728;&#x7528;&#x6765;&#x6307;&#x5B9A;&#x5BF9;&#x8C61;&#x90A3;&#x4E9B;&#x7528;&#x4E8E;&#x8FA8;&#x8BC6;&#x6027;&#x76EE;&#x7684;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x8FD9;&#x4E9B;&#x5C5E;&#x6027;&#x4E0E;&#x7528;&#x6237;&#x76F8;&#x5173;&#x6027;&#x5927;&#xFF0C;&#x4ED6;&#x4EEC;&#x6765;&#x8BF4;&#x5177;&#x6709;&#x610F;&#x4E49;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x4E9B;&#x5C5E;&#x6027;&#x5374;&#x5BF9;&#x4E8E;&#x4E0D;&#x76F4;&#x63A5;&#x8868;&#x8FBE;&#x6838;&#x5FC3;&#x7CFB;&#x7EDF;&#x7684;&#x8BED;&#x4E49;&#xFF08;sematics&#xFF09;&#x3002;Label&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x7EC4;&#x7EC7;&#x5E76;&#x4E14;&#x9009;&#x62E9;&#x5BF9;&#x8C61;&#x7684;&#x5B50;&#x96C6;&#x3002;Label&#x53EF;&#x4EE5;&#x5728;&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x7684;&#x65F6;&#x5019;&#x4F9D;&#x9644;&#x5230;&#x5BF9;&#x8C61;&#x4E0A;&#xFF0C;&#x968F;&#x540E;&#x53EF;&#x4EE5;&#x5728;&#x4EFB;&#x610F;&#x65F6;&#x95F4;&#x88AB;&#x6DFB;&#x52A0;&#x548C;&#x4FEE;&#x6539;&#x3002;&#x6BCF;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x4E00;&#x7EC4;&#x952E;&#x503C;&#x5BF9;label&#x3002;&#x6BCF;&#x4E00;&#x4E2A;&#x952E;&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A;&#x7ED9;&#x5B9A;&#x7684;&#x5BF9;&#x8C61;&#x5FC5;&#x987B;&#x662F;&#x552F;&#x4E00;&#x4E0D;&#x53EF;&#x91CD;&#x590D;&#x3002;</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;labels&quot;</span>: {
+  <span class="hljs-string">&quot;key1&quot;</span> : <span class="hljs-string">&quot;value1&quot;</span>,
+  <span class="hljs-string">&quot;key2&quot;</span> : <span class="hljs-string">&quot;value2&quot;</span>
+}
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x6700;&#x7EC8;&#x4F1A;&#x7D22;&#x5F15;&#x5E76;&#x4E14;&#x53CD;&#x5411;&#x7D22;&#x5F15;&#xFF08;reverse-index&#xFF09;labels&#xFF0C;&#x4EE5;&#x83B7;&#x5F97;&#x66F4;&#x9AD8;&#x6548;&#x7684;&#x67E5;&#x8BE2;&#x548C;&#x76D1;&#x89C6;&#xFF0C;&#x628A;&#x4ED6;&#x4EEC;&#x7528;&#x5230;UI&#x6216;&#x8005;CLI&#x4E2D;&#x7528;&#x6765;&#x6392;&#x5E8F;&#x6216;&#x8005;&#x5206;&#x7EC4;&#x7B49;&#x7B49;&#x3002;&#x6211;&#x4EEC;&#x4E0D;&#x60F3;&#x7528;&#x90A3;&#x4E9B;&#x4E0D;&#x5177;&#x6709;&#x6307;&#x8BA4;&#x6548;&#x679C;&#x7684;label&#x6765;&#x6C61;&#x67D3;label&#xFF0C;&#x7279;&#x522B;&#x662F;&#x90A3;&#x4E9B;&#x4F53;&#x79EF;&#x8F83;&#x5927;&#x548C;&#x7ED3;&#x6784;&#x578B;&#x7684;&#x7684;&#x6570;&#x636E;&#x3002;&#x4E0D;&#x5177;&#x6709;&#x6307;&#x8BA4;&#x6548;&#x679C;&#x7684;&#x4FE1;&#x606F;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;annotation&#x6765;&#x8BB0;&#x5F55;&#x3002;</p>
+<h2 id="motivation">Motivation</h2>
+<h2 id="&#x76EE;&#x6807;">&#x76EE;&#x6807;</h2>
+<p>Labels enable users to map their own organizational structures onto system objects in a loosely coupled fashion, without requiring clients to store these mappings.</p>
+<p>Service deployments and batch processing pipelines are often multi-dimensional entities (e.g., multiple partitions or deployments, multiple release tracks, multiple tiers, multiple micro-services per tier). Management often requires cross-cutting operations, which breaks encapsulation of strictly hierarchical representations, especially rigid hierarchies determined by the infrastructure rather than by users.</p>
+<p>Example labels:</p>
+<ul>
+<li><code>&quot;release&quot; : &quot;stable&quot;</code>, <code>&quot;release&quot; : &quot;canary&quot;</code></li>
+<li><code>&quot;environment&quot; : &quot;dev&quot;</code>, <code>&quot;environment&quot; : &quot;qa&quot;</code>, <code>&quot;environment&quot; : &quot;production&quot;</code></li>
+<li><code>&quot;tier&quot; : &quot;frontend&quot;</code>, <code>&quot;tier&quot; : &quot;backend&quot;</code>, <code>&quot;tier&quot; : &quot;cache&quot;</code></li>
+<li><code>&quot;partition&quot; : &quot;customerA&quot;</code>, <code>&quot;partition&quot; : &quot;customerB&quot;</code></li>
+<li><code>&quot;track&quot; : &quot;daily&quot;</code>, <code>&quot;track&quot; : &quot;weekly&quot;</code></li>
+</ul>
+<p>These are just examples; you are free to develop your own conventions.</p>
+<p>Label&#x53EF;&#x4EE5;&#x8BA9;&#x7528;&#x6237;&#x5C06;&#x4ED6;&#x4EEC;&#x81EA;&#x5DF1;&#x7684;&#x6709;&#x7EC4;&#x7EC7;&#x76EE;&#x7684;&#x7684;&#x7ED3;&#x6784;&#x4EE5;&#x4E00;&#x79CD;&#x677E;&#x8026;&#x5408;&#x7684;&#x65B9;&#x5F0F;&#x5E94;&#x7528;&#x5230;&#x7CFB;&#x7EDF;&#x7684;&#x5BF9;&#x8C61;&#x4E0A;&#xFF0C;&#x4E14;&#x4E0D;&#x9700;&#x8981;&#x5BA2;&#x6237;&#x7AEF;&#x5B58;&#x653E;&#x8FD9;&#x4E9B;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;&#xFF08;mappings&#xFF09;&#x3002;</p>
+<p>&#x670D;&#x52A1;&#x90E8;&#x7F72;&#x548C;&#x6279;&#x5904;&#x7406;&#x7BA1;&#x9053;&#x901A;&#x5E38;&#x662F;&#x591A;&#x7EF4;&#x7684;&#x5B9E;&#x4F53;&#xFF08;&#x4F8B;&#x5982;&#x591A;&#x4E2A;&#x5206;&#x533A;&#x6216;&#x8005;&#x90E8;&#x7F72;&#xFF0C;&#x591A;&#x4E2A;&#x53D1;&#x5E03;&#x8F68;&#x9053;&#xFF0C;&#x591A;&#x5C42;&#xFF0C;&#x6BCF;&#x5C42;&#x591A;&#x5FAE;&#x670D;&#x52A1;&#xFF09;&#x3002;&#x7BA1;&#x7406;&#x901A;&#x5E38;&#x9700;&#x8981;&#x8DE8;&#x8D8A;&#x5F0F;&#x7684;&#x5207;&#x5272;&#x64CD;&#x4F5C;&#xFF0C;&#x8FD9;&#x4F1A;&#x6253;&#x7834;&#x6709;&#x4E25;&#x683C;&#x5C42;&#x7EA7;&#x5C55;&#x793A;&#x5173;&#x7CFB;&#x7684;&#x5C01;&#x88C5;&#xFF0C;&#x7279;&#x522B;&#x5BF9;&#x90A3;&#x4E9B;&#x662F;&#x7531;&#x57FA;&#x7840;&#x8BBE;&#x65BD;&#x800C;&#x975E;&#x7528;&#x6237;&#x51B3;&#x5B9A;&#x7684;&#x5F88;&#x6B7B;&#x677F;&#x7684;&#x5C42;&#x7EA7;&#x5173;&#x7CFB;&#x3002;</p>
+<p>&#x4E00;&#x4E9B;&#x793A;&#x4F8B;label:</p>
+<ul>
+<li><code>&quot;&#x53D1;&#x884C;&#x7248;&#x672C;&#xFF08;release&#xFF09;&quot; : &quot;&#xFF08;&#x7A33;&#x5B9A;&#x7248;&#xFF09;stable&quot;</code>, <code>&quot;&#xFF08;&#x53D1;&#x884C;&#x7248;&#xFF09;release&quot; : &quot;canary&quot;</code></li>
+<li><code>&quot;&#x73AF;&#x5883;&#xFF08;environment&#xFF09;&quot; : &quot;&#xFF08;&#x5F00;&#x53D1;&#xFF09;dev&quot;</code>, <code>&quot;environment&quot; : &quot;qa&quot;</code>, <code>&quot;environment&quot; : &quot;&#xFF08;&#x751F;&#x4EA7;&#xFF09;production&quot;</code></li>
+<li><code>&quot;tier&quot; : &quot;frontend&quot;</code>, <code>&quot;tier&quot; : &quot;backend&quot;</code>, <code>&quot;tier&quot; : &quot;cache&quot;</code></li>
+<li><code>&quot;&#x5206;&#x533A;&#xFF08;partition&#xFF09;&quot; : &quot;&#xFF08;&#x5BA2;&#x6237;A&#xFF09;customerA&quot;</code>, <code>&quot;partition&quot; : &quot;customerB&quot;</code></li>
+<li><code>&quot;track&quot; : &quot;daily&quot;</code>, <code>&quot;track&quot; : &quot;weekly&quot;</code></li>
+</ul>
+<h2 id="syntax-and-character-set">Syntax and character set</h2>
+<h2 id="&#x8BED;&#x6CD5;&#x548C;&#x5B57;&#x7B26;&#x96C6;">&#x8BED;&#x6CD5;&#x548C;&#x5B57;&#x7B26;&#x96C6;</h2>
+<p><em>Labels</em> are key value pairs. Valid label keys have two segments: an optional prefix and name, separated by a slash (<code>/</code>).  The name segment is required and must be 63 characters or less, beginning and ending with an alphanumeric character (<code>[a-z0-9A-Z]</code>) with dashes (<code>-</code>), underscores (<code>_</code>), dots (<code>.</code>), and alphanumerics between.  The prefix is optional.  If specified, the prefix must be a DNS subdomain: a series of DNS labels separated by dots (<code>.</code>), not longer than 253 characters in total, followed by a slash (<code>/</code>).
+If the prefix is omitted, the label key is presumed to be private to the user. Automated system components (e.g. <code>kube-scheduler</code>, <code>kube-controller-manager</code>, <code>kube-apiserver</code>, <code>kubectl</code>, or other third-party automation) which add labels to end-user objects must specify a prefix.  The <code>kubernetes.io/</code> prefix is reserved for Kubernetes core components.</p>
+<p>Valid label values must be 63 characters or less and must be empty or begin and end with an alphanumeric character (<code>[a-z0-9A-Z]</code>) with dashes (<code>-</code>), underscores (<code>_</code>), dots (<code>.</code>), and alphanumerics between.</p>
+<p>Labels&#x662F;&#x952E;&#x503C;&#x5BF9;&#x3002;&#x5408;&#x6CD5;&#x7684;&#x952E;&#x503C;&#x5BF9;&#x6709;&#x4E24;&#x4E2A;&#x90E8;&#x5206;&#xFF1A;&#x4E00;&#x4E2A;&#x53EF;&#x9009;&#x7684;&#x524D;&#x7F00;&#x548C;&#x540D;&#x5B57;&#xFF0C;&#x7531;&#x201C;/&#x201D;&#x5206;&#x9694;&#x3002;&#x540D;&#x5B57;&#x90E8;&#x5206;&#x662F;&#x5FC5;&#x987B;&#xFF0C;&#x957F;&#x5EA6;&#x4E00;&#x5B9A;&#x662F;64&#x4E2A;&#x5B57;&#x7B26;&#x6216;&#x8005;&#x66F4;&#x77ED;&#xFF0C;&#x9996;&#x4F4D;&#x5B57;&#x7B26;&#x5FC5;&#x987B;&#x662F;&#x5B57;&#x6BCD;&#x6570;&#x5B57;&#x578B;&#xFF08;<code>[a-z0-9A-Z]</code>&#xFF09;&#xFF0C;&#x5176;&#x4ED6;&#x5730;&#x65B9;&#x7684;&#x5B57;&#x7B26;&#x5FC5;&#x987B;&#x662F;&#x6A2A;&#x7EBF;&#xFF0C;&#x4E0B;&#x5212;&#x7EBF;&#xFF0C;&#x70B9;&#xFF0C;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x5B57;&#x6BCD;&#x6570;&#x5B57;&#x5B57;&#x7B26;&#x3002;&#x524D;&#x7F00;&#x662F;&#x53EF;&#x9009;&#x7684;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#xFF0C;&#x524D;&#x7F00;&#x5FC5;&#x987B;&#x662F;&#x4E00;&#x4E2A;dns&#x7684;&#x5B50;&#x57DF;&#xFF1A;&#x4E00;&#x7CFB;&#x5217;&#x6709;&#x70B9;&#x5206;&#x9694;&#x7684;DNS label&#xFF0C;&#x603B;&#x957F;&#x5EA6;&#x4E0D;&#x80FD;&#x8D85;&#x8FC7;253&#x4E2A;&#x5B57;&#x7B26;&#xFF0C;&#x4EE5;&#x4E0B;&#x5212;&#x7EBF;&#x201C;/&#x201D;&#x7ED3;&#x5C3E;&#x3002;&#x5982;&#x679C;&#x524D;&#x7F00;&#x88AB;&#x7701;&#x7565;&#x6389;&#x4E86;&#xFF0C;label&#x7684;&#x952E;&#x4F1A;&#x88AB;&#x8BA4;&#x4E3A;&#x662F;&#x5BF9;&#x4E8E;&#x7528;&#x6237;&#x79C1;&#x6709;&#x7684;&#x3002;&#x7CFB;&#x7EDF;&#x81EA;&#x52A8;&#x7684;&#x7EC4;&#x4EF6;&#xFF08;&#x5982;kube-scheduler&#xFF0C;kube-controller-manager&#xFF0C;kube-apiserver&#xFF0C;kubectl&#x6216;&#x8005;&#x5176;&#x4ED6;&#x7B2C;&#x4E09;&#x65B9;&#x81EA;&#x52A8;&#x5DE5;&#x5177;&#xFF09;&#x5982;&#x8981;&#x5411;&#x7528;&#x6237;&#x6700;&#x7EC8;&#x7684;&#x5BF9;&#x8C61;&#x6DFB;&#x52A0;label&#xFF0C;&#x5FC5;&#x987B;&#x6307;&#x5B9A;&#x524D;&#x7F00;&#x3002;&#x524D;&#x7F00;<code>kubernetes.io/</code>&#x662F;&#x4FDD;&#x7559;&#x7ED9;Kubernetes&#x6838;&#x5FC3;&#x7EC4;&#x4EF6;&#x7528;&#x7684;&#x3002;</p>
+<p>&#x5408;&#x6CD5;&#x7684;label&#x503C;&#x5FC5;&#x987B;&#x662F;63&#x4E2A;&#x6216;&#x8005;&#x66F4;&#x77ED;&#x7684;&#x5B57;&#x7B26;&#x3002;&#x8981;&#x4E48;&#x662F;&#x7A7A;&#xFF0C;&#x8981;&#x4E48;&#x9996;&#x4F4D;&#x5B57;&#x7B26;&#x5FC5;&#x987B;&#x4E3A;&#x5B57;&#x6BCD;&#x6570;&#x5B57;&#x5B57;&#x7B26;&#xFF0C;&#x4E2D;&#x95F4;&#x5FC5;&#x987B;&#x662F;&#x6A2A;&#x7EBF;&#xFF0C;&#x4E0B;&#x5212;&#x7EBF;&#xFF0C;&#x70B9;&#x6216;&#x8005;&#x6570;&#x5B57;&#x5B57;&#x6BCD;&#x3002;</p>
+<h2 id="label&#x9009;&#x62E9;&#x5668;">Label&#x9009;&#x62E9;&#x5668;</h2>
+<p>Unlike <a href="identifiers.md">names and UIDs</a>, labels do not provide uniqueness. In general, we expect many objects to carry the same label(s).</p>
+<p>Via a <em>label selector</em>, the client/user can identify a set of objects. The label selector is the core grouping primitive in Kubernetes.</p>
+<p>The API currently supports two types of selectors: <em>equality-based</em> and <em>set-based</em>.
+A label selector can be made of multiple <em>requirements</em> which are comma-separated. In the case of multiple requirements, all must be satisfied so the comma separator acts as an <em>AND</em> logical operator.</p>
+<p>An empty label selector (that is, one with zero requirements) selects every object in the collection.</p>
+<p>A null label selector (which is only possible for optional selector fields) selects no objects.</p>
+<p>&#x4E0E;name&#x548C;UID&#x4E0D;&#x540C;&#xFF0C;label&#x4E0D;&#x63D0;&#x4F9B;&#x552F;&#x4E00;&#x6027;&#x3002;&#x901A;&#x5E38;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x770B;&#x5230;&#x5F88;&#x591A;&#x5BF9;&#x8C61;&#x6709;&#x7740;&#x4E00;&#x6837;&#x7684;label&#x3002;</p>
+<p>&#x901A;&#x8FC7;label&#x9009;&#x62E9;&#x5668;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;/&#x7528;&#x6237;&#x80FD;&#x65B9;&#x4FBF;&#x8FA8;&#x8BC6;&#x51FA;&#x4E00;&#x7EC4;&#x5BF9;&#x8C61;&#x3002;label&#x9009;&#x62E9;&#x5668;&#x662F;kubernetes&#x4E2D;&#x6838;&#x5FC3;&#x7684;&#x7EC4;&#x7EC7;&#x539F;&#x8BED;&#x3002;</p>
+<p>API&#x76EE;&#x524D;&#x652F;&#x6301;&#x4E24;&#x79CD;&#x9009;&#x62E9;&#x5668;&#xFF1A;&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x7684;&#x548C;&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x7684;&#x3002;&#x4E00;&#x4E2A;label&#x9009;&#x62E9;&#x5668;&#x4E00;&#x53EF;&#x4EE5;&#x7531;&#x591A;&#x4E2A;&#x5FC5;&#x987B;&#x6761;&#x4EF6;&#x7EC4;&#x6210;&#xFF0C;&#x7531;&#x9017;&#x53F7;&#x5206;&#x9694;&#x3002;&#x5728;&#x591A;&#x4E2A;&#x5FC5;&#x987B;&#x6761;&#x4EF6;&#x6307;&#x5B9A;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x6761;&#x4EF6;&#x90FD;&#x5FC5;&#x987B;&#x6EE1;&#x8DB3;&#xFF0C;&#x56E0;&#x800C;&#x9017;&#x53F7;&#x8D77;&#x7740;AND&#x903B;&#x8F91;&#x8FD0;&#x7B97;&#x7B26;&#x7684;&#x4F5C;&#x7528;&#x3002;</p>
+<p>&#x4E00;&#x4E2A;&#x7A7A;&#x7684;label&#x9009;&#x62E9;&#x5668;&#xFF08;&#x5373;&#x6709;0&#x4E2A;&#x5FC5;&#x987B;&#x6761;&#x4EF6;&#x7684;&#x9009;&#x62E9;&#x5668;&#xFF09;&#x4F1A;&#x9009;&#x62E9;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x3002;</p>
+<p> &#x4E00;&#x4E2A;null&#x578B;label&#x9009;&#x62E9;&#x5668;&#xFF08;&#x4EC5;&#x5BF9;&#x4E8E;&#x53EF;&#x9009;&#x7684;&#x9009;&#x62E9;&#x5668;&#x5B57;&#x6BB5;&#x624D;&#x53EF;&#x80FD;&#xFF09;&#x4E0D;&#x4F1A;&#x8FD4;&#x56DE;&#x4EFB;&#x4F55;&#x5BF9;&#x8C61;&#x3002;</p>
+<h3 id="equalitybased-requirement"><em>Equality-based</em> requirement</h3>
+<h3 id="&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x6027;&#x7684;&#x6761;&#x4EF6;">&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x6027;&#x7684;&#x6761;&#x4EF6;</h3>
+<p><em>Equality-</em> or <em>inequality-based</em> requirements allow filtering by label keys and values. Matching objects must satisfy all of the specified label constraints, though they may have additional labels as well.
+Three kinds of operators are admitted <code>=</code>,<code>==</code>,<code>!=</code>. The first two represent <em>equality</em> (and are simply synonyms), while the latter represents <em>inequality</em>. For example:</p>
+<pre><code>environment = production
+tier != frontend
+</code></pre><p>The former selects all resources with key equal to <code>environment</code> and value equal to <code>production</code>.
+The latter selects all resources with key equal to <code>tier</code> and value distinct from <code>frontend</code>, and all resources with no labels with the <code>tier</code> key.
+One could filter for resources in <code>production</code> excluding <code>frontend</code> using the comma operator: <code>environment=production,tier!=frontend</code></p>
+<p>&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x6027;&#x6216;&#x8005;&#x4E0D;&#x76F8;&#x7B49;&#x6027;&#x7684;&#x6761;&#x4EF6;&#x5141;&#x8BB8;&#x7528;label&#x7684;&#x952E;&#x6216;&#x8005;&#x503C;&#x8FDB;&#x884C;&#x8FC7;&#x6EE4;&#x3002;&#x5339;&#x914D;&#x7684;&#x5BF9;&#x8C61;&#x5FC5;&#x987B;&#x6EE1;&#x8DB3;&#x6240;&#x6709;&#x6307;&#x5B9A;&#x7684;label&#x7EA6;&#x675F;&#xFF0C;&#x5C3D;&#x7BA1;&#x4ED6;&#x4EEC;&#x53EF;&#x80FD;&#x4E5F;&#x6709;&#x989D;&#x5916;&#x7684;label&#x3002;&#x6709;&#x4E09;&#x79CD;&#x8FD0;&#x7B97;&#x7B26;&#x662F;&#x5141;&#x8BB8;&#x7684;&#xFF0C;&#x201C;=&#x201D;&#xFF0C;&#x201C;==&#x201D;&#x548C;&#x201C;!=&#x201D;&#x3002;&#x524D;&#x4E24;&#x79CD;&#x4EE3;&#x8868;&#x76F8;&#x7B49;&#x6027;&#xFF08;&#x4ED6;&#x4EEC;&#x662F;&#x540C;&#x4E49;&#x8FD0;&#x7B97;&#x7B26;&#xFF09;&#xFF0C;&#x540E;&#x4E00;&#x79CD;&#x4EE3;&#x8868;&#x975E;&#x76F8;&#x7B49;&#x6027;&#x3002;&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code>environment = production
+tier != frontend
+</code></pre><p>&#x7B2C;&#x4E00;&#x4E2A;&#x9009;&#x62E9;&#x6240;&#x6709;&#x952E;&#x7B49;&#x4E8E;<code>environment</code>&#x503C;&#x4E3A;<code>production</code>&#x7684;&#x8D44;&#x6E90;&#x3002;&#x540E;&#x4E00;&#x79CD;&#x9009;&#x62E9;&#x6240;&#x6709;&#x952E;&#x4E3A;<code>tier</code>&#x503C;&#x4E0D;&#x7B49;&#x4E8E;<code>frontend</code>&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x548C;&#x90A3;&#x4E9B;&#x6CA1;&#x6709;&#x952E;&#x4E3A;<code>tier</code>&#x7684;label&#x7684;&#x8D44;&#x6E90;&#x3002;</p>
+<p>&#x8981;&#x8FC7;&#x6EE4;&#x6240;&#x6709;&#x5904;&#x4E8E;<code>production</code>&#x4F46;&#x4E0D;&#x662F;<code>frontend</code>&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x9017;&#x53F7;&#x64CD;&#x4F5C;&#x7B26;&#xFF0C;<code>environment=production,tier!=frontend</code>&#x3002;</p>
+<h3 id="&#x57FA;&#x4E8E;set&#x7684;&#x6761;&#x4EF6;">&#x57FA;&#x4E8E;set&#x7684;&#x6761;&#x4EF6;</h3>
+<p><em>Set-based</em> label requirements allow filtering keys according to a set of values. Three kinds of operators are supported: <code>in</code>,<code>notin</code> and exists (only the key identifier). For example:</p>
+<pre><code>environment in (production, qa)
+tier notin (frontend, backend)
+partition
+!partition
+</code></pre><p>The first example selects all resources with key equal to <code>environment</code> and value equal to <code>production</code> or <code>qa</code>.
+The second example selects all resources with key equal to <code>tier</code> and values other than <code>frontend</code> and <code>backend</code>, and all resources with no labels with the <code>tier</code> key.
+The third example selects all resources including a label with key <code>partition</code>; no values are checked.
+The fourth example selects all resources without a label with key <code>partition</code>; no values are checked.
+Similarly the comma separator acts as an <em>AND</em> operator. So filtering resources with a <code>partition</code> key (no matter the value) and with <code>environment</code> different than  <code>qa</code> can be achieved using <code>partition,environment notin (qa)</code>.
+The <em>set-based</em> label selector is a general form of equality since <code>environment=production</code> is equivalent to <code>environment in (production)</code>; similarly for <code>!=</code> and <code>notin</code>.</p>
+<p><em>Set-based</em> requirements can be mixed with <em>equality-based</em> requirements. For example: <code>partition in (customerA, customerB),environment!=qa</code>.</p>
+<p>&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x7684;label&#x6761;&#x4EF6;&#x5141;&#x8BB8;&#x7528;&#x4E00;&#x7EC4;&#x503C;&#x6765;&#x8FC7;&#x6EE4;&#x952E;&#x3002;&#x652F;&#x6301;&#x4E09;&#x79CD;&#x64CD;&#x4F5C;&#x7B26;:<code>in</code>&#xFF0C;<code>notin</code>,&#x548C;<code>exists(&#x4EC5;&#x9488;&#x5BF9;&#x4E8E;key&#x7B26;&#x53F7;)</code>&#x3002;&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code>environment in (production, qa)
+tier notin (frontend, backend)
+partition
+!partitio
+</code></pre><p>&#x7B2C;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;&#x9009;&#x62E9;&#x6240;&#x6709;&#x952E;&#x7B49;&#x4E8E;<code>environment</code>&#xFF0C;&#x4E14;value&#x7B49;&#x4E8E;<code>production</code>&#x6216;&#x8005;<code>qa</code>&#x7684;&#x8D44;&#x6E90;&#x3002;
+&#x7B2C;&#x4E8C;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;&#x9009;&#x62E9;&#x6240;&#x6709;&#x952E;&#x7B49;&#x4E8E;<code>tier</code>&#x4E14;&#x503C;&#x662F;&#x9664;&#x4E86;<code>frontend</code>&#x548C;<code>backend</code>&#x4E4B;&#x5916;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x548C;&#x90A3;&#x4E9B;&#x6CA1;&#x6709;label&#x7684;&#x952E;&#x662F;<code>tier</code>&#x7684;&#x8D44;&#x6E90;&#x3002;
+&#x7B2C;&#x4E09;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;&#x9009;&#x62E9;&#x6240;&#x6709;&#x6240;&#x6709;&#x6709;&#x4E00;&#x4E2A;label&#x7684;&#x952E;&#x4E3A;partition&#x7684;&#x8D44;&#x6E90;&#xFF1B;&#x503C;&#x662F;&#x4EC0;&#x4E48;&#x4E0D;&#x4F1A;&#x88AB;&#x68C0;&#x67E5;&#x3002;
+&#x7B2C;&#x56DB;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;&#x9009;&#x62E9;&#x6240;&#x6709;&#x7684;&#x6CA1;&#x6709;lable&#x7684;&#x952E;&#x540D;&#x4E3A;<code>partition</code>&#x7684;&#x8D44;&#x6E90;&#xFF1B;&#x503C;&#x662F;&#x4EC0;&#x4E48;&#x4E0D;&#x4F1A;&#x88AB;&#x68C0;&#x67E5;&#x3002;</p>
+<p>&#x7C7B;&#x4F3C;&#x7684;&#xFF0C;&#x9017;&#x53F7;&#x64CD;&#x4F5C;&#x7B26;&#x76F8;&#x5F53;&#x4E8E;&#x4E00;&#x4E2A;<strong>AND</strong>&#x64CD;&#x4F5C;&#x7B26;&#x3002;&#x56E0;&#x800C;&#x8981;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;<code>partition</code>&#x952E;&#xFF08;&#x4E0D;&#x7BA1;&#x503C;&#x662F;&#x4EC0;&#x4E48;&#xFF09;&#xFF0C;&#x5E76;&#x4E14;<code>environment</code>&#x4E0D;&#x662F;<code>qa</code>&#x8FC7;&#x6EE4;&#x8D44;&#x6E90;&#x53EF;&#x4EE5;&#x7528;<code>partition,environment notin (qa)</code>&#x3002;</p>
+<p>&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x7684;&#x9009;&#x62E9;&#x5668;&#x662F;&#x4E00;&#x4E2A;&#x76F8;&#x7B49;&#x6027;&#x7684;&#x5BBD;&#x6CDB;&#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x56E0;&#x4E3A;<code>environment=production</code>&#x76F8;&#x5F53;&#x4E8E; <code>environment in (production)</code>&#xFF0C;&#x4E0E;<code>!=</code> and <code>notin</code>&#x7C7B;&#x4F3C;&#x3002;</p>
+<p>&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x7684;&#x6761;&#x4EF6;&#x53EF;&#x4EE5;&#x4E0E;&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x6027; &#x7684;&#x6761;&#x4EF6;&#x6DF7;&#x5408;&#x3002;&#x4F8B;&#x5982;&#xFF0C;<code>partition in (customerA, customerB),environment!=qa</code>&#x3002;</p>
+<h2 id="api">API</h2>
+<h3 id="list-and-watch-filtering">LIST and WATCH filtering</h3>
+<h3 id="list-&#x548C;watch&#x8FC7;&#x6EE4;">LIST &#x548C;WATCH&#x8FC7;&#x6EE4;</h3>
+<p>LIST and WATCH operations may specify label selectors to filter the sets of objects returned using a query parameter. Both requirements are permitted:</p>
+<pre><code>* _equality-based_ requirements: `?labelSelector=environment%3Dproduction,tier%3Dfrontend`
+* _set-based_ requirements: `?labelSelector=environment+in+%28production%2Cqa%29%2Ctier+in+%28frontend%29`
+</code></pre><p>LIST&#x548C;WATCH&#x64CD;&#x4F5C;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;query&#x53C2;&#x6570;&#x6765;&#x6307;&#x5B9A;label&#x9009;&#x62E9;&#x5668;&#x6765;&#x8FC7;&#x6EE4;&#x8FD4;&#x56DE;&#x5BF9;&#x8C61;&#x7684;&#x96C6;&#x5408;&#x3002;&#x4E24;&#x79CD;&#x6761;&#x4EF6;&#x90FD;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#xFF1A;
+    <em>&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x6027;&#x6761;&#x4EF6;&#xFF1A;<code>?labelSelector=environment%3Dproduction,tier%3Dfrontend</code>
+    </em>&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x6761;&#x4EF6;&#x7684;&#xFF1A;<code>?labelSelector=environment+in+%28production%2Cqa%29%2Ctier+in+%28frontend%29</code></p>
+<p>Both label selector styles can be used to list or watch resources via a REST client. For example targetting <code>apiserver</code> with <code>kubectl</code> and using <em>equality-based</em> one may write:</p>
+<p>&#x4E24;&#x79CD;label&#x9009;&#x62E9;&#x5668;&#x98CE;&#x683C;&#x90FD;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x901A;&#x8FC7;REST&#x5BA2;&#x6237;&#x7AEF;&#x6765;&#x5217;&#x8868;&#x6216;&#x8005;&#x76D1;&#x89C6;&#x8D44;&#x6E90;&#x3002;&#x6BD4;&#x5982;&#x4F7F;&#x7528;<code>kubectl</code>&#x6765;&#x9488;&#x5BF9;<code>apiserver</code>&#xFF0C;&#x5E76;&#x4E14;&#x4F7F;&#x7528;&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x6027;&#x7684;&#x6761;&#x4EF6;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#xFF1A;</p>
+<p>&#xB7;</p>
+<pre><code class="lang-console">$ kubectl get pods -l environment=production,tier=frontend
+</code></pre>
+<p>or using <em>set-based</em> requirements:
+&#x6216;&#x8005;&#x4F7F;&#x7528;&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x7684;&#x6761;&#x4EF6;&#xFF1A;</p>
+<pre><code class="lang-console">$ kubectl get pods -l &apos;environment in (production),tier in (frontend)&apos;
+</code></pre>
+<p>As already mentioned <em>set-based</em> requirements are more expressive.  For instance, they can implement the <em>OR</em> operator on values:</p>
+<p>&#x5982;&#x4EE5;&#x4E0A;&#x5DF2;&#x7ECF;&#x63D0;&#x5230;&#x7684;&#xFF0C;&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x7684;&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x6027;&#x66F4;&#x5F3A;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x4ED6;&#x4EEC;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x503C;&#x4E0A;&#x7684;OR&#x64CD;&#x4F5C;&#xFF1A;</p>
+<pre><code class="lang-console">$ kubectl get pods -l &apos;environment in (production, qa)&apos;
+</code></pre>
+<p>or restricting negative matching via <em>exists</em> operator:</p>
+<p>&#x6216;&#x8005;&#x901A;&#x8FC7;exists&#x64CD;&#x4F5C;&#x7B26;&#x8FDB;&#x884C;&#x5426;&#x5B9A;&#x9650;&#x5236;&#x5339;&#x914D;&#xFF1A;</p>
+<pre><code class="lang-console">$ kubectl get pods -l &apos;environment,environment notin (frontend)&apos;
+</code></pre>
+<h3 id="set-references-in-api-objects">Set references in API objects</h3>
+<p>Some Kubernetes objects, such as <a href="services.md"><code>service</code>s</a> and <a href="replication-controller.md"><code>replicationcontroller</code>s</a>, also use label selectors to specify sets of other resources, such as <a href="pods.md">pods</a>.</p>
+<p>&#x4E00;&#x4E9B;Kubernetes&#x5BF9;&#x8C61;&#xFF0C;&#x6BD4;&#x5982;service&#x548C;replication controlle&#x7684;&#xFF0C;&#x4E5F;&#x4F7F;&#x7528;label&#x9009;&#x62E9;&#x5668;&#x6765;&#x6307;&#x5B9A;&#x5176;&#x4ED6;&#x8D44;&#x6E90;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x6BD4;&#x5982;pods&#x3002;</p>
+<h4 id="service-and-replicationcontroller">Service and ReplicationController</h4>
+<p>The set of pods that a <code>service</code> targets is defined with a label selector. Similarly, the population of pods that a <code>replicationcontroller</code> should manage is also defined with a label selector.</p>
+<p>Labels selectors for both objects are defined in <code>json</code> or <code>yaml</code> files using maps, and only <em>equality-based</em> requirement selectors are supported:</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;selector&quot;</span>: {
+    <span class="hljs-string">&quot;component&quot;</span> : <span class="hljs-string">&quot;redis&quot;</span>,
+}
+</code></pre>
+<p>or</p>
+<pre><code class="lang-yaml">selector:
+    component: redis
+</code></pre>
+<p>this selector (respectively in <code>json</code> or <code>yaml</code> format) is equivalent to <code>component=redis</code> or <code>component in (redis)</code>.</p>
+<p>&#x4E00;&#x4E2A;service&#x9488;&#x5BF9;&#x7684;pods&#x7684;&#x96C6;&#x5408;&#x662F;&#x7528;label&#x9009;&#x62E9;&#x5668;&#x6765;&#x5B9A;&#x4E49;&#x7684;&#x3002;&#x7C7B;&#x4F3C;&#x7684;&#xFF0C;&#x4E00;&#x4E2A;replicationcontroller&#x7BA1;&#x7406;&#x7684;pods&#x7684;&#x7FA4;&#x4F53;&#x4E5F;&#x662F;&#x7528;label&#x9009;&#x62E9;&#x5668;&#x6765;&#x5B9A;&#x4E49;&#x7684;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x8FD9;&#x4E24;&#x79CD;&#x5BF9;&#x8C61;&#x7684;Label&#x9009;&#x62E9;&#x5668;&#x662F;&#x7528;map&#x5B9A;&#x4E49;&#x5728;json&#x6216;&#x8005;yaml&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x53EA;&#x652F;&#x6301;&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x6027;&#x7684;&#x6761;&#x4EF6;&#xFF1A;</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;selector&quot;</span>: {
+    <span class="hljs-string">&quot;component&quot;</span> : <span class="hljs-string">&quot;redis&quot;</span>,
+}
+</code></pre>
+<p>&#x6216;&#x8005;</p>
+<pre><code class="lang-yaml">selector:
+    component: redis
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x9009;&#x62E9;&#x5668;&#xFF08;&#x5206;&#x522B;&#x662F;&#x4F4D;&#x4E8E;json&#x6216;&#x8005;yaml&#x683C;&#x5F0F;&#x7684;&#xFF09;&#x76F8;&#x7B49;&#x4E8E;<code>component=redis</code> &#x6216;&#x8005; <code>component in (redis)</code>&#x3002;</p>
+<h4 id="job-and-other-new-resources">Job and other new resources</h4>
+<h3 id="job&#x548C;&#x5176;&#x4ED6;&#x65B0;&#x7684;&#x8D44;&#x6E90;">Job&#x548C;&#x5176;&#x4ED6;&#x65B0;&#x7684;&#x8D44;&#x6E90;</h3>
+<p>Newer resources, such as <a href="jobs.md">job</a>, support <em>set-based</em> requirements as well.</p>
+<pre><code class="lang-yaml">selector:
+  matchLabels:
+    component: redis
+  matchExpressions:
+    - {key: tier, operator: In, values: [cache]}
+    - {key: environment, operator: NotIn, values: [dev]}
+</code></pre>
+<p><code>matchLabels</code> is a map of <code>{key,value}</code> pairs. A single <code>{key,value}</code> in the <code>matchLabels</code> map is equivalent to an element of <code>matchExpressions</code>, whose <code>key</code> field is &quot;key&quot;, the <code>operator</code> is &quot;In&quot;, and the <code>values</code> array contains only &quot;value&quot;. <code>matchExpressions</code> is a list of pod selector requirements. Valid operators include In, NotIn, Exists, and DoesNotExist. The values set must be non-empty in the case of In and NotIn. All of the requirements, from both <code>matchLabels</code> and <code>matchExpressions</code> are ANDed together -- they must all be satisfied in order to match.</p>
+<p>&#x8F83;&#x65B0;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x5982;job&#xFF0C;&#x4E5F;&#x652F;&#x6301;&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x7684;&#x6761;&#x4EF6;&#x3002;</p>
+<pre><code class="lang-yaml">selector:
+  matchLabels:&#x76F8;&#x5F53;&#x4E8E;&#x4E00;&#x4E2A;
+    component: redis
+  matchExpressions:
+    - {key: tier, operator: In, values: [cache]}
+    - {key: environment, operator: NotIn, values: [dev]}
+</code></pre>
+<p><code>matchLabels</code>&#x662F;&#x4E00;&#x4E2A;&#x952E;&#x503C;&#x5BF9;&#x7684;&#x6620;&#x5C04;&#x3002;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;<code>{key,value}</code>&#x76F8;&#x5F53;&#x4E8E;<code>matchExpressions</code>&#x7684;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x5B83;&#x7684;&#x952E;&#x5B57;&#x6BB5;&#x662F;&quot;key&quot;,&#x64CD;&#x4F5C;&#x7B26;&#x662F;<code>In</code>&#xFF0C;&#x5E76;&#x4E14;&#x503C;&#x6570;&#x7EC4;&#x503C;&#x5305;&#x542B;&quot;value&quot;&#x3002;<code>matchExpressions</code>&#x662F;&#x4E00;&#x4E2A;pod&#x7684;&#x9009;&#x62E9;&#x5668;&#x6761;&#x4EF6;&#x7684;&#x5217;&#x8868;&#x3002;&#x5408;&#x6CD5;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#x5305;&#x542B;In, NotIn, Exists, and DoesNotExist&#x3002;&#x5728;In&#x548C;NotIn&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x503C;&#x7684;&#x7EC4;&#x5FC5;&#x987B;&#x4E0D;&#x80FD;&#x4E3A;&#x7A7A;&#x3002;&#x6240;&#x6709;&#x7684;&#x6761;&#x4EF6;&#xFF0C;&#x5305;&#x542B;<code>matchLabels</code> and <code>matchExpressions</code>&#x4E2D;&#x7684;&#xFF0C;&#x4F1A;&#x7528;AND&#x7B26;&#x53F7;&#x8FDE;&#x63A5;&#xFF0C;&#x4ED6;&#x4EEC;&#x5FC5;&#x987B;&#x90FD;&#x88AB;&#x6EE1;&#x8DB3;&#x4EE5;&#x5B8C;&#x6210;&#x5339;&#x914D;&#x3002;</p>
+
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="./035-Pods.html" class="navigation navigation-prev " aria-label="Previous page: 第3.1.5节  Pods"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="./037-Replication Controller.html" class="navigation navigation-next " aria-label="Next page: 第3.1.7节  Replication Controller"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="gitbook/app.js"></script>
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-splitter/splitter.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"splitter":{},"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>
