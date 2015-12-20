@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第4.2.23节  explorer | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./129-api_basicsmd.html" />
     
+    
+    <link rel="prev" href="./127-Exploring Pods.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="8.23"
+        data-chapter-title="第4.2.23节  explorer"
+        data-filepath="128-Updating Live Pods.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -1760,7 +1762,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.23" data-path="128-Updating Live Pods.html">
+        <li class="chapter active" data-level="8.23" data-path="128-Updating Live Pods.html">
             
                 
                     <a href="./128-Updating Live Pods.html">
@@ -2492,17 +2494,133 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
+                        <h3 id="explorer">explorer</h3>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;&#x8D75;&#x5E05;&#x9F99;</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p>Explorer is a little container for examining the runtime environment kubernetes produces for your pods.</p>
+<p>The intended use is to substitute gcr.io/google_containers/explorer for your intended container, and then visit it via the proxy.</p>
+<p>Currently, you can look at:</p>
 <ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
+<li>The environment variables to make sure kubernetes is doing what you expect.</li>
+<li>The filesystem to make sure the mounted volumes and files are also what you expect.</li>
+<li>Perform DNS lookups, to see how DNS works.</li>
 </ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
+<p><code>pod.yaml</code> is supplied as an example. You can control the port it serves on with the -port flag.</p>
+<p>Example from command line (the DNS lookup looks better from a web browser):</p>
+<pre><code class="lang-console">$ kubectl create -f examples/explorer/pod.yaml
+$ kubectl proxy &amp;
+Starting to serve on localhost:8001
+
+$ curl localhost:8001/api/v1/proxy/namespaces/default/pods/explorer:8080/vars/
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=explorer
+KIBANA_LOGGING_PORT_5601_TCP_PORT=5601
+KUBERNETES_SERVICE_HOST=10.0.0.2
+MONITORING_GRAFANA_PORT_80_TCP_PROTO=tcp
+MONITORING_INFLUXDB_UI_PORT_80_TCP_PROTO=tcp
+KIBANA_LOGGING_SERVICE_PORT=5601
+MONITORING_HEAPSTER_PORT_80_TCP_PORT=80
+MONITORING_INFLUXDB_UI_PORT_80_TCP_PORT=80
+KIBANA_LOGGING_SERVICE_HOST=10.0.204.206
+KIBANA_LOGGING_PORT_5601_TCP=tcp://10.0.204.206:5601
+KUBERNETES_PORT=tcp://10.0.0.2:443
+MONITORING_INFLUXDB_PORT=tcp://10.0.2.30:80
+MONITORING_INFLUXDB_PORT_80_TCP_PROTO=tcp
+MONITORING_INFLUXDB_UI_PORT=tcp://10.0.36.78:80
+KUBE_DNS_PORT_53_UDP=udp://10.0.0.10:53
+MONITORING_INFLUXDB_SERVICE_HOST=10.0.2.30
+ELASTICSEARCH_LOGGING_PORT=tcp://10.0.48.200:9200
+ELASTICSEARCH_LOGGING_PORT_9200_TCP_PORT=9200
+KUBERNETES_PORT_443_TCP=tcp://10.0.0.2:443
+ELASTICSEARCH_LOGGING_PORT_9200_TCP_PROTO=tcp
+KIBANA_LOGGING_PORT_5601_TCP_ADDR=10.0.204.206
+KUBE_DNS_PORT_53_UDP_ADDR=10.0.0.10
+MONITORING_HEAPSTER_PORT_80_TCP_PROTO=tcp
+MONITORING_INFLUXDB_PORT_80_TCP_ADDR=10.0.2.30
+KIBANA_LOGGING_PORT=tcp://10.0.204.206:5601
+MONITORING_GRAFANA_SERVICE_PORT=80
+MONITORING_HEAPSTER_SERVICE_PORT=80
+MONITORING_HEAPSTER_PORT_80_TCP=tcp://10.0.150.238:80
+ELASTICSEARCH_LOGGING_PORT_9200_TCP=tcp://10.0.48.200:9200
+ELASTICSEARCH_LOGGING_PORT_9200_TCP_ADDR=10.0.48.200
+MONITORING_GRAFANA_PORT_80_TCP_PORT=80
+MONITORING_HEAPSTER_PORT=tcp://10.0.150.238:80
+MONITORING_INFLUXDB_PORT_80_TCP=tcp://10.0.2.30:80
+KUBE_DNS_SERVICE_PORT=53
+KUBE_DNS_PORT_53_UDP_PORT=53
+MONITORING_GRAFANA_PORT_80_TCP_ADDR=10.0.100.174
+MONITORING_INFLUXDB_UI_SERVICE_HOST=10.0.36.78
+KIBANA_LOGGING_PORT_5601_TCP_PROTO=tcp
+MONITORING_GRAFANA_PORT=tcp://10.0.100.174:80
+MONITORING_INFLUXDB_UI_PORT_80_TCP_ADDR=10.0.36.78
+KUBE_DNS_SERVICE_HOST=10.0.0.10
+KUBERNETES_PORT_443_TCP_PORT=443
+MONITORING_HEAPSTER_PORT_80_TCP_ADDR=10.0.150.238
+MONITORING_INFLUXDB_UI_SERVICE_PORT=80
+KUBE_DNS_PORT=udp://10.0.0.10:53
+ELASTICSEARCH_LOGGING_SERVICE_HOST=10.0.48.200
+KUBERNETES_SERVICE_PORT=443
+MONITORING_HEAPSTER_SERVICE_HOST=10.0.150.238
+MONITORING_INFLUXDB_SERVICE_PORT=80
+MONITORING_INFLUXDB_PORT_80_TCP_PORT=80
+KUBE_DNS_PORT_53_UDP_PROTO=udp
+MONITORING_GRAFANA_PORT_80_TCP=tcp://10.0.100.174:80
+ELASTICSEARCH_LOGGING_SERVICE_PORT=9200
+MONITORING_GRAFANA_SERVICE_HOST=10.0.100.174
+MONITORING_INFLUXDB_UI_PORT_80_TCP=tcp://10.0.36.78:80
+KUBERNETES_PORT_443_TCP_PROTO=tcp
+KUBERNETES_PORT_443_TCP_ADDR=10.0.0.2
+HOME=/
+
+$ curl localhost:8001/api/v1/proxy/namespaces/default/pods/explorer:8080/fs/
+mount/
+var/
+.dockerenv
+etc/
+dev/
+proc/
+.dockerinit
+sys/
+README.md
+explorer
+
+$ curl localhost:8001/api/v1/proxy/namespaces/default/pods/explorer:8080/dns?q=elasticsearch-logging
+<html><head></head><body>
+<form action="/api/v1/proxy/namespaces/default/pods/explorer:8080/dns">
+<input name="q" type="text" value="elasticsearch-logging">
+<button type="submit">Lookup</button>
+</form>
+<br><br><pre>LookupNS(elasticsearch-logging):
+Result: ([]*net.NS)<nil>
+Error: &lt;*&gt;lookup elasticsearch-logging: no such host
+
+LookupTXT(elasticsearch-logging):
+Result: ([]string)<nil>
+Error: &lt;*&gt;lookup elasticsearch-logging: no such host
+
+LookupSRV(&quot;&quot;, &quot;&quot;, elasticsearch-logging):
+cname: elasticsearch-logging.default.svc.cluster.local.
+Result: ([]*net.SRV)[&lt;*&gt;{Target:(string)elasticsearch-logging.default.svc.cluster.local. Port:(uint16)9200 Priority:(uint16)10 Weight:(uint16)100}]
+Error: <nil>
+
+LookupHost(elasticsearch-logging):
+Result: ([]string)[10.0.60.245]
+Error: <nil>
+
+LookupIP(elasticsearch-logging):
+Result: ([]net.IP)[10.0.60.245]
+Error: <nil>
+
+LookupMX(elasticsearch-logging):
+Result: ([]*net.MX)<nil>
+Error: &lt;*&gt;lookup elasticsearch-logging: no such host
+
+</nil></nil></nil></nil></nil></nil></pre>
+
+</body></html>
+</code></pre>
+<!-- BEGIN MUNGE: GENERATED_ANALYTICS -->
+<p><a href=""><img src="https://kubernetes-site.appspot.com/UA-36037335-10/GitHub/examples/explorer/README.md?pixel" alt="Analytics"></a>
+<!-- END MUNGE: GENERATED_ANALYTICS --></p>
 
                     
                     </section>
@@ -2513,8 +2631,10 @@
         </div>
 
         
+        <a href="./127-Exploring Pods.html" class="navigation navigation-prev " aria-label="Previous page: 第4.2.22节  滚动升级示例"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./129-api_basicsmd.html" class="navigation navigation-next " aria-label="Next page: 第5.1.1节"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

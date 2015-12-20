@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第4.2.9节 在Kubernetes上运行你的第一个容器 | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./115-Kubernetes DNS example.html" />
     
+    
+    <link rel="prev" href="./111-Downward API example.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="8.9"
+        data-chapter-title="第4.2.9节 在Kubernetes上运行你的第一个容器"
+        data-filepath="114-Running your first containers in Kubernetes.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -1638,7 +1640,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.9" data-path="114-Running your first containers in Kubernetes.html">
+        <li class="chapter active" data-level="8.9" data-path="114-Running your first containers in Kubernetes.html">
             
                 
                     <a href="./114-Running your first containers in Kubernetes.html">
@@ -2492,17 +2494,39 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
-<ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
-</ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
+                        <h1 id="&#x5728;kubernetes&#x4E0A;&#x8FD0;&#x884C;&#x4F60;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;">&#x5728;Kubernetes&#x4E0A;&#x8FD0;&#x884C;&#x4F60;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;&#x949F;&#x5065;&#x946B;</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p>&#x597D;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5DF2;&#x7ECF;&#x5F00;&#x59CB;&#x4E86;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x5165;&#x95E8;&#x6307;&#x5357;&#xFF0C;&#x5E76;&#x4E14;&#x542F;&#x52A8;&#x4E86;&#x4E00;&#x4E2A;Kubernetes&#x96C6;&#x7FA4;&#x3002;&#x90A3;&#x4E48;&#x63A5;&#x4E0B;&#x6765;&#x5462;&#xFF1F; &#x8FD9;&#x4E2A;&#x7247;&#x6307;&#x5357;&#x4F1A;&#x5E2E;&#x52A9;&#x4F60;&#x6B63;&#x5BF9;KUbernetes,&#x5728;&#x5176;&#x96C6;&#x7FA4;&#x4E0A;&#x8FD0;&#x884C;&#x7B2C;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#x3002;</p>
+<h2 id="&#x8FD0;&#x884C;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;-&#x7B80;&#x5355;&#x7248;">&#x8FD0;&#x884C;&#x4E00;&#x4E2A;&#x5BB9;&#x5668; (&#x7B80;&#x5355;&#x7248;)</h2>
+<blockquote>
+<p>&#x4ECE;&#x8FD9;&#x65F6;&#x5F00;&#x59CB;&#xFF0C;&#x6211;&#x5047;&#x8BBE;&#x4F60;&#x5DF2;&#x7ECF;&#x6839;&#x636E;&#x5176;&#x5B83;&#x5165;&#x95E8;&#x6307;&#x5357;&#x5B89;&#x88C5;&#x4E86;kubectl&#x3002;</p>
+<p>&#x4E0B;&#x9762;&#x8FD9;&#x884C;kubectl&#x547D;&#x4EE4;&#x4F1A;&#x7A7F;&#x4EF6;&#x4E24;&#x4E2A;&#x76D1;&#x542C;80&#x7AEF;&#x53E3;&#x7684;nginx pod. &#x8FD8;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x540D;&#x4E3A;my-nginx&#x4E2A;replication controller,&#x7528;&#x6765;&#x4FDD;&#x8BC1;&#x59CB;&#x7EC8;&#x4F1A;&#x6709;&#x4E24;&#x4E2A;pod&#x5728;&#x8FD0;&#x884C;&#x3002;</p>
+</blockquote>
+<pre><code>kubectl run my-nginx --image=nginx --replicas=2 --port=80
+</code></pre><blockquote>
+<p>&#x4E00;&#x65E6;&#x8FD9;&#x4E9B;pod&#x88AB;&#x521B;&#x5EFA;&#x597D;&#x4E86;&#xFF0C; &#x4F60;&#x53EF;&#x4EE5;&#x5217;&#x51FA;&#x4ED6;&#x4EEC;&#x5E76;&#x67E5;&#x770B;&#x4ED6;&#x4EEC;&#x7684;&#x542F;&#x52A8;&#x548C;&#x8FD0;&#x884C;&#x3002;</p>
+</blockquote>
+<pre><code>kubectl get pods
+</code></pre><blockquote>
+<p>&#x4F60;&#x4E5F;&#x80FD;&#x591F;&#x770B;&#x89C1;replication controller&#x88AB;&#x521B;&#x5EFA;&#x4E86;&#xFF1A;</p>
+</blockquote>
+<pre><code>kubectl get rc
+</code></pre><p>To stop the two replicated containers, stop the replication controller:
+&#x5982;&#x679C;&#x8981;&#x505C;&#x6B62;&#x8FD9;&#x4E24;&#x4E2A;&#x88AB;&#x590D;&#x5236;&#x7684;&#x5BB9;&#x5668;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x505C;&#x6B62;replication&#xFF1A; controller</p>
+<pre><code>kubectl stop rc my-nginx
+</code></pre><h2 id="&#x8BA9;&#x4F60;&#x7684;&#x7684;pod&#x53EF;&#x4EE5;&#x88AB;&#x5916;&#x7F51;&#x65B9;&#x4F4D;">&#x8BA9;&#x4F60;&#x7684;&#x7684;pod&#x53EF;&#x4EE5;&#x88AB;&#x5916;&#x7F51;&#x65B9;&#x4F4D;.</h2>
+<p>&#x5728;&#x4E00;&#x4E9B;&#x5E73;&#x53F0;&#x4E0A;&#xFF08;&#x4F8B;&#x5982;Google Compute Engine&#xFF09;&#xFF0C;kubectl&#x547D;&#x4EE4;&#x80FD;&#x591F;&#x96C6;&#x6210;&#x4E91;&#x7AEF;&#x63D0;&#x4F9B;&#x7684;API&#x6765;&#x7ED9;pod&#x6761;&#x4EF6;&#x516C;&#x6709;IP&#x5730;&#x5740;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4EE5;&#x4E0B;&#x547D;&#x4EE4;&#x6765;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<pre><code>kubectl expose rc my-nginx --port=80 --type=LoadBalancer
+</code></pre><blockquote>
+<p>&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x4F1A;&#x6253;&#x5370;&#x51FA;&#x88AB;&#x521B;&#x5EFA;&#x4E86;&#x7684;service,&#x4EE5;&#x53CA;&#x4E00;&#x4E2A;&#x5916;&#x90E8;IP&#x5730;&#x5740;&#x6620;&#x5C04;&#x5230;service. &#x5BF9;&#x5916;&#x7684;IP&#x5730;&#x5740;&#x6839;&#x4F60;&#x5B9E;&#x9645;&#x8FD0;&#x884C;&#x73AF;&#x5883;&#x6709;&#x5173;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5BF9;&#x4E8E;Google Compute Engine&#x7684;&#x5916;&#x90E8;IP&#x5730;&#x5740;&#x4F1A;&#x88AB;&#x5217;&#x4E3A;&#x65B0;&#x521B;&#x5EFA;&#x7684;&#x670D;&#x52A1;&#x7684;&#x4E00;&#x90E8;&#x5206;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x901A;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x68C0;&#x7D22;&#x3002;</p>
+</blockquote>
+<pre><code>kubectl get services
+</code></pre><blockquote>
+<p>&#x4E3A;&#x4E86;&#x8BBF;&#x95EE;&#x4F60;&#x7684;nginx&#x521D;&#x59CB;&#x9875;&#x9762;,&#x4F60;&#x8FD8;&#x4E0D;&#x5F97;&#x4E0D;&#x4FDD;&#x8BC1;&#x901A;&#x8FC7;&#x5916;&#x90E8;IP&#x7684;&#x901A;&#x4FE1;&#x662F;&#x88AB;&#x5141;&#x8BB8;&#x7684;&#x3002;&#x90A3;&#x4E48;&#x5C31;&#x8981;&#x901A;&#x8FC7;&#x8BA9;&#x9632;&#x706B;&#x5899;&#x5141;&#x8BB8;80&#x7AEF;&#x53E3;&#x901A;&#x4FE1;&#x624D;&#x53EF;&#x4EE5;&#x505A;&#x5230;</p>
+</blockquote>
+<h2 id="&#x63A5;&#x4E0B;&#x6765;-&#x914D;&#x7F6E;&#x6587;&#x4EF6;">&#x63A5;&#x4E0B;&#x6765;: &#x914D;&#x7F6E;&#x6587;&#x4EF6;</h2>
+<p>Most people will eventually want to use declarative configuration files for creating/modifying their applications. A simplified introduction is given in a different document.</p>
+<p>&#x5927;&#x591A;&#x6570;&#x4EBA;&#x6700;&#x7EC8;&#x90FD;&#x4F1A;&#x54CD;&#x4F7F;&#x7528;&#x58F0;&#x660E;&#x5F0F;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x6765;&#x521B;&#x5EFA;&#x6216;&#x4FEE;&#x6539;&#x4ED6;&#x4EEC;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x52CB;&#x3002;&#x53E6;&#x5916;&#x4E00;&#x4E2A;&#x6587;&#x6863;&#x7ED9;&#x51FA;&#x4E86;&#x4E00;&#x4E2A;<a href="http://kubernetes.io/v1.0/docs/user-guide/simple-yaml.html" target="_blank">&#x7B80;&#x5355;&#x4ECB;&#x7ECD;</a>&#x3002;</p>
 
                     
                     </section>
@@ -2513,8 +2537,10 @@
         </div>
 
         
+        <a href="./111-Downward API example.html" class="navigation navigation-prev " aria-label="Previous page: 第4.2.4节 Downward API 范例"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./115-Kubernetes DNS example.html" class="navigation navigation-next " aria-label="Next page: 第4.2.10节 Kubernetes DNS 实例实战"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第4.2.22节  滚动升级示例 | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./128-Updating Live Pods.html" />
     
+    
+    <link rel="prev" href="./115-Kubernetes DNS example.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="8.22"
+        data-chapter-title="第4.2.22节  滚动升级示例"
+        data-filepath="127-Exploring Pods.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -1745,7 +1747,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.22" data-path="127-Exploring Pods.html">
+        <li class="chapter active" data-level="8.22" data-path="127-Exploring Pods.html">
             
                 
                     <a href="./127-Exploring Pods.html">
@@ -2492,17 +2494,75 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
+                        <h1 id="&#x6EDA;&#x52A8;&#x5347;&#x7EA7;&#x793A;&#x4F8B;">&#x6EDA;&#x52A8;&#x5347;&#x7EA7;&#x793A;&#x4F8B;</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;&#x8D75;&#x5E05;&#x9F99;</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p>&#x672C;&#x4F8B;&#x5C55;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x4F7F;&#x7528;Kubernetes&#x5BF9;&#x4E00;&#x7EC4;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;<a href="../../../docs/user-guide/pods.md">pods</a>&#x505A;<a href="../kubectl/kubectl_rolling-update.md">&#x6EDA;&#x52A8;&#x5347;&#x7EA7; rolling update</a>&#x3002;&#x5982;&#x679C;&#x4F60;&#x8FD8;&#x4E0D;&#x77E5;&#x9053;&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x6EDA;&#x52A8;&#x5347;&#x7EA7;&#xFF0C;&#x6216;&#x8005;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x505A;&#x6EDA;&#x52A8;&#x5347;&#x7EA7;&#xFF0C;&#x8BF7;&#x67E5;&#x770B;<a href="../managing-deployments.md#updating-your-application-without-a-service-outage">&#x8FD9;&#x91CC;</a>&#x3002;&#x66F4;&#x591A;&#x4FE1;&#x606F;&#x67E5;&#x770B;<a href="../../design/simple-rolling-update.md">&#x6EDA;&#x52A8;&#x5347;&#x7EA7;&#x8BBE;&#x8BA1;&#x6587;&#x6863;</a>&#x3002;</p>
+<h3 id="&#x7B2C;&#x4E00;&#x6B65;-&#x524D;&#x63D0;&#x6761;&#x4EF6;">&#x7B2C;&#x4E00;&#x6B65;: &#x524D;&#x63D0;&#x6761;&#x4EF6;</h3>
+<p>&#x672C;&#x4F8B;&#x5B50;&#x5047;&#x8BBE;&#x4F60;&#x5DF2;&#x7ECF;fork&#x4E86;&#x4E00;&#x4EFD;Kubernetes&#x4EE3;&#x7801;&#xFF0C;&#x5E76;&#x4E14;&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;<a href="../../../docs/getting-started-guides">Kubernetes&#x96C6;&#x7FA4;</a>:</p>
+<pre><code class="lang-&#x63A7;&#x5236;&#x53F0;">$ cd kubernetes
+$ ./cluster/kube-up.sh
+</code></pre>
+<h3 id="step-one-turn-up-the-ux-for-the-demo">Step One: Turn up the UX for the demo</h3>
+<p>You can use bash job control to run this in the background (note that you must use the default port -- 8001 -- for the following demonstration to work properly).
+This can sometimes spew to the output so you could also run it in a different terminal. You have to run <code>kubectl proxy</code> in the root of the
+Kubernetes repository. Otherwise you will get &quot;404 page not found&quot; errors as the paths will not match. You can find more information about <code>kubectl proxy</code>
+<a href="../../../docs/user-guide/kubectl/kubectl_proxy.md">here</a>.</p>
+<pre><code class="lang-console">$ kubectl proxy --www=docs/user-guide/update-demo/local/ &amp;
+I0218 15:18:31.623279   67480 proxy.go:36] Starting to serve on localhost:8001
+</code></pre>
+<p>Now visit the the <a href="http://localhost:8001/static" target="_blank">demo website</a>.  You won&apos;t see anything much quite yet.</p>
+<h3 id="step-two-run-the-replication-controller">Step Two: Run the replication controller</h3>
+<p>Now we will turn up two replicas of an <a href="../images.md">image</a>.  They all serve on internal port 80.</p>
+<pre><code class="lang-console">$ kubectl create -f docs/user-guide/update-demo/nautilus-rc.yaml
+</code></pre>
+<p>After pulling the image from the Docker Hub to your worker nodes (which may take a minute or so) you&apos;ll see a couple of squares in the UI detailing the pods that are running along with the image that they are serving up.  A cute little nautilus.</p>
+<h3 id="step-three-try-scaling-the-replication-controller">Step Three: Try scaling the replication controller</h3>
+<p>Now we will increase the number of replicas from two to four:</p>
+<pre><code class="lang-console">$ kubectl scale rc update-demo-nautilus --replicas=4
+</code></pre>
+<p>If you go back to the <a href="http://localhost:8001/static/index.html" target="_blank">demo website</a> you should eventually see four boxes, one for each pod.</p>
+<h3 id="step-four-update-the-docker-image">Step Four: Update the docker image</h3>
+<p>We will now update the docker image to serve a different image by doing a rolling update to a new Docker image.</p>
+<pre><code class="lang-console">$ kubectl rolling-update update-demo-nautilus --update-period=10s -f docs/user-guide/update-demo/kitten-rc.yaml
+</code></pre>
+<p>The rolling-update command in kubectl will do 2 things:</p>
+<ol>
+<li>Create a new <a href="../../../docs/user-guide/replication-controller.md">replication controller</a> with a pod template that uses the new image (<code>gcr.io/google_containers/update-demo:kitten</code>)</li>
+<li>Scale the old and new replication controllers until the new controller replaces the old. This will kill the current pods one at a time, spinning up new ones to replace them.</li>
+</ol>
+<p>Watch the <a href="http://localhost:8001/static/index.html" target="_blank">demo website</a>, it will update one pod every 10 seconds until all of the pods have the new image.
+Note that the new replication controller definition does not include the replica count, so the current replica count of the old replication controller is preserved.
+But if the replica count had been specified, the final replica count of the new replication controller will be equal this number.</p>
+<h3 id="step-five-bring-down-the-pods">Step Five: Bring down the pods</h3>
+<pre><code class="lang-console">$ kubectl delete rc update-demo-kitten
+</code></pre>
+<p>This first stops the replication controller by turning the target number of replicas to 0 and then deletes the controller.</p>
+<h3 id="step-six-cleanup">Step Six: Cleanup</h3>
+<p>To turn down a Kubernetes cluster:</p>
+<pre><code class="lang-console">$ ./cluster/kube-down.sh
+</code></pre>
+<p>Kill the proxy running in the background:
+After you are done running this demo make sure to kill it:</p>
+<pre><code class="lang-console">$ jobs
+[1]+  Running                 ./kubectl proxy --www=local/ &amp;
+$ kill %1
+[1]+  Terminated: 15          ./kubectl proxy --www=local/
+</code></pre>
+<h3 id="updating-the-docker-images">Updating the Docker images</h3>
+<p>If you want to build your own docker images, you can set <code>$DOCKER_HUB_USER</code> to your Docker user id and run the included shell script. It can take a few minutes to download/upload stuff.</p>
+<pre><code class="lang-console">$ export DOCKER_HUB_USER=my-docker-id
+$ ./docs/user-guide/update-demo/build-images.sh
+</code></pre>
+<p>To use your custom docker image in the above examples, you will need to change the image name in <code>docs/user-guide/update-demo/nautilus-rc.yaml</code> and <code>docs/user-guide/update-demo/kitten-rc.yaml</code>.</p>
+<h3 id="image-copyright">Image Copyright</h3>
+<p>Note that the images included here are public domain.</p>
 <ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
+<li><a href="http://commons.wikimedia.org/wiki/File:Kitten-stare.jpg" target="_blank">kitten</a></li>
+<li><a href="http://commons.wikimedia.org/wiki/File:Nautilus_pompilius.jpg" target="_blank">nautilus</a></li>
 </ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
+<!-- BEGIN MUNGE: GENERATED_ANALYTICS -->
+<p><a href=""><img src="https://kubernetes-site.appspot.com/UA-36037335-10/GitHub/docs/user-guide/update-demo/README.md?pixel" alt="Analytics"></a>
+<!-- END MUNGE: GENERATED_ANALYTICS --></p>
 
                     
                     </section>
@@ -2513,8 +2573,10 @@
         </div>
 
         
+        <a href="./115-Kubernetes DNS example.html" class="navigation navigation-prev " aria-label="Previous page: 第4.2.10节 Kubernetes DNS 实例实战"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./128-Updating Live Pods.html" class="navigation navigation-next " aria-label="Next page: 第4.2.23节  explorer"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第2.22节  离线安装（使用裸机和CoreOS系统） | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./027-fedora_single_node.html" />
     
+    
+    <link rel="prev" href="./024-libvirt or KVM.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="2.22"
+        data-chapter-title="第2.22节  离线安装（使用裸机和CoreOS系统）"
+        data-filepath="025-Offline.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -427,7 +429,7 @@
             
         </li>
     
-        <li class="chapter " data-level="2.22" data-path="025-Offline.html">
+        <li class="chapter active" data-level="2.22" data-path="025-Offline.html">
             
                 
                     <a href="./025-Offline.html">
@@ -2492,17 +2494,116 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
+                        <h1 id="&#x79BB;&#x7EBF;&#x5B89;&#x88C5;&#xFF08;&#x4F7F;&#x7528;&#x88F8;&#x673A;&#x548C;coreos&#x7CFB;&#x7EDF;&#xFF09;">&#x79BB;&#x7EBF;&#x5B89;&#x88C5;&#xFF08;&#x4F7F;&#x7528;&#x88F8;&#x673A;&#x548C;CoreOS&#x7CFB;&#x7EDF;&#xFF09;</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;&#x6797;&#x5E06;</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p>&#x8FD9;&#x4E2A;&#x90E8;&#x5206;&#x5C06;&#x4ECB;&#x7ECD;&#x5728;CoreOS&#x4E0A;&#x8FD0;&#x884C;Kubernetes&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x6BD4;&#x8F83;&#x7279;&#x522B;&#x7684;&#x662F;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x5173;&#x6CE8;&#x4E8E;&#x5982;&#x4F55;&#x5728;&#x79BB;&#x7EBF;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x5B8C;&#x6210;&#x90E8;&#x7F72;&#x64CD;&#x4F5C;&#xFF0C;&#x8FD9;&#x5BF9;&#x4E8E;&#x8FDB;&#x884C;&#x6982;&#x5FF5;&#x9A8C;&#x8BC1;&#x548C;&#x5728;&#x8BBF;&#x95EE;&#x53D7;&#x9650;&#x7684;&#x7F51;&#x7EDC;&#x73AF;&#x5883;&#x65F6;&#xFF0C;&#x90FD;&#x5C06;&#x6D3E;&#x4E0A;&#x7528;&#x573A;&#x3002;</p>
+<p>&#x5185;&#x5BB9;&#x76EE;&#x5F55;&#xFF1A;</p>
 <ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
+<li>&#x524D;&#x63D0;&#x6761;&#x4EF6;</li>
+<li>&#x603B;&#x4F53;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;</li>
+<li>&#x793A;&#x4F8B;&#x73AF;&#x5883;</li>
+<li>&#x6784;&#x5EFA;CentOS&#x7684;PXELINUX&#x670D;&#x52A1;&#x7AEF;</li>
+<li>&#x6DFB;&#x52A0;CoreOS&#x7CFB;&#x7EDF;&#x5230;PXE</li>
+<li>&#x914D;&#x7F6E;DHCP&#x670D;&#x52A1;</li>
+<li>&#x90E8;&#x7F72;Kubernetes</li>
+<li>CoreOS&#x7684;Cloudinit&#x542F;&#x52A8;&#x914D;&#x7F6E;<ul>
+<li>master.yml</li>
+<li>node.yml</li>
 </ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
+</li>
+<li>&#x65B0;&#x5EFA;pxelinux.cfg&#x6587;&#x4EF6;</li>
+<li>&#x6307;&#x5B9A;pxelinux&#x76EE;&#x6807;</li>
+<li>&#x521B;&#x5EFA;&#x6D4B;&#x8BD5;&#x7684;Pod</li>
+<li>&#x7528;&#x4E8E;&#x8C03;&#x8BD5;&#x7684;&#x6307;&#x4EE4;</li>
+</ul>
+<h2 id="&#x524D;&#x63D0;&#x6761;&#x4EF6;">&#x524D;&#x63D0;&#x6761;&#x4EF6;</h2>
+<ol>
+<li>&#x5DF2;&#x7ECF;&#x6709;&#x4E00;&#x4E2A;&#x4E3B;&#x673A;&#x5B89;&#x88C5;&#x6709;&#x8FD0;&#x884C;&#x7740;PXE&#x670D;&#x52A1;&#x7AEF;&#x7684;CentOS6&#x7CFB;&#x7EDF;</li>
+<li>&#x81F3;&#x5C11;&#x6709;&#x4E24;&#x4E2A;&#x88F8;&#x673A;&#x4E3B;&#x673A;&#x8282;&#x70B9;</li>
+</ol>
+<h2 id="&#x603B;&#x4F53;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;">&#x603B;&#x4F53;&#x8BBE;&#x8BA1;&#x601D;&#x8DEF;</h2>
+<ul>
+<li>&#x901A;&#x8FC7;TFTP&#x670D;&#x52A1;&#x7BA1;&#x7406;&#x4EE5;&#x4E0B;&#x76EE;&#x5F55;<ul>
+<li>/tftpboot/(coreos)(centos)(RHEL)</li>
+<li>/tftpboot/pxelinux.0/(MAC) -&gt; &#x94FE;&#x63A5;&#x5230;Linux&#x955C;&#x50CF;&#x4E2D;&#x7684;config&#x6587;&#x4EF6;</li>
+</ul>
+</li>
+<li>&#x5C06;PXELinux&#x7684;&#x94FE;&#x63A5;&#x66F4;&#x65B0;&#x5230;&#x6B63;&#x786E;&#x72B6;&#x6001;</li>
+<li>&#x5C06;DHCP&#x670D;&#x52A1;&#x914D;&#x7F6E;&#x6839;&#x636E;&#x5B9E;&#x9645;&#x4E3B;&#x673A;&#x9700;&#x6C42;&#x66F4;&#x65B0;&#x5230;&#x6B63;&#x786E;&#x72B6;&#x6001;</li>
+<li>&#x6784;&#x5EFA;&#x90E8;&#x7F72;CoreOS&#x7684;&#x4E3B;&#x673A;&#x8282;&#x70B9;&#xFF0C;&#x5E76;&#x8FD0;&#x884C;Etcd&#x7684;&#x96C6;&#x7FA4;</li>
+<li>&#x5728;&#x4E0D;&#x4F7F;&#x7528;&#x516C;&#x6709;&#x7F51;&#x7EDC;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x5B8C;&#x6210;&#x540E;&#x7EED;&#x914D;&#x7F6E;</li>
+<li>&#x90E8;&#x7F72;&#x66F4;&#x591A;&#x7684;CoreOS&#x8282;&#x70B9;&#x4F5C;&#x4E3A;Kubernetes&#x7684;Node&#x8282;&#x70B9;</li>
+</ul>
+<h2 id="&#x793A;&#x4F8B;&#x73AF;&#x5883;">&#x793A;&#x4F8B;&#x73AF;&#x5883;</h2>
+<table>
+<thead>
+<tr>
+<th>&#x8282;&#x70B9;</th>
+<th style="text-align:center">MAC</th>
+<th style="text-align:right">IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CoreOS/etcd/Kubernetes Master</td>
+<td style="text-align:center">d0:00:67:13:0d:00</td>
+<td style="text-align:right">10.20.30.40</td>
+</tr>
+<tr>
+<td>CoreOS Slave 1</td>
+<td style="text-align:center">d0:00:67:13:0d:01</td>
+<td style="text-align:right">10.20.30.41</td>
+</tr>
+<tr>
+<td>CoreOS Slave 2</td>
+<td style="text-align:center">d0:00:67:13:0d:02</td>
+<td style="text-align:right">10.20.30.42</td>
+</tr>
+</tbody>
+</table>
+<h2 id="&#x6784;&#x5EFA;centos&#x7684;pxelinux&#x670D;&#x52A1;&#x7AEF;">&#x6784;&#x5EFA;CentOS&#x7684;PXELINUX&#x670D;&#x52A1;&#x7AEF;</h2>
+<p>&#x5B8C;&#x6574;&#x7684;&#x6784;&#x5EFA;CentOS PXELinux&#x73AF;&#x5883;&#x65B9;&#x6CD5;&#x53C2;&#x89C1;<a href="http://docs.fedoraproject.org/en-US/Fedora/7/html/Installation_Guide/ap-pxe-server.html" target="_blank">&#x8FD9;&#x7BC7;&#x6587;&#x6863;</a>&#x3002;&#x4E0B;&#x9762;&#x7B80;&#x5355;&#x53D9;&#x8FF0;&#x8FD9;&#x4E2A;&#x6D41;&#x7A0B;&#xFF1A;</p>
+<ol>
+<li><p>&#x5B89;&#x88C5;CentOS&#x4E0A;&#x6240;&#x9700;&#x7684;&#x5305;&#xFF1A;<br></p>
+<p><code>sudo yum install tftp-server dhcp syslinux</code></p>
+</li>
+<li><p>&#x7F16;&#x8F91;TFTP&#x670D;&#x52A1;&#x914D;&#x7F6E;&#xFF0C;&#x5C06;<code>disable</code>&#x4E00;&#x9879;&#x4FEE;&#x6539;&#x4E3A;<code>no</code>&#xFF1A;<br></p>
+<p><code>vi /etc/xinetd.d/tftp</code></p>
+</li>
+<li><p>&#x62F7;&#x8D1D;&#x6240;&#x9700;&#x7684;syslinux&#x955C;&#x50CF;&#x6587;&#x4EF6;<br></p>
+<pre><code> su - 
+ mkdir -p /tftpboot
+ cd /tftpboot 
+ cp /usr/share/syslinux/pxelinux.0 /tftpboot 
+ cp /usr/share/syslinux/menu.c32 /tftpboot 
+ cp /usr/share/syslinux/memdisk /tftpboot 
+ cp /usr/share/syslinux/mboot.c32 /tftpboot 
+ cp /usr/share/syslinux/chain.c32 /tftpboot
+ /sbin/service dhcpd start 
+ /sbin/service xinetd start 
+ /sbin/chkconfig tftp on
+</code></pre></li>
+<li><p>&#x751F;&#x6210;&#x9ED8;&#x8BA4;&#x7684;&#x542F;&#x52A8;&#x83DC;&#x5355;</p>
+<pre><code>mkdir /tftpboot/pxelinux.cfg 
+touch /tftpboot/pxelinux.cfg/default
+</code></pre></li>
+<li><p>&#x7F16;&#x8F91;&#x542F;&#x52A8;&#x83DC;&#x5355;<code>vi /tftpboot/pxelinux.cfg/default</code>&#xFF0C;&#x5185;&#x5BB9;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>default menu.c32 prompt 0 timeout 15 ONTIMEOUT local display boot.msg
+ MENU TITLE Main Menu
+ LABEL local MENU LABEL Boot local hard drive LOCALBOOT 0
+</code></pre><p>&#x73B0;&#x5728;&#x4F60;&#x5C31;&#x5DF2;&#x7ECF;&#x6709;&#x4E86;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x7528;&#x4E8E;&#x6784;&#x5EFA;CoreOS&#x8282;&#x70B9;&#x7684;PXELinux&#x670D;&#x52A1;&#x4E86;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x672C;&#x5730;&#x7684;VirtualBox&#x865A;&#x62DF;&#x673A;&#x6216;&#x88F8;&#x673A;&#x4E0A;&#x9A8C;&#x8BC1;&#x8FD9;&#x4E2A;&#x670D;&#x52A1;&#x3002;</p>
+</li>
+</ol>
+<h2 id="&#x6DFB;&#x52A0;coreos&#x7CFB;&#x7EDF;&#x5230;pxe">&#x6DFB;&#x52A0;CoreOS&#x7CFB;&#x7EDF;&#x5230;PXE</h2>
+<h2 id="&#x914D;&#x7F6E;dhcp&#x670D;&#x52A1;">&#x914D;&#x7F6E;DHCP&#x670D;&#x52A1;</h2>
+<h2 id="&#x90E8;&#x7F72;kubernetes">&#x90E8;&#x7F72;Kubernetes</h2>
+<h2 id="coreos&#x7684;cloudinit&#x542F;&#x52A8;&#x914D;&#x7F6E;">CoreOS&#x7684;Cloudinit&#x542F;&#x52A8;&#x914D;&#x7F6E;</h2>
+<h3 id="masteryml">master.yml</h3>
+<h3 id="nodeyml">node.yml</h3>
+<h2 id="&#x65B0;&#x5EFA;pxelinuxcfg&#x6587;&#x4EF6;">&#x65B0;&#x5EFA;pxelinux.cfg&#x6587;&#x4EF6;</h2>
+<h2 id="&#x6307;&#x5B9A;pxelinux&#x76EE;&#x6807;">&#x6307;&#x5B9A;pxelinux&#x76EE;&#x6807;</h2>
+<h2 id="&#x521B;&#x5EFA;&#x6D4B;&#x8BD5;&#x7684;pod">&#x521B;&#x5EFA;&#x6D4B;&#x8BD5;&#x7684;Pod</h2>
+<h2 id="&#x7528;&#x4E8E;&#x8C03;&#x8BD5;&#x7684;&#x6307;&#x4EE4;">&#x7528;&#x4E8E;&#x8C03;&#x8BD5;&#x7684;&#x6307;&#x4EE4;</h2>
 
                     
                     </section>
@@ -2513,8 +2614,10 @@
         </div>
 
         
+        <a href="./024-libvirt or KVM.html" class="navigation navigation-prev " aria-label="Previous page: 第2.21节"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./027-fedora_single_node.html" class="navigation navigation-next " aria-label="Next page: 第2.24节  从Ferdora入门Kubernetes"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

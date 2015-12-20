@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第3.1.13节  Namespaces | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./043-Annotations.html" />
     
+    
+    <link rel="prev" href="./041-Names.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="4.13"
+        data-chapter-title="第3.1.13节  Namespaces"
+        data-filepath="042-Namespaces.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -692,7 +694,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.13" data-path="042-Namespaces.html">
+        <li class="chapter active" data-level="4.13" data-path="042-Namespaces.html">
             
                 
                     <a href="./042-Namespaces.html">
@@ -2492,17 +2494,65 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
+                        <h1 id="namespaces">Namespaces</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;kz</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p>Kubernetes supports multiple virtual clusters backed by the same physical cluster.
+These virtual clusters are called namespaces.</p>
+<h2 id="when-to-use-multiple-namespaces">When to Use Multiple Namespaces</h2>
+<p>Namespaces are intended for use in environments with many users spread across multiple
+teams, or projects.  For clusters with a few to tens of users, you should not
+need to create or think about namespaces at all.  Start using namespaces when you
+need the features they provide.</p>
+<p>Namespaces provide a scope for names.  Names of resources need to be unique within a namespace, but not across namespaces.</p>
+<p>Namespaces are a way to divide cluster resources between multiple uses (via <a href="../../docs/admin/resource-quota.md">resource quota</a>).</p>
+<p>In future versions of Kubernetes, objects in the same namespace will have the same
+access control policies by default.</p>
+<p>It is not necessary to use multiple namespaces just to separate slightly different
+resources, such as different versions of the same software: use <a href="#labels.md">labels</a> to distinguish
+resources within the same namespace.</p>
+<h2 id="working-with-namespaces">Working with Namespaces</h2>
+<p>Creation and deletion of namespaces is described in the <a href="../../docs/admin/namespaces.md">Admin Guide documentation
+for namespaces</a></p>
+<h3 id="viewing-namespaces">Viewing namespaces</h3>
+<p>You can list the current namespaces in a cluster using:</p>
+<pre><code class="lang-console">$ kubectl get namespaces
+NAME          LABELS    STATUS
+default       <none>    Active
+kube-system   <none>    Active
+</none></none></code></pre>
+<p>Kubernetes starts with two initial namespaces:</p>
 <ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
+<li><code>default</code> The default namespace for objects with no other namespace</li>
+<li><code>kube-system</code> The namespace for objects created by the Kubernetes system</li>
 </ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
+<h3 id="setting-the-namespace-for-a-request">Setting the namespace for a request</h3>
+<p>To temporarily set the namespace for a request, use the <code>--namespace</code> flag.</p>
+<p>For example:</p>
+<pre><code class="lang-console">$ kubectl --namespace=<insert-namespace-name-here> run nginx --image=nginx
+$ kubectl --namespace=<insert-namespace-name-here> get pods
+</insert-namespace-name-here></insert-namespace-name-here></code></pre>
+<h3 id="setting-the-namespace-preference">Setting the namespace preference</h3>
+<p>You can permanently save the namespace for all subsequent kubectl commands in that
+context.</p>
+<p>First get your current context:</p>
+<pre><code class="lang-console">$ export CONTEXT=$(kubectl config view | grep current-context | awk &apos;{print $2}&apos;)
+</code></pre>
+<p>Then update the default namespace:</p>
+<pre><code class="lang-console">$ kubectl config set-context $(CONTEXT) --namespace=<insert-namespace-name-here>
+</insert-namespace-name-here></code></pre>
+<h2 id="namespaces-and-dns">Namespaces and DNS</h2>
+<p>When you create a <a href="services.md">Service</a>, it creates a corresponding <a href="../admin/dns.md">DNS entry</a>.
+This entry is of the form <code>&lt;service-name&gt;.&lt;namespace-name&gt;.svc.cluster.local</code>, which means
+that if a container just uses <code>&lt;service-name&gt;</code> it will resolve to the service which
+is local to a namespace.  This is useful for using the same configuration across
+multiple namespaces such as Development, Staging and Production.  If you want to reach
+across namespaces, you need to use the fully qualified domain name (FQDN).</p>
+<h2 id="not-all-objects-are-in-a-namespace">Not All Objects are in a Namespace</h2>
+<p>Most kubernetes resources (e.g. pods, services, replication controllers, and others) are
+in a some namespace.  However namespace resources are not themselves in a namespace.
+And, low-level resources, such as <a href="../../docs/admin/node.md">nodes</a> and
+persistentVolumes, are not in any namespace. Events are an exception: they may or may not
+have a namespace, depending on the object the event is about.</p>
 
                     
                     </section>
@@ -2513,8 +2563,10 @@
         </div>
 
         
+        <a href="./041-Names.html" class="navigation navigation-prev " aria-label="Previous page: 第3.1.12节  Identifiers"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./043-Annotations.html" class="navigation navigation-next " aria-label="Next page: 第3.1.15节  Annotations"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第4.2.4节 Downward API 范例 | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./114-Running your first containers in Kubernetes.html" />
     
+    
+    <link rel="prev" href="./110-Environment Guide Example.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="8.4"
+        data-chapter-title="第4.2.4节 Downward API 范例"
+        data-filepath="111-Downward API example.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -1595,7 +1597,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.4" data-path="111-Downward API example.html">
+        <li class="chapter active" data-level="8.4" data-path="111-Downward API example.html">
             
                 
                     <a href="./111-Downward API example.html">
@@ -2492,18 +2494,21 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
-<ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
-</ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
-
+                        <h1 id="downward-api-&#x8303;&#x4F8B;">Downward API &#x8303;&#x4F8B;</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;&#x949F;&#x5065;&#x946B;</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x4F60;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;pod, &#x5B83;&#x5305;&#x542B;&#x4E86;&#x4E00;&#x4E2A;&#x901A;&#x8FC7;&#x8BBF;&#x95EE;<a href="http://kubernetes.io/v1.0/docs/user-guide/downward-api.html" target="_blank">downward API</a>&#x6765;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;pod&#x540D;&#x5B57;&#x548C;&#x547D;&#x540D;&#x7A7A;&#x7684;&#x5BB9;&#x5668;</p>
+<h1 id="&#x6B65;&#x9AA4;-0-&#x524D;&#x63D0;&#x6761;&#x4EF6;">&#x6B65;&#x9AA4; 0: &#x524D;&#x63D0;&#x6761;&#x4EF6;</h1>
+<p>&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4F1A;&#x5047;&#x8BBE;&#x4F60;&#x6709;&#x4E00;&#x4E2A;&#x5B89;&#x88C5;&#x597D;&#x5E76;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;Kubernetes&#x96C6;&#x7FA4;&#xFF0C;&#x4E5F;&#x5DF2;&#x7ECF;&#x5728;&#x7CFB;&#x7EDF;&#x7684;&#x67D0;&#x4E2A;&#x8DEF;&#x5F84;&#x4E0B;&#x5B89;&#x88C5;&#x597D;&#x4E86;kubectl&#x547D;&#x4EE4;&#x884C;&#x5DE5;&#x5177;&#x3002;&#x5177;&#x4F53;&#x5B89;&#x88C5;&#x6B65;&#x9AA4;&#x8BF7;&#x5728;<a href="http://kubernetes.io/v1.0/docs/getting-started-guides/" target="_blank">&#x5B89;&#x88C5;&#x5165;&#x95E8;</a>&#x4E2D;&#x627E;&#x5230;&#x4E0E;&#x4F60;&#x5E73;&#x53F0;&#x5BF9;&#x5E94;&#x7684;&#x5B89;&#x88C5;&#x8BF4;&#x660E;&#x3002;</p>
+<h1 id="&#x6B65;&#x9AA4;-1-&#x521B;&#x5EFA;&#x4E00;&#x4E2A;pod">&#x6B65;&#x9AA4; 1: &#x521B;&#x5EFA;&#x4E00;&#x4E2A;pod</h1>
+<p>&#x5BB9;&#x5668;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x6765;&#x6D88;&#x8D39;downward API&#xFF0C;&#x800C;&#x4E14;downward API&#x5141;&#x8BB8;&#x5BB9;&#x5668;&#x901A;&#x8FC7;&#x88AB;&#x6CE8;&#x5165;&#x7684;&#x65B9;&#x6765;&#x5F0F;&#x4F7F;&#x7528;&#x6240;&#x5728;pod&#x7684;name&#x548C;namespace&#x7B49;&#x4FE1;&#x606F;</p>
+<p>&#x4E0B;&#x9762;&#x6211;&#x4EEC;&#x4F7F;&#x7528;examples/downward-api/dapi-pod.yaml&#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;pod,&#x5E76;&#x8BA9;&#x5B83;&#x5176;&#x4E2D;&#x7684;&#x5BB9;&#x5668;&#x901A;&#x8FC7;downward API&#x83B7;&#x53D6;&#x4E86;&#x6240;&#x5C5E;pod&#x7684;&#x4FE1;&#x606F;:</p>
+<pre><code>$ kubectl create -f docs/user-guide/downward-api/dapi-pod.yaml
+</code></pre><h1 id="&#x68C0;&#x67E5;&#x65E5;&#x5FD7;">&#x68C0;&#x67E5;&#x65E5;&#x5FD7;</h1>
+<p>&#x8FD9;&#x4E2A;pod&#x5728;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#x4E2D;&#x8FD0;&#x884C;env&#x547D;&#x4EE4;&#xFF0C;&#x6765;&#x8C03;&#x7528;downward API&#x3002; &#x63A5;&#x4E0B;&#x6765;&#x4F60;&#x5C31;&#x80FD;&#x901A;&#x8FC7;&#x8FC7;&#x6EE4;pod&#x7684;&#x65E5;&#x5FD7;&#x6765;&#x770B;&#x5230;&#x8FD9;&#x4E2A;pod&#x88AB;&#x6CE8;&#x5165;&#x7684;&#x786E;&#x5207;&#x7684;&#x503C;&#xFF1A;</p>
+<pre><code>$ kubectl logs dapi-test-pod | grep POD_
+2015-04-30T20:22:18.568024817Z POD_NAME=dapi-test-pod
+2015-04-30T20:22:18.568087688Z POD_NAMESPACE=default
+</code></pre>
                     
                     </section>
                 
@@ -2513,8 +2518,10 @@
         </div>
 
         
+        <a href="./110-Environment Guide Example.html" class="navigation navigation-prev " aria-label="Previous page: 第4.2.3节  环境向导示例"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./114-Running your first containers in Kubernetes.html" class="navigation navigation-next " aria-label="Next page: 第4.2.9节 在Kubernetes上运行你的第一个容器"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第3.1.5节  Pods | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./036-Labels and Selectors.html" />
     
+    
+    <link rel="prev" href="./044-Overview and Concepts.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="4.5"
+        data-chapter-title="第3.1.5节  Pods"
+        data-filepath="035-Pods.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -580,7 +582,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.5" data-path="035-Pods.html">
+        <li class="chapter active" data-level="4.5" data-path="035-Pods.html">
             
                 
                     <a href="./035-Pods.html">
@@ -2492,17 +2494,172 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
+                        <h1 id="pods">Pods</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;kz</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p>&#x5728;Kubernetes&#x4E2D;&#xFF0C;&#x4E0E;&#x7528;&#x91C7;&#x7528;&#x5355;&#x72EC;&#x7684;&#x5E94;&#x7528;&#x5BB9;&#x5668;&#x65B9;&#x5F0F;&#x4E0D;&#x540C;&#xFF0C;pod&#x662F;&#x6700;&#x5C0F;&#x7684;&#x90E8;&#x7F72;&#x5355;&#x5143;&#xFF0C;&#x53EF;&#x4EE5;&#x5BF9;&#x5176;&#x8FDB;&#x884C;&#x521B;&#x5EFA;&#xFF0C;&#x8C03;&#x5EA6;&#x548C;&#x7BA1;&#x7406;&#x64CD;&#x4F5C;&#x3002;</p>
+<h2 id="pod&#x662F;&#x4EC0;&#x4E48;"><em>pod</em>&#x662F;&#x4EC0;&#x4E48;?</h2>
+<p>A <em>pod</em> (as in a pod of whales or pea pod) corresponds to a colocated group of applications running with a shared context. Within that context, the applications may also have individual cgroup isolations applied. A pod models an application-specific &quot;logical host&quot; in a containerized environment. It may contain one or more applications which are relatively tightly coupled &#x2014; in a pre-container world, they would have executed on the same physical or virtual host.</p>
+<p>&#x4E00;&#x4E2A;pod&#xFF08;&#x6B63;&#x5982;&#x9CB8;&#x7FA4;&#x4E2D;&#x7684;&#x7FA4;&#xFF0C;&#x6216;&#x8005;&#x8C4C;&#x8C46;&#x835A;&#x4E2D;&#x7684;&#x835A;&#xFF09;&#x5BF9;&#x5E94;&#x7740;&#x5904;&#x5728;&#x4E00;&#x4E2A;&#x5171;&#x4EAB;&#x60C5;&#x666F;&#x7684;&#x4E00;&#x7EC4;&#x5171;&#x5B58;&#x4E00;&#x7EC4;&#x5E94;&#x7528;&#x3002;&#x5728;&#x8BE5;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#xFF0C;&#x5E94;&#x7528;&#x53EF;&#x80FD;&#x4F7F;&#x7528;&#x4E86;&#x5355;&#x72EC;&#x7684;cgroup&#x9694;&#x79BB;&#x3002;&#x4E00;&#x4E2A;pod&#x5C06;&#x5904;&#x5728;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#x5316;&#x73AF;&#x5883;&#x7684;&#x4EE5;&#x5E94;&#x7528;&#x4E3A;&#x4E2D;&#x5FC3;&#x7684;&#x201C;&#x903B;&#x8F91;&#x4E3B;&#x673A;&#x201C;&#x3002;&#x5B83;&#x53EF;&#x80FD;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x6216;&#x8005;&#x591A;&#x4E2A;&#x5E94;&#x7528;&#xFF0C;&#x5B83;&#x4EEC;&#x4E4B;&#x95F4;&#x5F88;&#x53EF;&#x80FD;&#x7D27;&#x5BC6;&#x8026;&#x5408; - &#x5728;&#x4E00;&#x5BB9;&#x5668;&#x4E4B;&#x524D;&#x7684;&#x4E16;&#x754C;&#x91CC;&#xFF0C;&#x4ED6;&#x4EEC;&#x672C;&#x5E94;&#x8BE5;&#x5728;&#x540C;&#x6837;&#x7684;&#x7269;&#x7406;&#x6216;&#x8005;&#x865A;&#x62DF;&#x4E3B;&#x673A;&#x4E0A;&#x3002;</p>
+<p>The context of the pod can be defined as the conjunction of several Linux namespaces:</p>
 <ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
+<li>PID namespace (applications within the pod can see each other&apos;s processes)</li>
+<li>network namespace (applications within the pod have access to the same IP and port space)</li>
+<li>IPC namespace (applications within the pod can use SystemV IPC or POSIX message queues to communicate)</li>
+<li>UTS namespace (applications within the pod share a hostname)</li>
 </ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
+<p>pod&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x53EF;&#x4EE5;&#x88AB;&#x5B9A;&#x4E49;&#x6210;Linux&#x51E0;&#x79CD;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x7684;&#x7684;&#x7ED3;&#x5408;&#xFF1A;</p>
+<ul>
+<li>PID&#x547D;&#x540D;&#x7A7A;&#x95F4;&#xFF08;&#x5904;&#x5728;&#x540C;&#x4E00;&#x4E2A;pod&#x4E2D;&#x7684;&#x5E94;&#x7528;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5F7C;&#x6B64;&#x7684;&#x8FDB;&#x7A0B;&#xFF09;</li>
+<li>&#x7F51;&#x7EDC;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#xFF08;&#x5904;&#x5728;&#x540C;&#x4E00;&#x4E2A;pod&#x4E2D;&#x7684;&#x5E94;&#x7528;&#x80FD;&#x8BBF;&#x95EE;&#x4E00;&#x6837;&#x7684;IP&#x548C;&#x7AEF;&#x53E3;&#x7A7A;&#x95F4;&#xFF09;</li>
+<li>IPC&#x547D;&#x540D;&#x7A7A;&#x95F4;&#xFF08;&#x5904;&#x5728;&#x540C;&#x4E00;&#x4E2A;pod&#x4E2D;&#x7684;&#x5E94;&#x7528;&#x53EF;&#x4EE5;&#x7528;SystemV IPC&#x6216;&#x8005;POSIX&#x6D88;&#x606F;&#x961F;&#x5217;&#x6765;&#x8FDB;&#x884C;&#x901A;&#x8BAF;&#xFF09;</li>
+<li>UTS&#x547D;&#x540D;&#x7A7A;&#x95F4;&#xFF08;&#x5904;&#x5728;&#x540C;&#x4E00;&#x4E2A;pod&#x4E2D;&#x7684;&#x5E94;&#x7528;&#x516C;&#x7528;&#x4E00;&#x4E2A;&#x4E3B;&#x673A;&#x540D;&#xFF09;</li>
+</ul>
+<p>Applications within a pod also have access to shared volumes, which are defined at the pod level and made available in each application&apos;s filesystem. Additionally, a pod may define top-level cgroup isolations which form an outer bound to any individual isolation applied to constituent applications.</p>
+<p>In terms of <a href="https://www.docker.com/" target="_blank">Docker</a> constructs, a pod consists of a colocated group of Docker containers with shared <a href="volumes.md">volumes</a>. PID namespace sharing is not yet implemented with Docker.</p>
+<p>Like individual application containers, pods are considered to be relatively ephemeral rather than durable entities. As discussed in <a href="pod-states.md">life of a pod</a>, pods are scheduled to nodes and remain there until termination (according to restart policy) or deletion. When a node dies, the pods scheduled to that node are deleted. Specific pods are never rescheduled to new nodes; instead, they must be replaced (see <a href="replication-controller.md">replication controller</a> for more details). (In the future, a higher-level API may support pod migration.)</p>
+<p>&#x5904;&#x5728;&#x540C;&#x4E00;&#x4E2A;pod&#x4E2D;&#x7684;&#x5E94;&#x7528;&#x4E5F;&#x80FD;&#x8BBF;&#x95EE;&#x4E00;&#x6837;&#x7684;&#x7684;&#x5171;&#x4EAB;volume&#xFF0C;&#x5377;&#x662F;&#x5728;pod&#x7684;&#x5C42;&#x7EA7;&#x4E0A;&#x5B9A;&#x4E49;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x5728;&#x6BCF;&#x4E2A;&#x5E94;&#x7528;&#x7684;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x4E2D;&#x88AB;&#x8BBE;&#x4E3A;&#x53EF;&#x7528;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x4E00;&#x4E2A;pod&#x4E5F;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x9876;&#x7EA7;&#x7684;cgroup&#x9694;&#x79BB;&#xFF0C;&#x8FD9;&#x7ED9;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x5230;&#x5E94;&#x7528;&#x5230;&#x5355;&#x72EC;&#x7684;&#x9694;&#x79BB;&#x6784;&#x6210;&#x4E86;&#x4E00;&#x4E2A;&#x5916;&#x56F4;&#x7684;&#x7EA6;&#x675F;&#x3002;</p>
+<p>&#x81F3;&#x4E8E;Docker&#x7684;&#x6784;&#x6210;&#xFF0C;&#x4E00;&#x4E2A;pod&#x5305;&#x542B;&#x4E00;&#x7EC4;&#x5171;&#x5B58;&#x4E00;&#x7EC4;Docker&#x5BB9;&#x5668;&#xFF0C;&#x4ED6;&#x4EEC;&#x6709;&#x5171;&#x4EAB;&#x7684;&#x5377;&#x3002;PID&#x7684;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x5BF9;&#x4E8E;Docker&#x6765;&#x8BF4;&#x8FD8;&#x6CA1;&#x6709;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>&#x5C31;&#x5982;&#x5355;&#x72EC;&#x7684;&#x5E94;&#x7528;&#x5BB9;&#x5668;&#x4E00;&#x6837;&#xFF0C;pod&#x88AB;&#x8BA4;&#x4E3A;&#x662F;&#x6BD4;&#x8F83;&#x4E34;&#x65F6;&#x6027;&#x7684;&#x800C;&#x4E0D;&#x662F;&#x6301;&#x4E45;&#x6027;&#x7684;&#x5B9E;&#x4F53;&#x3002;&#x5C31;&#x5982;&#x5728;&#x4E00;&#x4E2A;pod&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x4E2D;&#x8BA8;&#x8BBA;&#x5230;&#x7684;&#xFF0C;pod&#x88AB;&#x8C03;&#x5EA6;&#x5230;node&#x7136;&#x540E;&#x76F4;&#x5230;&#x88AB;&#x7ED3;&#x675F;&#x6216;&#x8005;&#x5220;&#x9664;&#x524D;&#x4E00;&#x76F4;&#x88AB;&#x4FDD;&#x7559;&#x5728;&#x90A3;&#x91CC;&#x3002;&#x5F53;&#x4E00;&#x4E2A;node&#x6302;&#x6389;&#x65F6;&#xFF0C;&#x88AB;&#x8C03;&#x5EA6;&#x5230;&#x8BE5;node&#x7684;pod&#x4F1A;&#x88AB;&#x5220;&#x9664;&#x3002;&#x7279;&#x5B9A;&#x7684;pod&#x4ECE;&#x6765;&#x4E0D;&#x4F1A;&#x88AB;&#x8C03;&#x5EA6;&#x5230;&#x65B0;&#x7684;&#x8282;&#x70B9;&#xFF1B;&#x4ED6;&#x4EEC;&#x5FC5;&#x987B;&#x88AB;&#x66FF;&#x6362;&#x3002;&#xFF08;&#x5728;&#x4EE5;&#x540E;&#xFF0C;&#x4E00;&#x4E2A;&#x66F4;&#x9AD8;&#x5C42;&#x6B21;&#x7684;API&#x53EF;&#x80FD;&#x4F1A;&#x652F;&#x6301;pod&#x7684;&#x8FC1;&#x79FB;&#x3002;&#xFF09;</p>
+<h2 id="motivation-for-pods">Motivation for pods</h2>
+<h3 id="resource-sharing-and-communication">Resource sharing and communication</h3>
+<p>Pods facilitate data sharing and communication among their constituents.</p>
+<p>The applications in  pod all use the same network namespace/IP and port space, and can find and communicate with each other using localhost. Each pod has an IP address in a flat shared networking namespace that has full communication with other physical computers and containers across the network. The hostname is set to the pod&apos;s Name for the application containers within the pod. <a href="../admin/networking.md">More details on networking</a>.</p>
+<p>In addition to defining the application containers that run in the pod, the pod specifies a set of shared storage volumes. Volumes enable data to survive container restarts and to be shared among the applications within the pod.</p>
+<h3 id="management">Management</h3>
+<p>Pods also simplify application deployment and management by providing a higher-level abstraction than the raw, low-level container interface. Pods serve as units of deployment and horizontal scaling/replication. Co-location (co-scheduling), fate sharing, coordinated replication, resource sharing, and dependency management are handled automatically.</p>
+<h2 id="pod&#x7684;&#x8BBE;&#x8BA1;&#x52A8;&#x673A;">Pod&#x7684;&#x8BBE;&#x8BA1;&#x52A8;&#x673A;</h2>
+<h3 id="&#x8D44;&#x6E90;&#x5171;&#x4EAB;&#x4E0E;&#x901A;&#x8BAF;">&#x8D44;&#x6E90;&#x5171;&#x4EAB;&#x4E0E;&#x901A;&#x8BAF;</h3>
+<p>Pod&#x6709;&#x52A9;&#x4E8E;&#x6570;&#x636E;&#x7684;&#x5728;&#x7EC4;&#x6210;&#x6210;&#x5458;&#x4E4B;&#x95F4;&#x7684;&#x5171;&#x4EAB;&#x548C;&#x901A;&#x8BAF;&#x3002;</p>
+<p>&#x4E00;&#x4E2A;pod&#x4E2D;&#x5E94;&#x7528;&#x4F7F;&#x7528;&#x76F8;&#x540C;&#x7684;&#x7F51;&#x7EDC;&#x547D;&#x540D;&#x7A7A;&#x95F4;/IP&#x548C;&#x7AEF;&#x53E3;&#x7A7A;&#x95F4;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;localhost&#x627E;&#x5230;&#x5F7C;&#x6B64;&#x5E76;&#x8FDB;&#x884C;&#x901A;&#x4FE1;&#x3002;&#x6BCF;&#x4E00;&#x4E2A;pod&#x5728;&#x6241;&#x5E73;&#x7684;&#x5171;&#x4EAB;&#x7F51;&#x7EDC;&#x547D;&#x540D;&#x7A7A;&#x95F4;&#x4E2D;&#x6709;&#x4E00;&#x4E2A;IP&#x5730;&#x5740;&#xFF0C;&#x80FD;&#x4E0E;&#x7F51;&#x7EDC;&#x4E0A;&#x5176;&#x4ED6;&#x7684;&#x7269;&#x7406;&#x8BA1;&#x7B97;&#x673A;&#x548C;&#x5BB9;&#x5668;&#x8FDB;&#x884C;&#x5B8C;&#x6574;&#x7684;&#x901A;&#x8BAF;&#x3002;pod&#x4E2D;&#x7684;&#x5E94;&#x7528;&#x5BB9;&#x5668;&#x7684;&#x4E3B;&#x673A;&#x540D;&#x8BBE;&#x7F6E;&#x6210;pod&#x7684;&#x540D;&#x79F0;&#x3002;</p>
+<p>&#x9664;&#x4E86;&#x5B9A;&#x4E49;&#x8FD0;&#x884C;&#x5728;pod&#x4E2D;&#x5E94;&#x7528;&#x5BB9;&#x5668;&#x4E4B;&#x5916;&#xFF0C;pod&#x6307;&#x5B9A;&#x4E86;&#x4E00;&#x7EC4;&#x5171;&#x4EAB;&#x7684;&#x5B58;&#x50A8;&#x5377;&#x3002;&#x5377;&#x80FD;&#x8BA9;&#x6570;&#x636E;&#x4E0D;&#x53D7;&#x5BB9;&#x5668;&#x91CD;&#x542F;&#x7684;&#x5F71;&#x54CD;&#xFF0C;&#x5E76;&#x4E14;&#x53EF;&#x4EE5;&#x5728;pod&#x7684;&#x5BB9;&#x5668;&#x4E4B;&#x95F4;&#x5171;&#x4EAB;&#x3002;</p>
+<h3 id="&#x7BA1;&#x7406;">&#x7BA1;&#x7406;</h3>
+<p>&#x901A;&#x8FC7;&#x63D0;&#x4F9B;&#x66F4;&#x9AD8;&#x5C42;&#x6B21;&#x7684;&#x62BD;&#x8C61;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x539F;&#x59CB;&#xFF0C;&#x4F4E;&#x5C42;&#x6B21;&#x7684;&#x5BB9;&#x5668;&#x63A5;&#x53E3;&#xFF0C;pod&#x4E5F;&#x7B80;&#x5316;&#x4E86;&#x5E94;&#x7528;&#x7684;&#x90E8;&#x7F72;&#x4E0E;&#x7BA1;&#x7406;&#x3002;pod&#x4F5C;&#x4E3A;&#x90E8;&#x7F72;&#x7684;&#x5355;&#x5143;&#xFF0C;&#x4E5F;&#x662F;&#x6C34;&#x5E73;&#x4F38;&#x7F29;&#x590D;&#x5236;&#x7684;&#x5355;&#x5143;&#x3002;&#x540C;&#x5730;&#x70B9;&#x5B89;&#x653E;&#xFF0C;&#x547D;&#x8FD0;&#x5171;&#x4EAB;&#xFF0C;&#x534F;&#x4F5C;&#x7684;&#x526F;&#x672C;&#x590D;&#x5236;&#xFF0C;&#x8D44;&#x6E90;&#x8D21;&#x732E;&#xFF0C;&#x548C;&#x4F9D;&#x8D56;&#x7BA1;&#x7406;&#x90FD;&#x80FD;&#x81EA;&#x52A8;&#x7684;&#x5904;&#x7406;&#x3002;</p>
+<h2 id="uses-of-pods">Uses of pods</h2>
+<p>Pods can be used to host vertically integrated application stacks, but their primary motivation is to support co-located, co-managed helper programs, such as:</p>
+<ul>
+<li>content management systems, file and data loaders, local cache managers, etc.</li>
+<li>log and checkpoint backup, compression, rotation, snapshotting, etc.</li>
+<li>data change watchers, log tailers, logging and monitoring adapters, event publishers, etc.</li>
+<li>proxies, bridges, and adapters</li>
+<li>controllers, managers, configurators, and updaters</li>
+</ul>
+<p>Individual pods are not intended to run multiple instances of the same application, in general.</p>
+<p>For a longer explanation, see <a href="http://blog.kubernetes.io/2015/06/the-distributed-system-toolkit-patterns.html" target="_blank">The Distributed System ToolKit: Patterns for Composite Containers</a>.</p>
+<h2 id="pod&#x7684;&#x4F7F;&#x7528;">Pod&#x7684;&#x4F7F;&#x7528;</h2>
+<p>Pod&#x53EF;&#x4EE5;&#x7528;&#x6765;host&#x5782;&#x76F4;&#x96C6;&#x6210;&#x7684;&#x5E94;&#x7528;&#x6808;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x4EEC;&#x4E3B;&#x8981;&#x7684;&#x52A8;&#x673A;&#x8FD8;&#x662F;&#x5728;&#x4E8E;&#x652F;&#x6301;&#x540C;&#x5730;&#x5B89;&#x653E;&#xFF0C;&#x5171;&#x540C;&#x7BA1;&#x7406;&#x7684;&#x52A9;&#x624B;&#x7A0B;&#x5E8F;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<ul>
+<li>&#x5185;&#x5BB9;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#xFF0C;&#x6587;&#x4EF6;&#x548C;&#x6570;&#x636E;&#x52A0;&#x8F7D;&#x5668;&#xFF0C;&#x672C;&#x5730;&#x7F13;&#x5B58;&#x7BA1;&#x7406;&#x5668;&#x7B49;&#x7B49;</li>
+<li>&#x65E5;&#x5FD7;&#x548C;&#x68C0;&#x67E5;&#x70B9;&#x5907;&#x4EFD;&#xFF0C;&#x538B;&#x7F29;&#xFF0C;&#x6EDA;&#x52A8;&#x548C;&#x548C;&#x5FEB;&#x7167;&#x7B49;&#x7B49;</li>
+<li>&#x6570;&#x636E;&#x66F4;&#x6539;&#x76D1;&#x89C6;&#x8005;&#xFF0C;&#x65E5;&#x5FD7;&#x5C3E;&#x90E8;&#x67E5;&#x770B;&#x5668;&#xFF0C;&#x65E5;&#x5FD7;&#x548C;&#x76D1;&#x63A7;&#x9002;&#x914D;&#x5668;&#xFF0C;&#x4E8B;&#x4EF6;&#x53D1;&#x5E03;&#x5668;&#x7B49;&#x7B49;</li>
+<li>&#x4EE3;&#x7406;&#xFF0C;&#x6865;&#xFF0C;&#x548C;&#x9002;&#x914D;&#x5668;</li>
+<li>&#x63A7;&#x5236;&#x5668;&#xFF0C;&#x7BA1;&#x7406;&#x5668;&#xFF0C;&#x914D;&#x7F6E;&#x5668;&#xFF0C;&#x548C;&#x66F4;&#x65B0;&#x5668;&#x7B49;&#x7B49;</li>
+</ul>
+<p>&#x5355;&#x72EC;&#x7684;pod&#x603B;&#x4F53;&#x6765;&#x8BF4;&#x4E0D;&#x9002;&#x5408;&#x62FF;&#x6765;&#x8FD0;&#x884C;&#x540C;&#x4E00;&#x5E94;&#x7528;&#x7684;&#x591A;&#x4E2A;&#x5B9E;&#x4F8B;&#x3002;</p>
+<p>&#x8981;&#x66F4;&#x8BE6;&#x7EC6;&#x7684;&#x89E3;&#x91CA;&#xFF0C;&#x8BF7;&#x53C2;&#x770B;&#xFF0C;&#x5206;&#x5E03;&#x5F0F;&#x7CFB;&#x7EDF;&#x7684;&#x5DE5;&#x5177;&#x5305;&#xFF1A;&#x7EC4;&#x5408;&#x5BB9;&#x5668;&#x7684;&#x6A21;&#x5F0F;&#x3002;</p>
+<h2 id="alternatives-considered">Alternatives considered</h2>
+<p><em>Why not just run multiple programs in a single (Docker) container?</em></p>
+<ol>
+<li>Transparency. Making the containers within the pod visible to the infrastructure enables the infrastructure to provide services to those containers, such as process management and resource monitoring. This facilitates a number of conveniences for users.</li>
+<li>Decoupling software dependencies. The individual containers may be rebuilt and redeployed independently. Kubernetes may even support live updates of individual containers someday.</li>
+<li>Ease of use. Users don&apos;t need to run their own process managers, worry about signal and exit-code propagation, etc.</li>
+<li>Efficiency. Because the infrastructure takes on more responsibility, containers can be lighter weight.</li>
+</ol>
+<p><em>Why not support affinity-based co-scheduling of containers?</em></p>
+<p>That approach would provide co-location, but would not provide most of the benefits of pods, such as resource sharing, IPC, guaranteed fate sharing, and simplified management.</p>
+<h2 id="&#x8003;&#x8651;&#x8FC7;&#x7684;&#x5176;&#x4ED6;&#x65B9;&#x6848;">&#x8003;&#x8651;&#x8FC7;&#x7684;&#x5176;&#x4ED6;&#x65B9;&#x6848;</h2>
+<p><em>&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x5728;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;&#x5BB9;&#x5668;&#x91CC;&#x9762;&#x8FD0;&#x884C;&#x591A;&#x4E2A;&#x7A0B;&#x5E8F;&#xFF1F;</em></p>
+<ol>
+<li><p>&#x900F;&#x660E;&#x5EA6;&#x3002;&#x8BA9;&#x5904;&#x5728;pod&#x4E2D;&#x7684;&#x5BB9;&#x5668;&#x5BF9;&#x4E8E;&#x57FA;&#x7840;&#x8BBE;&#x65BD;&#x53EF;&#x89C1;&#xFF0C;&#x4F7F;&#x5F97;&#x57FA;&#x7840;&#x8BBE;&#x65BD;&#x80FD;&#x5411;&#x8FD9;&#x4E9B;&#x5BB9;&#x5668;&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#xFF0C;&#x6BD4;&#x5982;&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;&#xFF0C;&#x548C;&#x8D44;&#x6E90;&#x76D1;&#x63A7;&#x3002;&#x8FD9;&#x6709;&#x52A9;&#x4E8E;&#x4E3A;&#x7528;&#x6237;&#x63D0;&#x4F9B;&#x5F88;&#x591A;&#x7684;&#x4FBF;&#x5229;&#x3002;</p>
+</li>
+<li><p>&#x89E3;&#x8026;&#x8F6F;&#x4EF6;&#x4F9D;&#x8D56;&#x3002;&#x72EC;&#x7ACB;&#x7684;&#x5BB9;&#x5668;&#x53EF;&#x4EE5;&#x5355;&#x72EC;&#x7684;&#x91CD;&#x5EFA;&#x5E76;&#x91CD;&#x65B0;&#x90E8;&#x7F72;&#x3002;Kubernetes&#x53EF;&#x80FD;&#x751A;&#x81F3;&#x652F;&#x6301;&#x5728;&#x7EBF;&#x66F4;&#x65B0;&#x5355;&#x72EC;&#x7684;&#x5BB9;&#x5668;&#x3002;</p>
+</li>
+<li><p>&#x4F7F;&#x7528;&#x7684;&#x5BB9;&#x6613;&#x5EA6;&#x3002;&#x7528;&#x6237;&#x4E0D;&#x7528;&#x8FD0;&#x884C;&#x4ED6;&#x4EEC;&#x81EA;&#x5DF1;&#x7684;&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;&#x5668;&#xFF0C;&#x62C5;&#x5FC3;&#x4FE1;&#x53F7;&#x548C;&#x9000;&#x51FA;&#x4EE3;&#x7801;&#x7684;&#x4E32;&#x5347;&#xFF0C;&#x7B49;&#x7B49;&#x3002;</p>
+</li>
+<li><p>&#x6548;&#x7387;&#x3002;&#x56E0;&#x4E3A;&#x57FA;&#x7840;&#x8BBE;&#x65BD;&#x627F;&#x62C5;&#x4E86;&#x66F4;&#x591A;&#x7684;&#x8D23;&#x4EFB;&#xFF0C;&#x5BB9;&#x5668;&#x53EF;&#x4EE5;&#x505A;&#x7684;&#x66F4;&#x52A0;&#x8F7B;&#x91CF;&#x3002;</p>
+</li>
+</ol>
+<p><em>&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x652F;&#x6301;&#x5BB9;&#x5668;&#x57FA;&#x4E8E;&#x4EB2;&#x548C;&#x529B;&#x7684;&#x5171;&#x540C;&#x8C03;&#x5EA6;&#xFF1F;</em></p>
+<p>&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x53EF;&#x4EE5;&#x63D0;&#x4F9B;&#x5171;&#x540C;&#x5B89;&#x653E;&#x7684;&#x7279;&#x6027;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x4F1A;&#x63D0;&#x4F9B;pod&#x7684;&#x5176;&#x4ED6;&#x7EDD;&#x5927;&#x90E8;&#x5206;&#x7684;&#x4F18;&#x70B9;&#xFF0C;&#x4F8B;&#x5982;&#x8D44;&#x6E90;&#x5171;&#x4EAB;&#xFF0C;IPC&#xFF0C;&#x6709;&#x4FDD;&#x8BC1;&#x7684;&#x547D;&#x8FD0;&#x5171;&#x4EAB;&#xFF0C;&#x548C;&#x7B80;&#x5316;&#x7684;&#x7BA1;&#x7406;&#x3002;</p>
+<h2 id="durability-of-pods-or-lack-thereof">Durability of pods (or lack thereof)</h2>
+<p>Pods aren&apos;t intended to be treated as durable <a href="https://blog.engineyard.com/2014/pets-vs-cattle" target="_blank">pets</a>. They won&apos;t survive scheduling failures, node failures, or other evictions, such as due to lack of resources, or in the case of node maintenance.</p>
+<p>In general, users shouldn&apos;t need to create pods directly. They should almost always use controllers (e.g., <a href="replication-controller.md">replication controller</a>), even for singletons.  Controllers provide self-healing with a cluster scope, as well as replication and rollout management.</p>
+<p>The use of collective APIs as the primary user-facing primitive is relatively common among cluster scheduling systems, including <a href="https://research.google.com/pubs/pub43438.html" target="_blank">Borg</a>, <a href="https://mesosphere.github.io/marathon/docs/rest-api.html" target="_blank">Marathon</a>, <a href="http://aurora.apache.org/documentation/latest/configuration-reference/#job-schema" target="_blank">Aurora</a>, and <a href="http://www.slideshare.net/Docker/aravindnarayanan-facebook140613153626phpapp02-37588997" target="_blank">Tupperware</a>.</p>
+<p>Pod is exposed as a primitive in order to facilitate:</p>
+<ul>
+<li>scheduler and controller pluggability</li>
+<li>support for pod-level operations without the need to &quot;proxy&quot; them via controller APIs</li>
+<li>decoupling of pod lifetime from controller lifetime, such as for bootstrapping</li>
+<li>decoupling of controllers and services &#x2014; the endpoint controller just watches pods</li>
+<li>clean composition of Kubelet-level functionality with cluster-level functionality &#x2014; Kubelet is effectively the &quot;pod controller&quot;</li>
+<li>high-availability applications, which will expect pods to be replaced in advance of their termination and certainly in advance of deletion, such as in the case of planned evictions, image prefetching, or live pod migration <a href="http://issue.k8s.io/3949" target="_blank">#3949</a></li>
+</ul>
+<p>The current best practice for pets is to create a replication controller with <code>replicas</code> equal to <code>1</code> and a corresponding service. If you find this cumbersome, please comment on <a href="http://issue.k8s.io/260" target="_blank">issue #260</a>.</p>
+<h2 id="pod&#x7684;&#x6301;&#x4E45;&#x6027;">pod&#x7684;&#x6301;&#x4E45;&#x6027;</h2>
+<p>Pod&#x4E0D;&#x60F3;&#x88AB;&#x5F53;&#x505A;&#x6301;&#x4E45;&#x5316;&#x7684;&#x5BA0;&#x7269;&#x3002;&#x4ED6;&#x4EEC;&#x65E0;&#x6CD5;&#x5E78;&#x514D;&#x4E8E;&#x8C03;&#x5EA6;&#x9519;&#x8BEF;&#xFF0C;&#x8282;&#x70B9;&#x5931;&#x6548;&#xFF0C;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x7684;&#x6545;&#x969C;&#xFF0C;&#x6BD4;&#x5982;&#x8D44;&#x6E90;&#x7684;&#x77ED;&#x7F3A;&#xFF0C;&#x6216;&#x8005;&#x5728;&#x8282;&#x70B9;&#x5904;&#x4E8E;&#x7EF4;&#x62A4;&#x72B6;&#x6001;&#x65F6;&#x3002;</p>
+<p>&#x603B;&#x4F53;&#x6765;&#x8BF4;&#xFF0C;&#x7528;&#x6237;&#x4E0D;&#x5E94;&#x8BE5;&#x76F4;&#x63A5;&#x7684;&#x521B;&#x5EFA;pod&#x3002;&#x4ED6;&#x4EEC;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#x53EA;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;&#x63A7;&#x5236;&#x5668;&#xFF0C;&#x5373;&#x4F7F;&#x5BF9;&#x4E8E;&#x5355;&#x4F8B;&#x4E5F;&#x5982;&#x6B64;&#x3002;&#x63A7;&#x5236;&#x5668;&#x5728;&#x4E00;&#x4E2A;&#x96C6;&#x7FA4;&#x7684;&#x8303;&#x56F4;&#x7D2F;&#x63D0;&#x4F9B;&#x4E86;&#x81EA;&#x6211;&#x4FEE;&#x590D;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x548C;&#x590D;&#x5236;&#x4EE5;&#x53CA;&#x6269;&#x5C55;&#x5F00;&#x7684;&#x7BA1;&#x7406;&#x3002;</p>
+<p>&#x5728;&#x96C6;&#x7FA4;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;&#x4F7F;&#x7528;&#x4E00;&#x7CFB;&#x5217;API&#x4F5C;&#x4E3A;&#x4E3B;&#x8981;&#x7684;&#x9762;&#x5BF9;&#x7528;&#x6237;&#x7684;&#x539F;&#x8BED;&#x662F;&#x76F8;&#x5BF9;&#x5E38;&#x89C1;&#x7684;&#x505A;&#x6CD5;&#xFF0C;&#x5305;&#x542B;Borg&#xFF0C;Marathon&#xFF0C;Aurora&#x548C;Tupperware&#x3002;</p>
+<p>Pod&#x4F5C;&#x4E3A;&#x539F;&#x8BED;&#x66B4;&#x9732;&#x51FA;&#x6765;&#x662F;&#x4E3A;&#x4E86;&#x6709;&#x52A9;&#x4E8E;&#xFF1A;</p>
+<ul>
+<li>&#x8C03;&#x5EA6;&#x5668;&#x548C;&#x63A7;&#x5236;&#x5668;&#x7684;&#x63D2;&#x4EF6;&#x6027;</li>
+<li>&#x652F;&#x6301;pod&#x7EA7;&#x522B;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x4E0D;&#x7528;&#x901A;&#x8FC7;&#x63A7;&#x5236;&#x5668;API&#x6765;&#x5BF9;&#x4ED6;&#x4EEC;&#x8FDB;&#x884C;&#x4EE3;&#x7406;</li>
+<li>&#x5C06;pod&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x548C;&#x63A7;&#x5236;&#x5668;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x89E3;&#x8026;&#xFF0C;&#x6BD4;&#x5982;&#x4E3A;&#x4E86;&#x542F;&#x52A8;</li>
+<li>&#x5C06;controller&#x548C;service&#x89E3;&#x8026; - &#x7AEF;&#x70B9;&#x63A7;&#x5236;&#x5668;&#x53EA;&#x76D1;&#x89C6;pod</li>
+<li>&#x6E05;&#x7406;Kubelet&#x7EA7;&#x522B;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x53D6;&#x800C;&#x4EE3;&#x4E4B;&#x96C6;&#x7FA4;&#x7EA7;&#x522B;&#x7684;&#x529F;&#x80FD; - Kubelet&#x662F;&#x5B9E;&#x9645;&#x4E0A;&#x7684;pod&#x63A7;&#x5236;&#x5668;</li>
+<li>&#x9AD8;&#x53EF;&#x7528;&#x7684;&#x5E94;&#x7528;&#xFF0C;pod&#x5728;&#x88AB;&#x7ED3;&#x675F;&#x524D;&#x4F1A;&#x88AB;&#x53D6;&#x4EE3;&#xFF0C;&#x81EA;&#x7136;&#x5728;&#x5220;&#x9664;&#x4E4B;&#x524D;&#x4E5F;&#x4F1A;&#x88AB;&#x53D6;&#x4EE3;&#xFF0C;&#x6BD4;&#x5982;&#x5728;&#x6709;&#x8BA1;&#x5212;&#x7684;&#x8E22;&#x51FA;&#xFF0C;&#x955C;&#x50CF;&#x9884;&#x53D6;&#xFF0C;&#x548C;&#x5728;&#x7EBF;&#x7684;pod&#x8FC1;&#x79FB;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x3002;</li>
+</ul>
+<p>&#x76EE;&#x524D;&#x5BF9;&#x4E8E;&#x5BA0;&#x7269;&#x7684;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;&#x662F;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x526F;&#x672C;&#x7B49;&#x4E8E;1&#x548C;&#x6709;&#x5BF9;&#x5E94;service&#x7684;&#x4E00;&#x4E2A;replication&#x63A7;&#x5236;&#x5668;&#x3002;&#x5982;&#x679C;&#x4F60;&#x89C9;&#x5F97;&#x8FD9;&#x592A;&#x9EBB;&#x70E6;&#xFF0C;&#x8BF7;&#x5728;&#x8FD9;&#x91CC;&#x7559;&#x4E0B;&#x4F60;&#x7684;&#x610F;&#x89C1;&#x3002;</p>
+<h2 id="termination-of-pods">Termination of Pods</h2>
+<h2 id="&#x5BB9;&#x5668;&#x7684;&#x7EC8;&#x6B62;">&#x5BB9;&#x5668;&#x7684;&#x7EC8;&#x6B62;</h2>
+<p>Because pods represent running processes on nodes in the cluster, it is important to allow those processes to gracefully terminate when they are no longer needed (vs being violently killed with a KILL signal and having no chance to clean up). Users should be able to request deletion and know when processes terminate, but also be able to ensure that deletes eventually complete. When a user requests deletion of a pod the system records the intended grace period before the pod is allowed to be forcefully killed, and a TERM signal is sent to the main process in each container. Once the grace period has expired the KILL signal is sent to those processes and the pod is then deleted from the API server. If the Kubelet or the container manager is restarted while waiting for processes to terminate, the termination will be retried with the full grace period.</p>
+<p>&#x56E0;&#x4E3A;pod&#x4EE3;&#x8868;&#x7740;&#x4E00;&#x4E2A;&#x96C6;&#x7FA4;&#x4E2D;&#x8282;&#x70B9;&#x4E0A;&#x8FD0;&#x884C;&#x7684;&#x8FDB;&#x7A0B;&#xFF0C;&#x8BA9;&#x8FD9;&#x4E9B;&#x8FDB;&#x7A0B;&#x4E0D;&#x518D;&#x88AB;&#x9700;&#x8981;&#xFF0C;&#x4F18;&#x96C5;&#x7684;&#x9000;&#x51FA;&#x662F;&#x5F88;&#x91CD;&#x8981;&#x7684;&#xFF08;&#x4E0E;&#x7C97;&#x66B4;&#x7684;&#x7528;&#x4E00;&#x4E2A;KILL&#x4FE1;&#x53F7;&#x53BB;&#x7ED3;&#x675F;&#xFF0C;&#x8BA9;&#x5E94;&#x7528;&#x6CA1;&#x6709;&#x673A;&#x4F1A;&#x8FDB;&#x884C;&#x6E05;&#x7406;&#x64CD;&#x4F5C;&#xFF09;&#x3002;&#x7528;&#x6237;&#x5E94;&#x8BE5;&#x80FD;&#x8BF7;&#x6C42;&#x5220;&#x9664;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x5BA4;&#x8FDB;&#x7A0B;&#x7EC8;&#x6B62;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x80FD;&#x77E5;&#x9053;&#xFF0C;&#x800C;&#x4E14;&#x4E5F;&#x80FD;&#x4FDD;&#x8BC1;&#x5220;&#x9664;&#x6700;&#x7EC8;&#x5B8C;&#x6210;&#x3002;&#x5F53;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x8BF7;&#x6C42;&#x5220;&#x9664;pod&#xFF0C;&#x7CFB;&#x7EDF;&#x8BB0;&#x5F55;&#x60F3;&#x8981;&#x7684;&#x4F18;&#x96C5;&#x9000;&#x51FA;&#x65F6;&#x95F4;&#x6BB5;&#xFF0C;&#x5728;&#x8FD9;&#x4E4B;&#x524D;Pod&#x4E0D;&#x5141;&#x8BB8;&#x88AB;&#x5F3A;&#x5236;&#x7684;&#x6740;&#x6B7B;&#xFF0C;TERM&#x4FE1;&#x53F7;&#x4F1A;&#x53D1;&#x9001;&#x7ED9;&#x5BB9;&#x5668;&#x4E3B;&#x8981;&#x7684;&#x8FDB;&#x7A0B;&#x3002;&#x4E00;&#x65E6;&#x4F18;&#x96C5;&#x9000;&#x51FA;&#x7684;&#x671F;&#x9650;&#x8FC7;&#x4E86;&#xFF0C;KILL&#x4FE1;&#x53F7;&#x4F1A;&#x9001;&#x5230;&#x8FD9;&#x4E9B;&#x8FDB;&#x7A0B;&#xFF0C;pod&#x4F1A;&#x4ECE;API&#x670D;&#x52A1;&#x5668;&#x5176;&#x4E2D;&#x88AB;&#x5220;&#x9664;&#x3002;&#x5982;&#x679C;&#x5728;&#x7B49;&#x5F85;&#x8FDB;&#x7A0B;&#x7ED3;&#x675F;&#x7684;&#x65F6;&#x5019;&#xFF0C;Kubelet&#x6216;&#x8005;&#x5BB9;&#x5668;&#x7BA1;&#x7406;&#x5668;&#x91CD;&#x542F;&#x4E86;&#xFF0C;&#x7ED3;&#x675F;&#x7684;&#x8FC7;&#x7A0B;&#x4F1A;&#x5E26;&#x7740;&#x5B8C;&#x6574;&#x7684;&#x4F18;&#x96C5;&#x9000;&#x51FA;&#x65F6;&#x95F4;&#x6BB5;&#x8FDB;&#x884C;&#x91CD;&#x8BD5;&#x3002;</p>
+<p>An example flow:</p>
+<ol>
+<li>User sends command to delete Pod, with default grace period (30s)</li>
+<li>The Pod in the API server is updated with the time beyond which the Pod is considered &quot;dead&quot; along with the grace period.</li>
+<li>Pod shows up as &quot;Terminating&quot; when listed in client commands</li>
+<li>(simultaneous with 3) When the Kubelet sees that a Pod has been marked as terminating because the time in 2 has been set, it begins the pod shutdown process.<ol>
+<li>If the pod has defined a <a href="container-environment.md#hook-details">preStop hook</a>, it is invoked inside of the pod. If the <code>preStop</code> hook is still running after the grace period expires, step 2 is then invoked with a small (2 second) extended grace period.</li>
+<li>The processes in the Pod are sent the TERM signal.</li>
+</ol>
+</li>
+<li>(simultaneous with 3), Pod is removed from endpoints list for service, and are no longer considered part of the set of running pods for replication controllers. Pods that shutdown slowly can continue to serve traffic as load balancers (like the service proxy) remove them from their rotations.</li>
+<li>When the grace period expires, any processes still running in the Pod are killed with SIGKILL.</li>
+<li>The Kubelet will finish deleting the Pod on the API server by setting grace period 0 (immediate deletion). The Pod disappears from the API and is no longer visible from the client.</li>
+</ol>
+<p>By default, all deletes are graceful within 30 seconds. The <code>kubectl delete</code> command supports the <code>--grace-period=&lt;seconds&gt;</code> option which allows a user to override the default and specify their own value. The value <code>0</code> indicates that delete should be immediate, and removes the pod in the API immediately so a new pod can be created with the same name. On the node pods that are set to terminate immediately will still be given a small grace period before being force killed.</p>
+<p>&#x4E00;&#x4E2A;&#x793A;&#x4F8B;&#x6D41;&#x7A0B;&#xFF1A;</p>
+<ol>
+<li>&#x7528;&#x6237;&#x53D1;&#x9001;&#x4E00;&#x4E2A;&#x547D;&#x4EE4;&#x6765;&#x5220;&#x9664;Pod&#xFF0C;&#x9ED8;&#x8BA4;&#x7684;&#x4F18;&#x96C5;&#x9000;&#x51FA;&#x65F6;&#x95F4;&#x662F;30&#x79D2;</li>
+<li>API&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x7684;Pod&#x66F4;&#x65B0;&#x65F6;&#x95F4;&#xFF0C;&#x8D85;&#x8FC7;&#x8BE5;&#x65F6;&#x95F4;Pod&#x88AB;&#x8BA4;&#x4E3A;&#x6B7B;&#x4EA1;</li>
+<li>&#x5728;&#x5BA2;&#x6237;&#x7AEF;&#x547D;&#x4EE4;&#x7684;&#x7684;&#x91CC;&#x9762;&#xFF0C;Pod&#x663E;&#x793A;&#x4E3A;&quot;Terminating&#xFF08;&#x9000;&#x51FA;&#x4E2D;&#xFF09;&quot;&#x7684;&#x72B6;&#x6001;</li>
+<li><p>&#xFF08;&#x4E0E;&#x7B2C;3&#x540C;&#x65F6;&#xFF09;&#x5F53;Kubelet&#x770B;&#x5230;Pod&#x6807;&#x8BB0;&#x4E3A;&#x9000;&#x51FA;&#x4E2D;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x56E0;&#x4E3A;&#x7B2C;2&#x6B65;&#x4E2D;&#x65F6;&#x95F4;&#x5DF2;&#x7ECF;&#x8BBE;&#x7F6E;&#x4E86;&#xFF0C;&#x5B83;&#x5F00;&#x59CB;pod&#x5173;&#x95ED;&#x7684;&#x6D41;&#x7A0B;</p>
+<ol>
+<li>&#x5982;&#x679C;&#x8BE5;Pod&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x505C;&#x6B62;&#x524D;&#x7684;&#x94A9;&#x5B50;&#xFF0C;&#x5176;&#x4F1A;&#x5728;pod&#x5185;&#x90E8;&#x88AB;&#x8C03;&#x7528;&#x3002;&#x5982;&#x679C;&#x94A9;&#x5B50;&#x5728;&#x4F18;&#x96C5;&#x9000;&#x51FA;&#x65F6;&#x95F4;&#x6BB5;&#x8D85;&#x65F6;&#x4ECD;&#x7136;&#x5728;&#x8FD0;&#x884C;&#xFF0C;&#x7B2C;&#x4E8C;&#x6B65;&#x4F1A;&#x610F;&#x4E00;&#x4E2A;&#x5F88;&#x5C0F;&#x7684;&#x4F18;&#x96C5;&#x65F6;&#x95F4;&#x65AD;&#x88AB;&#x8C03;&#x7528;</li>
+<li>&#x8FDB;&#x7A0B;&#x88AB;&#x53D1;&#x9001;TERM&#x7684;&#x4FE1;&#x53F7;</li>
+</ol>
+</li>
+<li><p>&#xFF08;&#x4E0E;&#x7B2C;&#x4E09;&#x6B65;&#x540C;&#x65F6;&#x8FDB;&#x884C;&#xFF09;Pod&#x4ECE;service&#x7684;&#x5217;&#x8868;&#x4E2D;&#x88AB;&#x5220;&#x9664;&#xFF0C;&#x4E0D;&#x5728;&#x88AB;&#x8BA4;&#x4E3A;&#x662F;&#x8FD0;&#x884C;&#x7740;&#x7684;pod&#x7684;&#x4E00;&#x90E8;&#x5206;&#x3002;&#x7F13;&#x6162;&#x5173;&#x95ED;&#x7684;pod&#x53EF;&#x4EE5;&#x7EE7;&#x7EED;&#x5BF9;&#x5916;&#x670D;&#x52A1;&#xFF0C;&#x5F53;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x5668;&#x5C06;&#x4ED6;&#x4EEC;&#x8F6E;&#x6D41;&#x79FB;&#x9664;&#x3002;</p>
+</li>
+<li>&#x5F53;&#x4F18;&#x96C5;&#x9000;&#x51FA;&#x65F6;&#x95F4;&#x8D85;&#x65F6;&#x4E86;&#xFF0C;&#x4EFB;&#x4F55;pod&#x4E2D;&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x8FDB;&#x7A0B;&#x4F1A;&#x88AB;&#x53D1;&#x9001;SIGKILL&#x4FE1;&#x53F7;&#x88AB;&#x6740;&#x6B7B;&#x3002;</li>
+<li>Kubelet&#x4F1A;&#x5B8C;&#x6210;pod&#x7684;&#x5220;&#x9664;&#xFF0C;&#x5C06;&#x4F18;&#x96C5;&#x9000;&#x51FA;&#x7684;&#x65F6;&#x95F4;&#x8BBE;&#x7F6E;&#x4E3A;0&#xFF08;&#x8868;&#x793A;&#x7ACB;&#x5373;&#x5220;&#x9664;&#xFF09;&#x3002;pod&#x4ECE;API&#x4E2D;&#x5220;&#x9664;&#xFF0C;&#x4E0D;&#x5728;&#x5BF9;&#x5BA2;&#x6237;&#x7AEF;&#x53EF;&#x89C1;&#x3002;</li>
+</ol>
+<p>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x5220;&#x9664;&#x64CD;&#x4F5C;&#x7684;&#x4F18;&#x96C5;&#x9000;&#x51FA;&#x65F6;&#x95F4;&#x90FD;&#x5728;30&#x79D2;&#x4EE5;&#x5185;&#x3002;kubectl delete&#x547D;&#x4EE4;&#x652F;&#x6301;--grace-period=<seconds>&#x7684;&#x9009;&#x9879;&#xFF0C;&#x4EE5;&#x8FD0;&#x884C;&#x7528;&#x6237;&#x6765;&#x4FEE;&#x6539;&#x9ED8;&#x8BA4;&#x503C;&#x3002;0&#x8868;&#x793A;&#x5220;&#x9664;&#x7ACB;&#x5373;&#x6267;&#x884C;&#xFF0C;&#x5E76;&#x4E14;&#x7ACB;&#x5373;&#x4ECE;API&#x4E2D;&#x5220;&#x9664;pod&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x65B0;&#x7684;pod&#x4F1A;&#x5728;&#x540C;&#x65F6;&#x88AB;&#x521B;&#x5EFA;&#x3002;&#x5728;&#x8282;&#x70B9;&#x4E0A;&#xFF0C;&#x88AB;&#x8BBE;&#x7F6E;&#x4E86;&#x7ACB;&#x5373;&#x7ED3;&#x675F;&#x7684;&#x7684;pod&#xFF0C;&#x4ECD;&#x7136;&#x4F1A;&#x7ED9;&#x4E00;&#x4E2A;&#x5F88;&#x77ED;&#x7684;&#x4F18;&#x96C5;&#x9000;&#x51FA;&#x65F6;&#x95F4;&#x6BB5;&#xFF0C;&#x624D;&#x4F1A;&#x5F00;&#x59CB;&#x88AB;&#x5F3A;&#x5236;&#x6740;&#x6B7B;&#x3002;</seconds></p>
+<h2 id="privileged-mode-for-pod-containers">Privileged mode for pod containers</h2>
+<p>pod&#x5BB9;&#x5668;&#x7684;&#x7279;&#x6743;&#x6A21;&#x5F0F;</p>
+<p>From kubernetes v1.1, any container in a pod can enable privileged mode, using the <code>privileged</code> flag on the <code>SecurityContext</code> of the container spec. This is useful for containers that want to use linux capabilities like manipulating the network stack and accessing devices. Processes within the container get almost the same privileges that are available to processes outside a container. With privileged mode, it should be easier to write network and volume plugins as seperate pods that don&apos;t need to be compiled into the kubelet.</p>
+<p>If the master is running kubernetes v1.1 or higher, and the nodes are running a version lower than v1.1, then new privileged pods will be accepted by api-server, but will not be launched. They will be pending state.
+If user calls <code>kubectl describe pod FooPodName</code>, user can see the reason why the pod is in pending state. The events table in the describe command output will say:
+<code>Error validating pod &quot;FooPodName&quot;.&quot;FooPodNamespace&quot; from api, ignoring: spec.containers[0].securityContext.privileged: forbidden &apos;&lt;*&gt;(0xc2089d3248)true&apos;</code></p>
+<p>If the master is running a version lower than v1.1, then privileged pods cannot be created. If user attempts to create a pod, that has a privileged container, the user will get the following error:
+<code>The Pod &quot;FooPodName&quot; is invalid.
+spec.containers[0].securityContext.privileged: forbidden &apos;&lt;*&gt;(0xc20b222db0)true&apos;</code></p>
+<p>&#x5BF9;&#x4E8E;kubernetes v1.1l&#x6765;&#x8BF4;&#xFF0C;&#x4EFB;&#x4F55;pod&#x4E2D;&#x7684;&#x5BB9;&#x5668;&#x90FD;&#x53EF;&#x4EE5;&#x542F;&#x7528;&#x7279;&#x6743;&#x6A21;&#x5F0F;&#xFF0C;&#x5728;&#x5BB9;&#x5668;&#x5B9A;&#x4E49;&#x7684;SecurityContext&#x91CC;&#x8BBE;&#x7F6E;privileged&#x6807;&#x8BB0;&#x3002;&#x8FD9;&#x5BF9;&#x4E8E;&#x60F3;&#x4F7F;&#x7528;linux&#x80FD;&#x529B;&#x7684;&#x5BB9;&#x5668;&#x6765;&#x8BF4;&#x662F;&#x6709;&#x7528;&#xFF0C;&#x6BD4;&#x5982;&#x60F3;&#x5229;&#x7528;&#x7F51;&#x7EDC;&#x6808;&#x5E76;&#x8BBF;&#x95EE;&#x8BBE;&#x5907;&#x3002;&#x5BB9;&#x5668;&#x4E4B;&#x5916;&#x7684;&#x8FDB;&#x7A0B;&#x80FD;&#x83B7;&#x5F97;&#x7684;&#x7279;&#x6743;&#xFF0C;&#x5BB9;&#x5668;&#x4E2D;&#x7684;&#x8FDB;&#x7A0B;&#x4F1A;&#x83B7;&#x5F97;&#x540C;&#x6837;&#x7684;&#x7279;&#x6743;&#x3002;&#x5728;&#x7279;&#x6743;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x7F16;&#x5199;&#x7F51;&#x7EDC;&#x548C;&#x5377;&#x63D2;&#x4EF6;&#x4F1A;&#x66F4;&#x5BB9;&#x6613;&#xFF0C;&#x56E0;&#x4E3A;&#x5355;&#x72EC;&#x7684;pod&#x4E0D;&#x9700;&#x8981;&#x88AB;&#x7F16;&#x8BD1;&#x8FDB;kubelet&#x3002;</p>
+<h2 id="api-object">API Object</h2>
+<p>Pod is a top-level resource in the kubernetes REST API. More details about the
+API object can be found at: <a href="https://htmlpreview.github.io/?https://github.com/kubernetes/kubernetes/HEAD/docs/api-reference/v1/definitions.html#_v1_pod" target="_blank">Pod API
+object</a>.</p>
+<h2 id="api&#x5BF9;&#x8C61;">API&#x5BF9;&#x8C61;</h2>
+<p>&#x5728;kubernetes&#x7684;REST API&#x4E2D;&#xFF0C;pod&#x662F;&#x4E00;&#x4E2A;&#x9876;&#x7EA7;&#x7684;&#x8D44;&#x6E90;&#x3002;&#x66F4;&#x591A;&#x7684;&#x8BE6;&#x60C5;&#x53EF;&#x4EE5;&#x5728;&#x8FD9;&#x91CC;&#x627E;&#x5230;&#x3002;</p>
 
                     
                     </section>
@@ -2513,8 +2670,10 @@
         </div>
 
         
+        <a href="./044-Overview and Concepts.html" class="navigation navigation-prev " aria-label="Previous page: 第3.1.1节 Kubernetes用户指南：应用程序管理"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./036-Labels and Selectors.html" class="navigation navigation-next " aria-label="Next page: 第3.1.6节  Labels"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

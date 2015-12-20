@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第3.1.29节 管理应用：部署持续运行的应用 | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./050-Managing_Applications-Connecting_applications.html" />
     
+    
+    <link rel="prev" href="./048-Configuring Containers.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="4.29"
+        data-chapter-title="第3.1.29节 管理应用：部署持续运行的应用"
+        data-filepath="049-Managing_Applications-Deploying_continuously_running_applications.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -852,7 +854,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.29" data-path="049-Managing_Applications-Deploying_continuously_running_applications.html">
+        <li class="chapter active" data-level="4.29" data-path="049-Managing_Applications-Deploying_continuously_running_applications.html">
             
                 
                     <a href="./049-Managing_Applications-Deploying_continuously_running_applications.html">
@@ -2492,17 +2494,64 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
-<ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
-</ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
+                        <h1 id="&#x7BA1;&#x7406;&#x5E94;&#x7528;&#xFF1A;&#x90E8;&#x7F72;&#x6301;&#x7EED;&#x8FD0;&#x884C;&#x7684;&#x5E94;&#x7528;">&#x7BA1;&#x7406;&#x5E94;&#x7528;&#xFF1A;&#x90E8;&#x7F72;&#x6301;&#x7EED;&#x8FD0;&#x884C;&#x7684;&#x5E94;&#x7528;</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;it2afl0rd</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p>&#x5728;&#x524D;&#x9762;&#x7684;&#x7AE0;&#x8282;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x4E86;&#x89E3;&#x4E86;&#x5982;&#x4F55;&#x7528;<code>kubectl run</code>&#x5FEB;&#x901F;&#x90E8;&#x7F72;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x590D;&#x5236;&#x7684;&#x5E94;&#x7528;&#x4EE5;&#x53CA;&#x5982;&#x4F55;&#x7528;pods&#xFF08;configuring-containers.md&#xFF09;&#x914D;&#x7F6E;&#x5E76;&#x751F;&#x6210;&#x5355;&#x6B21;&#x8FD0;&#x884C;&#x7684;&#x5BB9;&#x5668;&#x3002;&#x672C;&#x6587;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x4F7F;&#x7528;&#x57FA;&#x4E8E;&#x914D;&#x7F6E;&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x90E8;&#x7F72;&#x4E00;&#x4E2A;&#x6301;&#x7EED;&#x8FD0;&#x884C;&#x7684;&#x590D;&#x5236;&#x7684;&#x5E94;&#x7528;&#x3002;</p>
+<h2 id="&#x7528;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x751F;&#x6210;&#x590D;&#x5236;&#x54C1;&#x96C6;&#x5408;">&#x7528;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x751F;&#x6210;&#x590D;&#x5236;&#x54C1;&#x96C6;&#x5408;</h2>
+<p>Kubernetes&#x7528;<code>Replication Controllers</code>&#x521B;&#x5EFA;&#x5E76;&#x7BA1;&#x7406;&#x590D;&#x5236;&#x7684;&#x5BB9;&#x5668;&#x96C6;&#x5408;&#xFF08;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x590D;&#x5236;&#x7684;Pods&#xFF09;&#x3002;<code>Replication Controller</code>&#x7B80;&#x5355;&#x5730;&#x786E;&#x4FDD;&#x5728;&#x4EFB;&#x4E00;&#x65F6;&#x95F4;&#x91CC;&#x90FD;&#x6709;&#x7279;&#x5B9A;&#x6570;&#x91CF;&#x7684;pod&#x526F;&#x672C;&#x5728;&#x8FD0;&#x884C;&#x3002;&#x5982;&#x679C;&#x8FD0;&#x884C;&#x7684;&#x592A;&#x591A;&#xFF0C;&#x5B83;&#x4F1A;&#x6740;&#x6389;&#x4E00;&#x4E9B;&#xFF1B;&#x5982;&#x679C;&#x8FD0;&#x884C;&#x7684;&#x592A;&#x5C11;&#xFF0C;&#x5B83;&#x4F1A;&#x542F;&#x52A8;&#x4E00;&#x4E9B;&#x3002;&#x8FD9;&#x548C;&#x8C37;&#x6B4C;&#x8BA1;&#x7B97;&#x5F15;&#x64CE;&#x7684;Instance Group Manager&#x4EE5;&#x53CA;AWS&#x7684;Auto-scaling Group&#xFF08;&#x4E0D;&#x5E26;&#x6269;&#x5C55;&#x7B56;&#x7565;&#xFF09;&#x7C7B;&#x4F3C;&#x3002;&#x5728;<a href="http://kubernetes.io/v1.0/docs/user-guide/quick-start.html" target="_blank">&#x5FEB;&#x901F;&#x5F00;&#x59CB;</a>&#x7AE0;&#x8282;&#x91CC;&#x7528;<code>kubctl run</code>&#x521B;&#x5EFA;&#x7684;&#x7528;&#x6765;&#x8DD1;Nginx&#x7684;<code>Replication Controller</code>&#x53EF;&#x4EE5;&#x7528;&#x4E0B;&#x9762;&#x7684;YAML&#x63CF;&#x8FF0;&#xFF1A;</p>
+<pre><code>apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: my-nginx
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+</code></pre><p>&#x548C;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;Pod&#x76F8;&#x6BD4;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x662F;&#x8BBE;&#x7F6E;&#x4E86;&#x8FD9;&#x91CC;&#x7684;kind&#x57DF;&#x4E3A;ReplicationController&#xFF0C;&#x8BBE;&#x5B9A;&#x4E86;&#x9700;&#x8981;&#x7684;&#x526F;&#x672C;&#xFF08;replicas&#xFF09;&#x6570;&#x91CF;&#x4EE5;&#x53CA;&#x628A;Pod&#x7684;&#x5B9A;&#x4E49;&#x653E;&#x5230;&#x4E86;template&#x57DF;&#x4E0B;&#x9762;&#x3002;pods&#x7684;&#x540D;&#x5B57;&#x4E0D;&#x9700;&#x8981;&#x663E;&#x793A;&#x6307;&#x5B9A;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4EEC;&#x662F;&#x7531;<code>replication controller</code>&#x7684;&#x540D;&#x5B57;&#x751F;&#x6210;&#x7684;&#x3002;&#x8981;&#x67E5;&#x770B;&#x652F;&#x6301;&#x7684;&#x57DF;&#x5217;&#x8868;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;<a href="https://htmlpreview.github.io/?https://github.com/GoogleCloudPlatform/kubernetes/v1.0.1/docs/api-reference/definitions.html#_v1_replicationcontroller" target="_blank">replication controller API object</a>&#x3002;
+&#x548C;&#x521B;&#x5EFA;pods&#x4E00;&#x6837;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;<code>create</code>&#x547D;&#x4EE4;&#x6765;&#x521B;&#x5EFA;&#x8FD9;&#x4E2A;replication controller&#xFF1A;</p>
+<pre><code>$ kubectl create -f ./nginx-rc.yaml
+replicationcontrollers/my-nginx
+</code></pre><p><code>replication controller</code>&#x4F1A;&#x66FF;&#x6362;&#x5220;&#x9664;&#x7684;&#x6216;&#x8005;&#x56E0;&#x4E0D;&#x660E;&#x539F;&#x56E0;&#x7EC8;&#x6B62;&#x7684;&#xFF08;&#x6BD4;&#x5982;&#x8282;&#x70B9;&#x5931;&#x8D25;&#xFF09;pods&#xFF0C;&#x8FD9;&#x548C;&#x76F4;&#x63A5;&#x521B;&#x5EFA;&#x7684;pods&#x7684;&#x60C5;&#x51B5;&#x662F;&#x4E0D;&#x4E00;&#x6837;&#x3002;&#x57FA;&#x4E8E;&#x8FD9;&#x6837;&#x7684;&#x8003;&#x91CF;&#xFF0C;&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A;&#x9700;&#x8981;&#x6301;&#x7EED;&#x8FD0;&#x884C;&#x7684;&#x5E94;&#x7528;&#xFF0C;&#x5373;&#x4FBF;&#x4F60;&#x7684;&#x5E94;&#x7528;&#x53EA;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;pod&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x63A8;&#x8350;&#x4F7F;&#x7528;<code>replication controller</code>&#x3002;&#x5BF9;&#x4E8E;&#x5355;&#x72EC;&#x7684;pod&#xFF0C;&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x91CC;&#x53EF;&#x4EE5;&#x7701;&#x7565;<code>replicas</code>&#x8FD9;&#x4E2A;&#x57DF;&#xFF0C;&#x56E0;&#x4E3A;&#x4E0D;&#x8BBE;&#x7F6E;&#x7684;&#x65F6;&#x5019;&#x9ED8;&#x8BA4;&#x5C31;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x526F;&#x672C;&#x3002;</p>
+<h2 id="&#x67E5;&#x770B;replication-controller&#x7684;&#x72B6;&#x6001;">&#x67E5;&#x770B;replication controller&#x7684;&#x72B6;&#x6001;</h2>
+<p>&#x53EF;&#x4EE5;&#x7528;<code>get</code>&#x547D;&#x4EE4;&#x67E5;&#x770B;&#x4F60;&#x521B;&#x5EFA;&#x7684;replication controller&#xFF1A;</p>
+<pre><code>$ kubectl get rc
+CONTROLLER   CONTAINER(S)   IMAGE(S)   SELECTOR    REPLICAS
+my-nginx     nginx          nginx      app=nginx   2
+</code></pre><p>&#x8FD9;&#x8BF4;&#x660E;&#x4F60;&#x7684;controller&#x4F1A;&#x786E;&#x4FDD;&#x6709;&#x4E24;&#x4E2A;nginx&#x7684;&#x526F;&#x672C;&#x3002;&#x548C;&#x76F4;&#x63A5;&#x521B;&#x5EFA;&#x7684;pod&#x4E00;&#x6837;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;<code>get</code>&#x547D;&#x4EE4;&#x67E5;&#x770B;&#x8FD9;&#x4E9B;&#x526F;&#x672C;&#xFF1A;</p>
+<pre><code>$ kubectl get pods
+NAME             READY     STATUS    RESTARTS   AGE
+my-nginx-065jq   1/1       Running   0          51s
+my-nginx-buaiq   1/1       Running   0          51s
+</code></pre><h2 id="&#x5220;&#x9664;replication-controllers">&#x5220;&#x9664;replication controllers</h2>
+<p>&#x5982;&#x679C;&#x60F3;&#x8981;&#x7ED3;&#x675F;&#x4F60;&#x7684;&#x5E94;&#x7528;&#x5E76;&#x4E14;&#x5220;&#x9664;repication controller&#x3002;&#x548C;&#x5728;<a href="">&#x5FEB;&#x901F;&#x5F00;&#x59CB;</a>&#x91CC;&#x4E00;&#x6837;&#xFF0C;&#x7528;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code>$ kubectl delete rc my-nginx
+replicationcontrollers/my-nginx
+</code></pre><p>&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x9ED8;&#x8BA4;&#x4F1A;&#x628A;&#x7531;replication controller&#x7BA1;&#x7406;&#x7684;pods&#x4E00;&#x8D77;&#x5220;&#x9664;&#x3002;&#x5982;&#x679C;pods&#x7684;&#x6570;&#x91CF;&#x6BD4;&#x8F83;&#x5927;&#xFF0C;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x8981;&#x82B1;&#x4E00;&#x4E9B;&#x65F6;&#x95F4;&#x624D;&#x80FD;&#x5B8C;&#x6210;&#x3002;&#x5982;&#x679C;&#x60F3;&#x8981;pods&#x7EE7;&#x7EED;&#x8FD0;&#x884C;&#xFF0C;&#x4E0D;&#x88AB;&#x5220;&#x6389;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;delete&#x7684;&#x65F6;&#x5019;&#x6307;&#x5B9A;&#x53C2;&#x6570;<code>--cascade=false</code>&#x3002;
+&#x5982;&#x679C;&#x5728;&#x5220;&#x9664;replication controller&#x4E4B;&#x524D;&#x60F3;&#x8981;&#x5220;&#x9664;pods&#xFF0C;pods&#x53EA;&#x662F;&#x88AB;&#x66FF;&#x6362;&#x4E86;&#xFF0C;&#x56E0;&#x4E3A;replication controller&#x4F1A;&#x518D;&#x8D77;&#x65B0;&#x7684;pods&#xFF0C;&#x786E;&#x4FDD;pods&#x7684;&#x6570;&#x91CF;&#x3002;</p>
+<h2 id="labels">Labels</h2>
+<p>Kubernetes&#x4F7F;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x952E;&#x503C;&#x5BF9;&#xFF08;&#x79F0;&#x4E3A;<a href="http://kubernetes.io/v1.0/docs/user-guide/labels.html" target="_blank">Labels</a>&#xFF09;&#x5206;&#x7C7B;&#x8D44;&#x6E90;&#x96C6;&#x5408;&#xFF0C;&#x4F8B;&#x5982;pods&#x548C;replication controller&#x3002;&#x5728;&#x524D;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x91CC;&#xFF0C;pod&#x7684;&#x6A21;&#x677F;&#x91CC;&#x53EA;&#x8BBE;&#x5B9A;&#x4E86;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;label&#xFF0C;&#x952E;&#x662F;<code>app</code>&#xFF0C;&#x503C;&#x4E3A;<code>nginx</code>&#x3002;&#x6240;&#x6709;&#x88AB;&#x521B;&#x5EFA;&#x7684;pod&#x90FD;&#x5E26;&#x6709;&#x8FD9;&#x4E2A;label&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x5E26;-L&#x53C2;&#x6570;&#x7684;&#x547D;&#x4EE4;&#x67E5;&#x770B;&#xFF1A;</p>
+<pre><code>$ kubectl get pods -L app
+NAME             READY     STATUS    RESTARTS   AGE       APP
+my-nginx-afv12   0/1       Running   0          3s        nginx
+my-nginx-lg99z   0/1       Running   0          3s        nginx
+</code></pre><p>pod&#x6A21;&#x677F;&#x5E26;&#x7684;label&#x9ED8;&#x8BA4;&#x4F1A;&#x88AB;&#x590D;&#x5236;&#x4E3A;replication controller&#x7684;label&#x3002;Kubernetes&#x4E2D;&#x6240;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x90FD;&#x652F;&#x6301;labels&#xFF1A;</p>
+<pre><code>$ kubectl get rc my-nginx -L app
+CONTROLLER   CONTAINER(S)   IMAGE(S)   SELECTOR    REPLICAS   APP
+my-nginx     nginx          nginx      app=nginx   2          nginx
+</code></pre><p>&#x66F4;&#x91CD;&#x8981;&#x7684;&#x662F;&#xFF0C;pod&#x6A21;&#x677F;&#x7684;label&#x4F1A;&#x88AB;&#x7528;&#x6765;&#x521B;&#x5EFA;<code>selector</code>&#xFF0C;&#x8FD9;&#x4E2A;<code>selector</code>&#x4F1A;&#x5339;&#x914D;&#x6240;&#x6709;&#x5E26;&#x8FD9;&#x4E9B;labels&#x7684;pods&#x3002;&#x7528;<code>kubectl get</code>&#x7684;<a href="http://kubernetes.io/v1.0/docs/user-guide/kubectl/kubectl_get.html" target="_blank">go&#x8BED;&#x8A00;&#x6A21;&#x677F;&#x8F93;&#x51FA;&#x683C;&#x5F0F;</a>&#x5C31;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x8FD9;&#x4E2A;&#x57DF;&#xFF1A;</p>
+<pre><code>$ kubectl get rc my-nginx -o template --template=&quot;{{.spec.selector}}&quot;
+map[app:nginx]
+</code></pre><p>&#x5982;&#x679C;&#x4F60;&#x60F3;&#x8981;&#x5728;pod&#x6A21;&#x677F;&#x91CC;&#x6307;&#x5B9A;labels&#xFF0C;&#x4F46;&#x662F;&#x53C8;&#x4E0D;&#x60F3;&#x8981;&#x88AB;&#x9009;&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x663E;&#x793A;&#x6307;&#x5B9A;<code>selector</code>&#x6765;&#x89E3;&#x51B3;&#xFF0C;&#x4E0D;&#x8FC7;&#x9700;&#x8981;&#x786E;&#x4FDD;<code>selector</code>&#x80FD;&#x591F;&#x5339;&#x914D;&#x7531;pod&#x6A21;&#x677F;&#x521B;&#x5EFA;&#x51FA;&#x6765;&#x7684;pod&#x7684;label&#xFF0C;&#x5E76;&#x4E14;&#x4E0D;&#x80FD;&#x5339;&#x914D;&#x7531;&#x5176;&#x4ED6;replication controller&#x521B;&#x5EFA;&#x7684;pods&#x3002;&#x5BF9;&#x4E8E;&#x540E;&#x8005;&#xFF0C;&#x6700;&#x76F4;&#x63A5;&#x6700;&#x4FDD;&#x9669;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x7ED9;replication controller&#x5206;&#x914D;&#x4E00;&#x4E2A;&#x72EC;&#x7279;&#x7684;label&#xFF0C;&#x5E76;&#x4E14;&#x5728;pod&#x6A21;&#x677F;&#x548C;selector&#x91CC;&#x90FD;&#x8FDB;&#x884C;&#x6307;&#x5B9A;&#x3002;</p>
+<h2 id="&#x540E;&#x7EED;">&#x540E;&#x7EED;</h2>
+<p><a href="http://kubernetes.io/v1.0/docs/user-guide/connecting-applications.html" target="_blank">&#x5B66;&#x4E60;&#x5C55;&#x793A;&#x5E94;&#x7528;&#x7ED9;&#x7528;&#x6237;&#x548C;&#x5BA2;&#x6237;&#xFF0C;&#x4EE5;&#x53CA;&#x628A;&#x5E94;&#x7528;&#x7684;&#x5404;&#x5C42;&#x62FC;&#x63A5;&#x8D77;&#x6765;</a>&#x3002;</p>
 
                     
                     </section>
@@ -2513,8 +2562,10 @@
         </div>
 
         
+        <a href="./048-Configuring Containers.html" class="navigation navigation-prev " aria-label="Previous page: 第3.1.27节  配置kubernetes"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./050-Managing_Applications-Connecting_applications.html" class="navigation navigation-next " aria-label="Next page: 第3.1.30节 管理应用：连接应用"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第3.1.6节  Labels | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./037-Replication Controller.html" />
     
+    
+    <link rel="prev" href="./035-Pods.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="4.6"
+        data-chapter-title="第3.1.6节  Labels"
+        data-filepath="036-Labels and Selectors.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -595,7 +597,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.6" data-path="036-Labels and Selectors.html">
+        <li class="chapter active" data-level="4.6" data-path="036-Labels and Selectors.html">
             
                 
                     <a href="./036-Labels and Selectors.html">
@@ -2492,17 +2494,178 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
+                        <h1 id="labels">Labels</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;kz</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p><em>Labels</em> are key/value pairs that are attached to objects, such as pods.
+Labels are intended to be used to specify identifying attributes of objects that are meaningful and relevant to users, but which do not directly imply semantics to the core system.
+Labels can be used to organize and to select subsets of objects.  Labels can be attached to objects at creation time and subsequently added and modified at any time.
+Each object can have a set of key/value labels defined.  Each Key must be unique for a given object.</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;labels&quot;</span>: {
+  <span class="hljs-string">&quot;key1&quot;</span> : <span class="hljs-string">&quot;value1&quot;</span>,
+  <span class="hljs-string">&quot;key2&quot;</span> : <span class="hljs-string">&quot;value2&quot;</span>
+}
+</code></pre>
+<p>We&apos;ll eventually index and reverse-index labels for efficient queries and watches, use them to sort and group in UIs and CLIs, etc. We don&apos;t want to pollute labels with non-identifying, especially large and/or structured, data. Non-identifying information should be recorded using <a href="annotations.md">annotations</a>.</p>
+<p>Labels&#x662F;&#x9644;&#x52A0;&#x5230;&#x5982;pod&#x7B49;&#x5BF9;&#x8C61;&#x7684;&#x952E;&#x503C;&#x5BF9;&#x3002;Label&#x65E8;&#x5728;&#x7528;&#x6765;&#x6307;&#x5B9A;&#x5BF9;&#x8C61;&#x90A3;&#x4E9B;&#x7528;&#x4E8E;&#x8FA8;&#x8BC6;&#x6027;&#x76EE;&#x7684;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x8FD9;&#x4E9B;&#x5C5E;&#x6027;&#x4E0E;&#x7528;&#x6237;&#x76F8;&#x5173;&#x6027;&#x5927;&#xFF0C;&#x4ED6;&#x4EEC;&#x6765;&#x8BF4;&#x5177;&#x6709;&#x610F;&#x4E49;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x4E9B;&#x5C5E;&#x6027;&#x5374;&#x5BF9;&#x4E8E;&#x4E0D;&#x76F4;&#x63A5;&#x8868;&#x8FBE;&#x6838;&#x5FC3;&#x7CFB;&#x7EDF;&#x7684;&#x8BED;&#x4E49;&#xFF08;sematics&#xFF09;&#x3002;Label&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x7EC4;&#x7EC7;&#x5E76;&#x4E14;&#x9009;&#x62E9;&#x5BF9;&#x8C61;&#x7684;&#x5B50;&#x96C6;&#x3002;Label&#x53EF;&#x4EE5;&#x5728;&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x7684;&#x65F6;&#x5019;&#x4F9D;&#x9644;&#x5230;&#x5BF9;&#x8C61;&#x4E0A;&#xFF0C;&#x968F;&#x540E;&#x53EF;&#x4EE5;&#x5728;&#x4EFB;&#x610F;&#x65F6;&#x95F4;&#x88AB;&#x6DFB;&#x52A0;&#x548C;&#x4FEE;&#x6539;&#x3002;&#x6BCF;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x4E00;&#x7EC4;&#x952E;&#x503C;&#x5BF9;label&#x3002;&#x6BCF;&#x4E00;&#x4E2A;&#x952E;&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A;&#x7ED9;&#x5B9A;&#x7684;&#x5BF9;&#x8C61;&#x5FC5;&#x987B;&#x662F;&#x552F;&#x4E00;&#x4E0D;&#x53EF;&#x91CD;&#x590D;&#x3002;</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;labels&quot;</span>: {
+  <span class="hljs-string">&quot;key1&quot;</span> : <span class="hljs-string">&quot;value1&quot;</span>,
+  <span class="hljs-string">&quot;key2&quot;</span> : <span class="hljs-string">&quot;value2&quot;</span>
+}
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x6700;&#x7EC8;&#x4F1A;&#x7D22;&#x5F15;&#x5E76;&#x4E14;&#x53CD;&#x5411;&#x7D22;&#x5F15;&#xFF08;reverse-index&#xFF09;labels&#xFF0C;&#x4EE5;&#x83B7;&#x5F97;&#x66F4;&#x9AD8;&#x6548;&#x7684;&#x67E5;&#x8BE2;&#x548C;&#x76D1;&#x89C6;&#xFF0C;&#x628A;&#x4ED6;&#x4EEC;&#x7528;&#x5230;UI&#x6216;&#x8005;CLI&#x4E2D;&#x7528;&#x6765;&#x6392;&#x5E8F;&#x6216;&#x8005;&#x5206;&#x7EC4;&#x7B49;&#x7B49;&#x3002;&#x6211;&#x4EEC;&#x4E0D;&#x60F3;&#x7528;&#x90A3;&#x4E9B;&#x4E0D;&#x5177;&#x6709;&#x6307;&#x8BA4;&#x6548;&#x679C;&#x7684;label&#x6765;&#x6C61;&#x67D3;label&#xFF0C;&#x7279;&#x522B;&#x662F;&#x90A3;&#x4E9B;&#x4F53;&#x79EF;&#x8F83;&#x5927;&#x548C;&#x7ED3;&#x6784;&#x578B;&#x7684;&#x7684;&#x6570;&#x636E;&#x3002;&#x4E0D;&#x5177;&#x6709;&#x6307;&#x8BA4;&#x6548;&#x679C;&#x7684;&#x4FE1;&#x606F;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;annotation&#x6765;&#x8BB0;&#x5F55;&#x3002;</p>
+<h2 id="motivation">Motivation</h2>
+<h2 id="&#x76EE;&#x6807;">&#x76EE;&#x6807;</h2>
+<p>Labels enable users to map their own organizational structures onto system objects in a loosely coupled fashion, without requiring clients to store these mappings.</p>
+<p>Service deployments and batch processing pipelines are often multi-dimensional entities (e.g., multiple partitions or deployments, multiple release tracks, multiple tiers, multiple micro-services per tier). Management often requires cross-cutting operations, which breaks encapsulation of strictly hierarchical representations, especially rigid hierarchies determined by the infrastructure rather than by users.</p>
+<p>Example labels:</p>
 <ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
+<li><code>&quot;release&quot; : &quot;stable&quot;</code>, <code>&quot;release&quot; : &quot;canary&quot;</code></li>
+<li><code>&quot;environment&quot; : &quot;dev&quot;</code>, <code>&quot;environment&quot; : &quot;qa&quot;</code>, <code>&quot;environment&quot; : &quot;production&quot;</code></li>
+<li><code>&quot;tier&quot; : &quot;frontend&quot;</code>, <code>&quot;tier&quot; : &quot;backend&quot;</code>, <code>&quot;tier&quot; : &quot;cache&quot;</code></li>
+<li><code>&quot;partition&quot; : &quot;customerA&quot;</code>, <code>&quot;partition&quot; : &quot;customerB&quot;</code></li>
+<li><code>&quot;track&quot; : &quot;daily&quot;</code>, <code>&quot;track&quot; : &quot;weekly&quot;</code></li>
 </ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
+<p>These are just examples; you are free to develop your own conventions.</p>
+<p>Label&#x53EF;&#x4EE5;&#x8BA9;&#x7528;&#x6237;&#x5C06;&#x4ED6;&#x4EEC;&#x81EA;&#x5DF1;&#x7684;&#x6709;&#x7EC4;&#x7EC7;&#x76EE;&#x7684;&#x7684;&#x7ED3;&#x6784;&#x4EE5;&#x4E00;&#x79CD;&#x677E;&#x8026;&#x5408;&#x7684;&#x65B9;&#x5F0F;&#x5E94;&#x7528;&#x5230;&#x7CFB;&#x7EDF;&#x7684;&#x5BF9;&#x8C61;&#x4E0A;&#xFF0C;&#x4E14;&#x4E0D;&#x9700;&#x8981;&#x5BA2;&#x6237;&#x7AEF;&#x5B58;&#x653E;&#x8FD9;&#x4E9B;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;&#xFF08;mappings&#xFF09;&#x3002;</p>
+<p>&#x670D;&#x52A1;&#x90E8;&#x7F72;&#x548C;&#x6279;&#x5904;&#x7406;&#x7BA1;&#x9053;&#x901A;&#x5E38;&#x662F;&#x591A;&#x7EF4;&#x7684;&#x5B9E;&#x4F53;&#xFF08;&#x4F8B;&#x5982;&#x591A;&#x4E2A;&#x5206;&#x533A;&#x6216;&#x8005;&#x90E8;&#x7F72;&#xFF0C;&#x591A;&#x4E2A;&#x53D1;&#x5E03;&#x8F68;&#x9053;&#xFF0C;&#x591A;&#x5C42;&#xFF0C;&#x6BCF;&#x5C42;&#x591A;&#x5FAE;&#x670D;&#x52A1;&#xFF09;&#x3002;&#x7BA1;&#x7406;&#x901A;&#x5E38;&#x9700;&#x8981;&#x8DE8;&#x8D8A;&#x5F0F;&#x7684;&#x5207;&#x5272;&#x64CD;&#x4F5C;&#xFF0C;&#x8FD9;&#x4F1A;&#x6253;&#x7834;&#x6709;&#x4E25;&#x683C;&#x5C42;&#x7EA7;&#x5C55;&#x793A;&#x5173;&#x7CFB;&#x7684;&#x5C01;&#x88C5;&#xFF0C;&#x7279;&#x522B;&#x5BF9;&#x90A3;&#x4E9B;&#x662F;&#x7531;&#x57FA;&#x7840;&#x8BBE;&#x65BD;&#x800C;&#x975E;&#x7528;&#x6237;&#x51B3;&#x5B9A;&#x7684;&#x5F88;&#x6B7B;&#x677F;&#x7684;&#x5C42;&#x7EA7;&#x5173;&#x7CFB;&#x3002;</p>
+<p>&#x4E00;&#x4E9B;&#x793A;&#x4F8B;label:</p>
+<ul>
+<li><code>&quot;&#x53D1;&#x884C;&#x7248;&#x672C;&#xFF08;release&#xFF09;&quot; : &quot;&#xFF08;&#x7A33;&#x5B9A;&#x7248;&#xFF09;stable&quot;</code>, <code>&quot;&#xFF08;&#x53D1;&#x884C;&#x7248;&#xFF09;release&quot; : &quot;canary&quot;</code></li>
+<li><code>&quot;&#x73AF;&#x5883;&#xFF08;environment&#xFF09;&quot; : &quot;&#xFF08;&#x5F00;&#x53D1;&#xFF09;dev&quot;</code>, <code>&quot;environment&quot; : &quot;qa&quot;</code>, <code>&quot;environment&quot; : &quot;&#xFF08;&#x751F;&#x4EA7;&#xFF09;production&quot;</code></li>
+<li><code>&quot;tier&quot; : &quot;frontend&quot;</code>, <code>&quot;tier&quot; : &quot;backend&quot;</code>, <code>&quot;tier&quot; : &quot;cache&quot;</code></li>
+<li><code>&quot;&#x5206;&#x533A;&#xFF08;partition&#xFF09;&quot; : &quot;&#xFF08;&#x5BA2;&#x6237;A&#xFF09;customerA&quot;</code>, <code>&quot;partition&quot; : &quot;customerB&quot;</code></li>
+<li><code>&quot;track&quot; : &quot;daily&quot;</code>, <code>&quot;track&quot; : &quot;weekly&quot;</code></li>
+</ul>
+<h2 id="syntax-and-character-set">Syntax and character set</h2>
+<h2 id="&#x8BED;&#x6CD5;&#x548C;&#x5B57;&#x7B26;&#x96C6;">&#x8BED;&#x6CD5;&#x548C;&#x5B57;&#x7B26;&#x96C6;</h2>
+<p><em>Labels</em> are key value pairs. Valid label keys have two segments: an optional prefix and name, separated by a slash (<code>/</code>).  The name segment is required and must be 63 characters or less, beginning and ending with an alphanumeric character (<code>[a-z0-9A-Z]</code>) with dashes (<code>-</code>), underscores (<code>_</code>), dots (<code>.</code>), and alphanumerics between.  The prefix is optional.  If specified, the prefix must be a DNS subdomain: a series of DNS labels separated by dots (<code>.</code>), not longer than 253 characters in total, followed by a slash (<code>/</code>).
+If the prefix is omitted, the label key is presumed to be private to the user. Automated system components (e.g. <code>kube-scheduler</code>, <code>kube-controller-manager</code>, <code>kube-apiserver</code>, <code>kubectl</code>, or other third-party automation) which add labels to end-user objects must specify a prefix.  The <code>kubernetes.io/</code> prefix is reserved for Kubernetes core components.</p>
+<p>Valid label values must be 63 characters or less and must be empty or begin and end with an alphanumeric character (<code>[a-z0-9A-Z]</code>) with dashes (<code>-</code>), underscores (<code>_</code>), dots (<code>.</code>), and alphanumerics between.</p>
+<p>Labels&#x662F;&#x952E;&#x503C;&#x5BF9;&#x3002;&#x5408;&#x6CD5;&#x7684;&#x952E;&#x503C;&#x5BF9;&#x6709;&#x4E24;&#x4E2A;&#x90E8;&#x5206;&#xFF1A;&#x4E00;&#x4E2A;&#x53EF;&#x9009;&#x7684;&#x524D;&#x7F00;&#x548C;&#x540D;&#x5B57;&#xFF0C;&#x7531;&#x201C;/&#x201D;&#x5206;&#x9694;&#x3002;&#x540D;&#x5B57;&#x90E8;&#x5206;&#x662F;&#x5FC5;&#x987B;&#xFF0C;&#x957F;&#x5EA6;&#x4E00;&#x5B9A;&#x662F;64&#x4E2A;&#x5B57;&#x7B26;&#x6216;&#x8005;&#x66F4;&#x77ED;&#xFF0C;&#x9996;&#x4F4D;&#x5B57;&#x7B26;&#x5FC5;&#x987B;&#x662F;&#x5B57;&#x6BCD;&#x6570;&#x5B57;&#x578B;&#xFF08;<code>[a-z0-9A-Z]</code>&#xFF09;&#xFF0C;&#x5176;&#x4ED6;&#x5730;&#x65B9;&#x7684;&#x5B57;&#x7B26;&#x5FC5;&#x987B;&#x662F;&#x6A2A;&#x7EBF;&#xFF0C;&#x4E0B;&#x5212;&#x7EBF;&#xFF0C;&#x70B9;&#xFF0C;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x5B57;&#x6BCD;&#x6570;&#x5B57;&#x5B57;&#x7B26;&#x3002;&#x524D;&#x7F00;&#x662F;&#x53EF;&#x9009;&#x7684;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#xFF0C;&#x524D;&#x7F00;&#x5FC5;&#x987B;&#x662F;&#x4E00;&#x4E2A;dns&#x7684;&#x5B50;&#x57DF;&#xFF1A;&#x4E00;&#x7CFB;&#x5217;&#x6709;&#x70B9;&#x5206;&#x9694;&#x7684;DNS label&#xFF0C;&#x603B;&#x957F;&#x5EA6;&#x4E0D;&#x80FD;&#x8D85;&#x8FC7;253&#x4E2A;&#x5B57;&#x7B26;&#xFF0C;&#x4EE5;&#x4E0B;&#x5212;&#x7EBF;&#x201C;/&#x201D;&#x7ED3;&#x5C3E;&#x3002;&#x5982;&#x679C;&#x524D;&#x7F00;&#x88AB;&#x7701;&#x7565;&#x6389;&#x4E86;&#xFF0C;label&#x7684;&#x952E;&#x4F1A;&#x88AB;&#x8BA4;&#x4E3A;&#x662F;&#x5BF9;&#x4E8E;&#x7528;&#x6237;&#x79C1;&#x6709;&#x7684;&#x3002;&#x7CFB;&#x7EDF;&#x81EA;&#x52A8;&#x7684;&#x7EC4;&#x4EF6;&#xFF08;&#x5982;kube-scheduler&#xFF0C;kube-controller-manager&#xFF0C;kube-apiserver&#xFF0C;kubectl&#x6216;&#x8005;&#x5176;&#x4ED6;&#x7B2C;&#x4E09;&#x65B9;&#x81EA;&#x52A8;&#x5DE5;&#x5177;&#xFF09;&#x5982;&#x8981;&#x5411;&#x7528;&#x6237;&#x6700;&#x7EC8;&#x7684;&#x5BF9;&#x8C61;&#x6DFB;&#x52A0;label&#xFF0C;&#x5FC5;&#x987B;&#x6307;&#x5B9A;&#x524D;&#x7F00;&#x3002;&#x524D;&#x7F00;<code>kubernetes.io/</code>&#x662F;&#x4FDD;&#x7559;&#x7ED9;Kubernetes&#x6838;&#x5FC3;&#x7EC4;&#x4EF6;&#x7528;&#x7684;&#x3002;</p>
+<p>&#x5408;&#x6CD5;&#x7684;label&#x503C;&#x5FC5;&#x987B;&#x662F;63&#x4E2A;&#x6216;&#x8005;&#x66F4;&#x77ED;&#x7684;&#x5B57;&#x7B26;&#x3002;&#x8981;&#x4E48;&#x662F;&#x7A7A;&#xFF0C;&#x8981;&#x4E48;&#x9996;&#x4F4D;&#x5B57;&#x7B26;&#x5FC5;&#x987B;&#x4E3A;&#x5B57;&#x6BCD;&#x6570;&#x5B57;&#x5B57;&#x7B26;&#xFF0C;&#x4E2D;&#x95F4;&#x5FC5;&#x987B;&#x662F;&#x6A2A;&#x7EBF;&#xFF0C;&#x4E0B;&#x5212;&#x7EBF;&#xFF0C;&#x70B9;&#x6216;&#x8005;&#x6570;&#x5B57;&#x5B57;&#x6BCD;&#x3002;</p>
+<h2 id="label&#x9009;&#x62E9;&#x5668;">Label&#x9009;&#x62E9;&#x5668;</h2>
+<p>Unlike <a href="identifiers.md">names and UIDs</a>, labels do not provide uniqueness. In general, we expect many objects to carry the same label(s).</p>
+<p>Via a <em>label selector</em>, the client/user can identify a set of objects. The label selector is the core grouping primitive in Kubernetes.</p>
+<p>The API currently supports two types of selectors: <em>equality-based</em> and <em>set-based</em>.
+A label selector can be made of multiple <em>requirements</em> which are comma-separated. In the case of multiple requirements, all must be satisfied so the comma separator acts as an <em>AND</em> logical operator.</p>
+<p>An empty label selector (that is, one with zero requirements) selects every object in the collection.</p>
+<p>A null label selector (which is only possible for optional selector fields) selects no objects.</p>
+<p>&#x4E0E;name&#x548C;UID&#x4E0D;&#x540C;&#xFF0C;label&#x4E0D;&#x63D0;&#x4F9B;&#x552F;&#x4E00;&#x6027;&#x3002;&#x901A;&#x5E38;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x770B;&#x5230;&#x5F88;&#x591A;&#x5BF9;&#x8C61;&#x6709;&#x7740;&#x4E00;&#x6837;&#x7684;label&#x3002;</p>
+<p>&#x901A;&#x8FC7;label&#x9009;&#x62E9;&#x5668;&#xFF0C;&#x5BA2;&#x6237;&#x7AEF;/&#x7528;&#x6237;&#x80FD;&#x65B9;&#x4FBF;&#x8FA8;&#x8BC6;&#x51FA;&#x4E00;&#x7EC4;&#x5BF9;&#x8C61;&#x3002;label&#x9009;&#x62E9;&#x5668;&#x662F;kubernetes&#x4E2D;&#x6838;&#x5FC3;&#x7684;&#x7EC4;&#x7EC7;&#x539F;&#x8BED;&#x3002;</p>
+<p>API&#x76EE;&#x524D;&#x652F;&#x6301;&#x4E24;&#x79CD;&#x9009;&#x62E9;&#x5668;&#xFF1A;&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x7684;&#x548C;&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x7684;&#x3002;&#x4E00;&#x4E2A;label&#x9009;&#x62E9;&#x5668;&#x4E00;&#x53EF;&#x4EE5;&#x7531;&#x591A;&#x4E2A;&#x5FC5;&#x987B;&#x6761;&#x4EF6;&#x7EC4;&#x6210;&#xFF0C;&#x7531;&#x9017;&#x53F7;&#x5206;&#x9694;&#x3002;&#x5728;&#x591A;&#x4E2A;&#x5FC5;&#x987B;&#x6761;&#x4EF6;&#x6307;&#x5B9A;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x6761;&#x4EF6;&#x90FD;&#x5FC5;&#x987B;&#x6EE1;&#x8DB3;&#xFF0C;&#x56E0;&#x800C;&#x9017;&#x53F7;&#x8D77;&#x7740;AND&#x903B;&#x8F91;&#x8FD0;&#x7B97;&#x7B26;&#x7684;&#x4F5C;&#x7528;&#x3002;</p>
+<p>&#x4E00;&#x4E2A;&#x7A7A;&#x7684;label&#x9009;&#x62E9;&#x5668;&#xFF08;&#x5373;&#x6709;0&#x4E2A;&#x5FC5;&#x987B;&#x6761;&#x4EF6;&#x7684;&#x9009;&#x62E9;&#x5668;&#xFF09;&#x4F1A;&#x9009;&#x62E9;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#x3002;</p>
+<p> &#x4E00;&#x4E2A;null&#x578B;label&#x9009;&#x62E9;&#x5668;&#xFF08;&#x4EC5;&#x5BF9;&#x4E8E;&#x53EF;&#x9009;&#x7684;&#x9009;&#x62E9;&#x5668;&#x5B57;&#x6BB5;&#x624D;&#x53EF;&#x80FD;&#xFF09;&#x4E0D;&#x4F1A;&#x8FD4;&#x56DE;&#x4EFB;&#x4F55;&#x5BF9;&#x8C61;&#x3002;</p>
+<h3 id="equalitybased-requirement"><em>Equality-based</em> requirement</h3>
+<h3 id="&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x6027;&#x7684;&#x6761;&#x4EF6;">&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x6027;&#x7684;&#x6761;&#x4EF6;</h3>
+<p><em>Equality-</em> or <em>inequality-based</em> requirements allow filtering by label keys and values. Matching objects must satisfy all of the specified label constraints, though they may have additional labels as well.
+Three kinds of operators are admitted <code>=</code>,<code>==</code>,<code>!=</code>. The first two represent <em>equality</em> (and are simply synonyms), while the latter represents <em>inequality</em>. For example:</p>
+<pre><code>environment = production
+tier != frontend
+</code></pre><p>The former selects all resources with key equal to <code>environment</code> and value equal to <code>production</code>.
+The latter selects all resources with key equal to <code>tier</code> and value distinct from <code>frontend</code>, and all resources with no labels with the <code>tier</code> key.
+One could filter for resources in <code>production</code> excluding <code>frontend</code> using the comma operator: <code>environment=production,tier!=frontend</code></p>
+<p>&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x6027;&#x6216;&#x8005;&#x4E0D;&#x76F8;&#x7B49;&#x6027;&#x7684;&#x6761;&#x4EF6;&#x5141;&#x8BB8;&#x7528;label&#x7684;&#x952E;&#x6216;&#x8005;&#x503C;&#x8FDB;&#x884C;&#x8FC7;&#x6EE4;&#x3002;&#x5339;&#x914D;&#x7684;&#x5BF9;&#x8C61;&#x5FC5;&#x987B;&#x6EE1;&#x8DB3;&#x6240;&#x6709;&#x6307;&#x5B9A;&#x7684;label&#x7EA6;&#x675F;&#xFF0C;&#x5C3D;&#x7BA1;&#x4ED6;&#x4EEC;&#x53EF;&#x80FD;&#x4E5F;&#x6709;&#x989D;&#x5916;&#x7684;label&#x3002;&#x6709;&#x4E09;&#x79CD;&#x8FD0;&#x7B97;&#x7B26;&#x662F;&#x5141;&#x8BB8;&#x7684;&#xFF0C;&#x201C;=&#x201D;&#xFF0C;&#x201C;==&#x201D;&#x548C;&#x201C;!=&#x201D;&#x3002;&#x524D;&#x4E24;&#x79CD;&#x4EE3;&#x8868;&#x76F8;&#x7B49;&#x6027;&#xFF08;&#x4ED6;&#x4EEC;&#x662F;&#x540C;&#x4E49;&#x8FD0;&#x7B97;&#x7B26;&#xFF09;&#xFF0C;&#x540E;&#x4E00;&#x79CD;&#x4EE3;&#x8868;&#x975E;&#x76F8;&#x7B49;&#x6027;&#x3002;&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code>environment = production
+tier != frontend
+</code></pre><p>&#x7B2C;&#x4E00;&#x4E2A;&#x9009;&#x62E9;&#x6240;&#x6709;&#x952E;&#x7B49;&#x4E8E;<code>environment</code>&#x503C;&#x4E3A;<code>production</code>&#x7684;&#x8D44;&#x6E90;&#x3002;&#x540E;&#x4E00;&#x79CD;&#x9009;&#x62E9;&#x6240;&#x6709;&#x952E;&#x4E3A;<code>tier</code>&#x503C;&#x4E0D;&#x7B49;&#x4E8E;<code>frontend</code>&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x548C;&#x90A3;&#x4E9B;&#x6CA1;&#x6709;&#x952E;&#x4E3A;<code>tier</code>&#x7684;label&#x7684;&#x8D44;&#x6E90;&#x3002;</p>
+<p>&#x8981;&#x8FC7;&#x6EE4;&#x6240;&#x6709;&#x5904;&#x4E8E;<code>production</code>&#x4F46;&#x4E0D;&#x662F;<code>frontend</code>&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x9017;&#x53F7;&#x64CD;&#x4F5C;&#x7B26;&#xFF0C;<code>environment=production,tier!=frontend</code>&#x3002;</p>
+<h3 id="&#x57FA;&#x4E8E;set&#x7684;&#x6761;&#x4EF6;">&#x57FA;&#x4E8E;set&#x7684;&#x6761;&#x4EF6;</h3>
+<p><em>Set-based</em> label requirements allow filtering keys according to a set of values. Three kinds of operators are supported: <code>in</code>,<code>notin</code> and exists (only the key identifier). For example:</p>
+<pre><code>environment in (production, qa)
+tier notin (frontend, backend)
+partition
+!partition
+</code></pre><p>The first example selects all resources with key equal to <code>environment</code> and value equal to <code>production</code> or <code>qa</code>.
+The second example selects all resources with key equal to <code>tier</code> and values other than <code>frontend</code> and <code>backend</code>, and all resources with no labels with the <code>tier</code> key.
+The third example selects all resources including a label with key <code>partition</code>; no values are checked.
+The fourth example selects all resources without a label with key <code>partition</code>; no values are checked.
+Similarly the comma separator acts as an <em>AND</em> operator. So filtering resources with a <code>partition</code> key (no matter the value) and with <code>environment</code> different than  <code>qa</code> can be achieved using <code>partition,environment notin (qa)</code>.
+The <em>set-based</em> label selector is a general form of equality since <code>environment=production</code> is equivalent to <code>environment in (production)</code>; similarly for <code>!=</code> and <code>notin</code>.</p>
+<p><em>Set-based</em> requirements can be mixed with <em>equality-based</em> requirements. For example: <code>partition in (customerA, customerB),environment!=qa</code>.</p>
+<p>&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x7684;label&#x6761;&#x4EF6;&#x5141;&#x8BB8;&#x7528;&#x4E00;&#x7EC4;&#x503C;&#x6765;&#x8FC7;&#x6EE4;&#x952E;&#x3002;&#x652F;&#x6301;&#x4E09;&#x79CD;&#x64CD;&#x4F5C;&#x7B26;:<code>in</code>&#xFF0C;<code>notin</code>,&#x548C;<code>exists(&#x4EC5;&#x9488;&#x5BF9;&#x4E8E;key&#x7B26;&#x53F7;)</code>&#x3002;&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code>environment in (production, qa)
+tier notin (frontend, backend)
+partition
+!partitio
+</code></pre><p>&#x7B2C;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;&#x9009;&#x62E9;&#x6240;&#x6709;&#x952E;&#x7B49;&#x4E8E;<code>environment</code>&#xFF0C;&#x4E14;value&#x7B49;&#x4E8E;<code>production</code>&#x6216;&#x8005;<code>qa</code>&#x7684;&#x8D44;&#x6E90;&#x3002;
+&#x7B2C;&#x4E8C;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;&#x9009;&#x62E9;&#x6240;&#x6709;&#x952E;&#x7B49;&#x4E8E;<code>tier</code>&#x4E14;&#x503C;&#x662F;&#x9664;&#x4E86;<code>frontend</code>&#x548C;<code>backend</code>&#x4E4B;&#x5916;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x548C;&#x90A3;&#x4E9B;&#x6CA1;&#x6709;label&#x7684;&#x952E;&#x662F;<code>tier</code>&#x7684;&#x8D44;&#x6E90;&#x3002;
+&#x7B2C;&#x4E09;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;&#x9009;&#x62E9;&#x6240;&#x6709;&#x6240;&#x6709;&#x6709;&#x4E00;&#x4E2A;label&#x7684;&#x952E;&#x4E3A;partition&#x7684;&#x8D44;&#x6E90;&#xFF1B;&#x503C;&#x662F;&#x4EC0;&#x4E48;&#x4E0D;&#x4F1A;&#x88AB;&#x68C0;&#x67E5;&#x3002;
+&#x7B2C;&#x56DB;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;&#x9009;&#x62E9;&#x6240;&#x6709;&#x7684;&#x6CA1;&#x6709;lable&#x7684;&#x952E;&#x540D;&#x4E3A;<code>partition</code>&#x7684;&#x8D44;&#x6E90;&#xFF1B;&#x503C;&#x662F;&#x4EC0;&#x4E48;&#x4E0D;&#x4F1A;&#x88AB;&#x68C0;&#x67E5;&#x3002;</p>
+<p>&#x7C7B;&#x4F3C;&#x7684;&#xFF0C;&#x9017;&#x53F7;&#x64CD;&#x4F5C;&#x7B26;&#x76F8;&#x5F53;&#x4E8E;&#x4E00;&#x4E2A;<strong>AND</strong>&#x64CD;&#x4F5C;&#x7B26;&#x3002;&#x56E0;&#x800C;&#x8981;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;<code>partition</code>&#x952E;&#xFF08;&#x4E0D;&#x7BA1;&#x503C;&#x662F;&#x4EC0;&#x4E48;&#xFF09;&#xFF0C;&#x5E76;&#x4E14;<code>environment</code>&#x4E0D;&#x662F;<code>qa</code>&#x8FC7;&#x6EE4;&#x8D44;&#x6E90;&#x53EF;&#x4EE5;&#x7528;<code>partition,environment notin (qa)</code>&#x3002;</p>
+<p>&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x7684;&#x9009;&#x62E9;&#x5668;&#x662F;&#x4E00;&#x4E2A;&#x76F8;&#x7B49;&#x6027;&#x7684;&#x5BBD;&#x6CDB;&#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x56E0;&#x4E3A;<code>environment=production</code>&#x76F8;&#x5F53;&#x4E8E; <code>environment in (production)</code>&#xFF0C;&#x4E0E;<code>!=</code> and <code>notin</code>&#x7C7B;&#x4F3C;&#x3002;</p>
+<p>&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x7684;&#x6761;&#x4EF6;&#x53EF;&#x4EE5;&#x4E0E;&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x6027; &#x7684;&#x6761;&#x4EF6;&#x6DF7;&#x5408;&#x3002;&#x4F8B;&#x5982;&#xFF0C;<code>partition in (customerA, customerB),environment!=qa</code>&#x3002;</p>
+<h2 id="api">API</h2>
+<h3 id="list-and-watch-filtering">LIST and WATCH filtering</h3>
+<h3 id="list-&#x548C;watch&#x8FC7;&#x6EE4;">LIST &#x548C;WATCH&#x8FC7;&#x6EE4;</h3>
+<p>LIST and WATCH operations may specify label selectors to filter the sets of objects returned using a query parameter. Both requirements are permitted:</p>
+<pre><code>* _equality-based_ requirements: `?labelSelector=environment%3Dproduction,tier%3Dfrontend`
+* _set-based_ requirements: `?labelSelector=environment+in+%28production%2Cqa%29%2Ctier+in+%28frontend%29`
+</code></pre><p>LIST&#x548C;WATCH&#x64CD;&#x4F5C;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;query&#x53C2;&#x6570;&#x6765;&#x6307;&#x5B9A;label&#x9009;&#x62E9;&#x5668;&#x6765;&#x8FC7;&#x6EE4;&#x8FD4;&#x56DE;&#x5BF9;&#x8C61;&#x7684;&#x96C6;&#x5408;&#x3002;&#x4E24;&#x79CD;&#x6761;&#x4EF6;&#x90FD;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#xFF1A;
+    <em>&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x6027;&#x6761;&#x4EF6;&#xFF1A;<code>?labelSelector=environment%3Dproduction,tier%3Dfrontend</code>
+    </em>&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x6761;&#x4EF6;&#x7684;&#xFF1A;<code>?labelSelector=environment+in+%28production%2Cqa%29%2Ctier+in+%28frontend%29</code></p>
+<p>Both label selector styles can be used to list or watch resources via a REST client. For example targetting <code>apiserver</code> with <code>kubectl</code> and using <em>equality-based</em> one may write:</p>
+<p>&#x4E24;&#x79CD;label&#x9009;&#x62E9;&#x5668;&#x98CE;&#x683C;&#x90FD;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x901A;&#x8FC7;REST&#x5BA2;&#x6237;&#x7AEF;&#x6765;&#x5217;&#x8868;&#x6216;&#x8005;&#x76D1;&#x89C6;&#x8D44;&#x6E90;&#x3002;&#x6BD4;&#x5982;&#x4F7F;&#x7528;<code>kubectl</code>&#x6765;&#x9488;&#x5BF9;<code>apiserver</code>&#xFF0C;&#x5E76;&#x4E14;&#x4F7F;&#x7528;&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x6027;&#x7684;&#x6761;&#x4EF6;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#xFF1A;</p>
+<p>&#xB7;</p>
+<pre><code class="lang-console">$ kubectl get pods -l environment=production,tier=frontend
+</code></pre>
+<p>or using <em>set-based</em> requirements:
+&#x6216;&#x8005;&#x4F7F;&#x7528;&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x7684;&#x6761;&#x4EF6;&#xFF1A;</p>
+<pre><code class="lang-console">$ kubectl get pods -l &apos;environment in (production),tier in (frontend)&apos;
+</code></pre>
+<p>As already mentioned <em>set-based</em> requirements are more expressive.  For instance, they can implement the <em>OR</em> operator on values:</p>
+<p>&#x5982;&#x4EE5;&#x4E0A;&#x5DF2;&#x7ECF;&#x63D0;&#x5230;&#x7684;&#xFF0C;&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x7684;&#x6761;&#x4EF6;&#x8868;&#x8FBE;&#x6027;&#x66F4;&#x5F3A;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x4ED6;&#x4EEC;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x503C;&#x4E0A;&#x7684;OR&#x64CD;&#x4F5C;&#xFF1A;</p>
+<pre><code class="lang-console">$ kubectl get pods -l &apos;environment in (production, qa)&apos;
+</code></pre>
+<p>or restricting negative matching via <em>exists</em> operator:</p>
+<p>&#x6216;&#x8005;&#x901A;&#x8FC7;exists&#x64CD;&#x4F5C;&#x7B26;&#x8FDB;&#x884C;&#x5426;&#x5B9A;&#x9650;&#x5236;&#x5339;&#x914D;&#xFF1A;</p>
+<pre><code class="lang-console">$ kubectl get pods -l &apos;environment,environment notin (frontend)&apos;
+</code></pre>
+<h3 id="set-references-in-api-objects">Set references in API objects</h3>
+<p>Some Kubernetes objects, such as <a href="services.md"><code>service</code>s</a> and <a href="replication-controller.md"><code>replicationcontroller</code>s</a>, also use label selectors to specify sets of other resources, such as <a href="pods.md">pods</a>.</p>
+<p>&#x4E00;&#x4E9B;Kubernetes&#x5BF9;&#x8C61;&#xFF0C;&#x6BD4;&#x5982;service&#x548C;replication controlle&#x7684;&#xFF0C;&#x4E5F;&#x4F7F;&#x7528;label&#x9009;&#x62E9;&#x5668;&#x6765;&#x6307;&#x5B9A;&#x5176;&#x4ED6;&#x8D44;&#x6E90;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x6BD4;&#x5982;pods&#x3002;</p>
+<h4 id="service-and-replicationcontroller">Service and ReplicationController</h4>
+<p>The set of pods that a <code>service</code> targets is defined with a label selector. Similarly, the population of pods that a <code>replicationcontroller</code> should manage is also defined with a label selector.</p>
+<p>Labels selectors for both objects are defined in <code>json</code> or <code>yaml</code> files using maps, and only <em>equality-based</em> requirement selectors are supported:</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;selector&quot;</span>: {
+    <span class="hljs-string">&quot;component&quot;</span> : <span class="hljs-string">&quot;redis&quot;</span>,
+}
+</code></pre>
+<p>or</p>
+<pre><code class="lang-yaml">selector:
+    component: redis
+</code></pre>
+<p>this selector (respectively in <code>json</code> or <code>yaml</code> format) is equivalent to <code>component=redis</code> or <code>component in (redis)</code>.</p>
+<p>&#x4E00;&#x4E2A;service&#x9488;&#x5BF9;&#x7684;pods&#x7684;&#x96C6;&#x5408;&#x662F;&#x7528;label&#x9009;&#x62E9;&#x5668;&#x6765;&#x5B9A;&#x4E49;&#x7684;&#x3002;&#x7C7B;&#x4F3C;&#x7684;&#xFF0C;&#x4E00;&#x4E2A;replicationcontroller&#x7BA1;&#x7406;&#x7684;pods&#x7684;&#x7FA4;&#x4F53;&#x4E5F;&#x662F;&#x7528;label&#x9009;&#x62E9;&#x5668;&#x6765;&#x5B9A;&#x4E49;&#x7684;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x8FD9;&#x4E24;&#x79CD;&#x5BF9;&#x8C61;&#x7684;Label&#x9009;&#x62E9;&#x5668;&#x662F;&#x7528;map&#x5B9A;&#x4E49;&#x5728;json&#x6216;&#x8005;yaml&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x53EA;&#x652F;&#x6301;&#x57FA;&#x4E8E;&#x76F8;&#x7B49;&#x6027;&#x7684;&#x6761;&#x4EF6;&#xFF1A;</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;selector&quot;</span>: {
+    <span class="hljs-string">&quot;component&quot;</span> : <span class="hljs-string">&quot;redis&quot;</span>,
+}
+</code></pre>
+<p>&#x6216;&#x8005;</p>
+<pre><code class="lang-yaml">selector:
+    component: redis
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x9009;&#x62E9;&#x5668;&#xFF08;&#x5206;&#x522B;&#x662F;&#x4F4D;&#x4E8E;json&#x6216;&#x8005;yaml&#x683C;&#x5F0F;&#x7684;&#xFF09;&#x76F8;&#x7B49;&#x4E8E;<code>component=redis</code> &#x6216;&#x8005; <code>component in (redis)</code>&#x3002;</p>
+<h4 id="job-and-other-new-resources">Job and other new resources</h4>
+<h3 id="job&#x548C;&#x5176;&#x4ED6;&#x65B0;&#x7684;&#x8D44;&#x6E90;">Job&#x548C;&#x5176;&#x4ED6;&#x65B0;&#x7684;&#x8D44;&#x6E90;</h3>
+<p>Newer resources, such as <a href="jobs.md">job</a>, support <em>set-based</em> requirements as well.</p>
+<pre><code class="lang-yaml">selector:
+  matchLabels:
+    component: redis
+  matchExpressions:
+    - {key: tier, operator: In, values: [cache]}
+    - {key: environment, operator: NotIn, values: [dev]}
+</code></pre>
+<p><code>matchLabels</code> is a map of <code>{key,value}</code> pairs. A single <code>{key,value}</code> in the <code>matchLabels</code> map is equivalent to an element of <code>matchExpressions</code>, whose <code>key</code> field is &quot;key&quot;, the <code>operator</code> is &quot;In&quot;, and the <code>values</code> array contains only &quot;value&quot;. <code>matchExpressions</code> is a list of pod selector requirements. Valid operators include In, NotIn, Exists, and DoesNotExist. The values set must be non-empty in the case of In and NotIn. All of the requirements, from both <code>matchLabels</code> and <code>matchExpressions</code> are ANDed together -- they must all be satisfied in order to match.</p>
+<p>&#x8F83;&#x65B0;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x5982;job&#xFF0C;&#x4E5F;&#x652F;&#x6301;&#x57FA;&#x4E8E;&#x96C6;&#x5408;&#x7684;&#x6761;&#x4EF6;&#x3002;</p>
+<pre><code class="lang-yaml">selector:
+  matchLabels:&#x76F8;&#x5F53;&#x4E8E;&#x4E00;&#x4E2A;
+    component: redis
+  matchExpressions:
+    - {key: tier, operator: In, values: [cache]}
+    - {key: environment, operator: NotIn, values: [dev]}
+</code></pre>
+<p><code>matchLabels</code>&#x662F;&#x4E00;&#x4E2A;&#x952E;&#x503C;&#x5BF9;&#x7684;&#x6620;&#x5C04;&#x3002;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;<code>{key,value}</code>&#x76F8;&#x5F53;&#x4E8E;<code>matchExpressions</code>&#x7684;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x5B83;&#x7684;&#x952E;&#x5B57;&#x6BB5;&#x662F;&quot;key&quot;,&#x64CD;&#x4F5C;&#x7B26;&#x662F;<code>In</code>&#xFF0C;&#x5E76;&#x4E14;&#x503C;&#x6570;&#x7EC4;&#x503C;&#x5305;&#x542B;&quot;value&quot;&#x3002;<code>matchExpressions</code>&#x662F;&#x4E00;&#x4E2A;pod&#x7684;&#x9009;&#x62E9;&#x5668;&#x6761;&#x4EF6;&#x7684;&#x5217;&#x8868;&#x3002;&#x5408;&#x6CD5;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#x5305;&#x542B;In, NotIn, Exists, and DoesNotExist&#x3002;&#x5728;In&#x548C;NotIn&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x503C;&#x7684;&#x7EC4;&#x5FC5;&#x987B;&#x4E0D;&#x80FD;&#x4E3A;&#x7A7A;&#x3002;&#x6240;&#x6709;&#x7684;&#x6761;&#x4EF6;&#xFF0C;&#x5305;&#x542B;<code>matchLabels</code> and <code>matchExpressions</code>&#x4E2D;&#x7684;&#xFF0C;&#x4F1A;&#x7528;AND&#x7B26;&#x53F7;&#x8FDE;&#x63A5;&#xFF0C;&#x4ED6;&#x4EEC;&#x5FC5;&#x987B;&#x90FD;&#x88AB;&#x6EE1;&#x8DB3;&#x4EE5;&#x5B8C;&#x6210;&#x5339;&#x914D;&#x3002;</p>
 
                     
                     </section>
@@ -2513,8 +2676,10 @@
         </div>
 
         
+        <a href="./035-Pods.html" class="navigation navigation-prev " aria-label="Previous page: 第3.1.5节  Pods"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./037-Replication Controller.html" class="navigation navigation-next " aria-label="Next page: 第3.1.7节  Replication Controller"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

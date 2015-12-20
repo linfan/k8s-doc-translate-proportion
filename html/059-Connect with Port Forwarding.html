@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第3.1.39节  应用：kubectl port-forward | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./060-Overview and Concepts.html" />
     
+    
+    <link rel="prev" href="./058-Connect with Proxies.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="4.39"
+        data-chapter-title="第3.1.39节  应用：kubectl port-forward"
+        data-filepath="059-Connect with Port Forwarding.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -978,7 +980,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.39" data-path="059-Connect with Port Forwarding.html">
+        <li class="chapter active" data-level="4.39" data-path="059-Connect with Port Forwarding.html">
             
                 
                     <a href="./059-Connect with Port Forwarding.html">
@@ -2492,17 +2494,29 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
-<ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
-</ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
+                        <h1 id="&#x5E94;&#x7528;&#xFF1A;kubectl-portforward">&#x5E94;&#x7528;&#xFF1A;kubectl port-forward</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;&#x674E;&#x6602;</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p>kubectl port-forward&#x547D;&#x4EE4;&#x8F6C;&#x53D1;&#x4E86;&#x672C;&#x5730;&#x7AEF;&#x53E3;&#x5230;pod&#x7AEF;&#x53E3;&#x7684;&#x8FDE;&#x63A5;&#x3002;&#x5B83;&#x7684;<a href="http://kubernetes.io/v1.0/docs/user-guide/kubectl/kubectl_port-forward.html" target="_blank">&#x624B;&#x518C;</a>&#x73B0;&#x5728;&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x3002;&#x76F8;&#x6BD4;&#x4E8E;<a href="http://kubernetes.io/v1.0/docs/user-guide/accessing-the-cluster.html#using-kubectl-proxy" target="_blank">kubectl proxy</a>&#xFF0C;<code>kubectl port-forward</code>&#x4E5F;&#x53EF;&#x4EE5;&#x8F6C;&#x53D1;TCP&#x6D41;&#x91CF;&#x800C;<code>kubectl proxy</code>&#x53EA;&#x80FD;&#x8F6C;&#x53D1;HTTP&#x6D41;&#x91CF;&#x3002;&#x672C;&#x9875;&#x9610;&#x8FF0;&#x4E86;&#x5982;&#x4F55;&#x4F7F;&#x7528;<code>kubectl port-forward</code>&#x53BB;&#x8FDE;&#x63A5;Redis &#x6570;&#x636E;&#x5E93;&#xFF0C;&#x8FD9;&#x5728;&#x6570;&#x636E;&#x5E93;&#x67E5;&#x9519;&#x4E2D;&#x5F88;&#x6709;&#x7528;&#x3002;</p>
+<h2 id="&#x521B;&#x5EFA;&#x4E00;&#x4E2A;redis&#x4E3B;&#x670D;&#x52A1;">&#x521B;&#x5EFA;&#x4E00;&#x4E2A;Redis&#x4E3B;&#x670D;&#x52A1;</h2>
+<pre><code>$ kubectl create examples/redis/redis-master.yaml
+pods/redis-master
+</code></pre><p>&#x7B49;Redis&#x4E3B;&#x670D;&#x52A1;&#x7684;pod&#x72B6;&#x6001;&#x53D8;&#x4E3A;Running&#x548C;Ready&#x3002;</p>
+<pre><code>$ kubectl get pods
+NAME           READY     STATUS    RESTARTS   AGE
+redis-master   2/2       Running   0          41s
+</code></pre><h2 id="&#x8FDE;&#x63A5;&#x5230;redis&#x4E3B;&#x670D;&#x52A1;">&#x8FDE;&#x63A5;&#x5230;Redis&#x4E3B;&#x670D;&#x52A1;</h2>
+<p>Redis&#x4E3B;&#x670D;&#x52A1;&#x76D1;&#x542C;&#x5728;&#x7AEF;&#x53E3;6379&#xFF0C;&#x4F7F;&#x7528;&#x4E0B;&#x9762;&#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x9A8C;&#x8BC1;&#xFF0C;</p>
+<pre><code>$ kubectl get pods redis-master -t=&apos;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&apos;
+6379
+</code></pre><p>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x8F6C;&#x53D1;redis&#x4E3B;&#x670D;&#x52A1;pod&#x7684;&#x7AEF;&#x53E3;6379&#x5230;&#x672C;&#x5730;6379&#x7AEF;&#x53E3;&#xFF0C;</p>
+<pre><code>$ kubectl port-forward -p redis-master 6379:6379
+I0710 14:43:38.274550    3655 portforward.go:225] Forwarding from 127.0.0.1:6379 -&gt; 6379
+I0710 14:43:38.274797    3655 portforward.go:225] Forwarding from [::1]:6379 -&gt; 6379
+</code></pre><p>&#x60F3;&#x8981;&#x9A8C;&#x8BC1;&#x8FDE;&#x63A5;&#x6210;&#x529F;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x672C;&#x5730;&#x542F;&#x52A8;&#x4E00;&#x4E2A;redis&#x5BA2;&#x6237;&#x7AEF;&#xFF0C;</p>
+<pre><code>$ redis-cli
+127.0.0.1:6379&gt; ping
+PONG
+</code></pre><p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x4ECE;&#x672C;&#x5730;&#x6765;&#x68C0;&#x67E5;&#x6570;&#x636E;&#x5E93;&#x4E86;&#x3002;</p>
 
                     
                     </section>
@@ -2513,8 +2527,10 @@
         </div>
 
         
+        <a href="./058-Connect with Proxies.html" class="navigation navigation-prev " aria-label="Previous page: 第3.1.38节  应用：kubectl proxy和apiserver proxy"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./060-Overview and Concepts.html" class="navigation navigation-next " aria-label="Next page: 第3.2.1节  Kubenetes集群管理员手册"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

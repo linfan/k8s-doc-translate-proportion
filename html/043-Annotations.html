@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第3.1.15节  Annotations | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./045-Quick_Walkthrough_Basics_Tutorials.html" />
     
+    
+    <link rel="prev" href="./042-Namespaces.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="4.15"
+        data-chapter-title="第3.1.15节  Annotations"
+        data-filepath="043-Annotations.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -714,7 +716,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.15" data-path="043-Annotations.html">
+        <li class="chapter active" data-level="4.15" data-path="043-Annotations.html">
             
                 
                     <a href="./043-Annotations.html">
@@ -2492,17 +2494,27 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
+                        <h1 id="annotations">Annotations</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;kz</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p>We have <a href="labels.md">labels</a> for identifying metadata.</p>
+<p>It is also useful to be able to attach arbitrary non-identifying metadata, for retrieval by API clients such as tools, libraries, etc. This information may be large, may be structured or unstructured, may include characters not permitted by labels, etc. Such information would not be used for object selection and therefore doesn&apos;t belong in labels.</p>
+<p>Like labels, annotations are key-value maps.</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;annotations&quot;</span>: {
+  <span class="hljs-string">&quot;key1&quot;</span> : <span class="hljs-string">&quot;value1&quot;</span>,
+  <span class="hljs-string">&quot;key2&quot;</span> : <span class="hljs-string">&quot;value2&quot;</span>
+}
+</code></pre>
+<p>Possible information that could be recorded in annotations:</p>
 <ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
+<li>fields managed by a declarative configuration layer, to distinguish them from client- and/or server-set default values and other auto-generated fields, fields set by auto-sizing/auto-scaling systems, etc., in order to facilitate merging</li>
+<li>build/release/image information (timestamps, release ids, git branch, PR numbers, image hashes, registry address, etc.)</li>
+<li>pointers to logging/monitoring/analytics/audit repos</li>
+<li>client library/tool information (e.g. for debugging purposes -- name, version, build info)</li>
+<li>other user and/or tool/system provenance info, such as URLs of related objects from other ecosystem components</li>
+<li>lightweight rollout tool metadata (config and/or checkpoints)</li>
+<li>phone/pager number(s) of person(s) responsible, or directory entry where that info could be found, such as a team website</li>
 </ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
+<p>Yes, this information could be stored in an external database or directory, but that would make it much harder to produce shared client libraries and tools for deployment, management, introspection, etc.</p>
 
                     
                     </section>
@@ -2513,8 +2525,10 @@
         </div>
 
         
+        <a href="./042-Namespaces.html" class="navigation navigation-prev " aria-label="Previous page: 第3.1.13节  Namespaces"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./045-Quick_Walkthrough_Basics_Tutorials.html" class="navigation navigation-next " aria-label="Next page: 第3.1.23节  基础教程"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

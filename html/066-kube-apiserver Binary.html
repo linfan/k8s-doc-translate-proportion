@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第3.2.10节  Kube-API Server | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./067-Authorization.html" />
     
+    
+    <link rel="prev" href="./065-Administering Clusters.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="5.10"
+        data-chapter-title="第3.2.10节  Kube-API Server"
+        data-filepath="066-kube-apiserver Binary.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -1125,7 +1127,7 @@
             
         </li>
     
-        <li class="chapter " data-level="5.10" data-path="066-kube-apiserver Binary.html">
+        <li class="chapter active" data-level="5.10" data-path="066-kube-apiserver Binary.html">
             
                 
                     <a href="./066-kube-apiserver Binary.html">
@@ -2492,18 +2494,67 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
-<ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
-</ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
-
+                        <h1 id="kubeapi-server">Kube-API Server</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;Nancy</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<h2 id="&#x6982;&#x8981;">&#x6982;&#x8981;</h2>
+<p>Kubernetes API&#x670D;&#x52A1;&#x5668;&#x4E3A;API&#x5BF9;&#x8C61;&#x9A8C;&#x8BC1;&#x548C;&#x914D;&#x7F6E;&#x6570;&#x636E;&#xFF0C;&#x8FD9;&#x4E9B;&#x5BF9;&#x8C61;&#x5305;&#x542B;Pod&#xFF0C;Service&#xFF0C;Replication Controller&#x7B49;&#x7B49;&#x3002;API Server&#x63D0;&#x4F9B;REST&#x64CD;&#x4F5C;&#x4EE5;&#x53CA;&#x524D;&#x7AEF;&#x5230;&#x96C6;&#x7FA4;&#x7684;&#x5171;&#x4EAB;&#x72B6;&#x6001;&#xFF0C;&#x6240;&#x6709;&#x5176;&#x5B83;&#x7EC4;&#x4EF6;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8FD9;&#x4E9B;&#x5171;&#x4EAB;&#x72B6;&#x6001;&#x4EA4;&#x4E92;&#x3002;</p>
+<pre><code>kube-apiserver
+</code></pre><h2 id="&#x9009;&#x9879;">&#x9009;&#x9879;</h2>
+<pre><code>  --admission-control=&quot;AlwaysAdmit&quot;&#xFF1A;&#x96C6;&#x7FA4;&#x4E2D;&#x8D44;&#x6E90;&#x7684;Admission Controller&#x7684;&#x63D2;&#x4EF6;&#x7684;&#x6709;&#x5E8F;&#x5217;&#x8868;&#xFF0C;&#x5206;&#x522B;&#x4F7F;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;&#xFF0C;AlwaysAdmit, AlwaysDeny, DenyEscalatingExec, DenyExecOnPrivileged, InitialResources, LimitRanger, NamespaceAutoProvision, NamespaceExists, NamespaceLifecycle, ResourceQuota, SecurityContextDeny, ServiceAccount&#x3002;
+  --admission-control-config-file=&quot;&quot;: Admission Controller&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x3002;
+  --advertise-address=&lt;nil&gt;: &#x5E7F;&#x64AD;API Server&#x7ED9;&#x6240;&#x6709;&#x96C6;&#x7FA4;&#x6210;&#x5458;&#x7684;IP&#x5730;&#x5740;&#x3002;&#x5176;&#x5B83;&#x96C6;&#x7FA4;&#x90FD;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x8BE5;IP&#x5730;&#x5740;&#xFF0C;&#x5982;&#x679C;&#x4E3A;&#x7A7A;&#xFF0C;&#x4F1A;&#x4F7F;&#x7528;--bind-address&#x914D;&#x7F6E;&#xFF1B;&#x5982;&#x679C;&#x8BE5;&#x914D;&#x7F6E;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#xFF0C;&#x4F1A;&#x4F7F;&#x7528;&#x4E3B;&#x673A;&#x7684;&#x9ED8;&#x8BA4;&#x63A5;&#x53E3;&#x3002;
+  --allow-privileged[=false]: true&#xFF0C;&#x8868;&#x793A;&#x5141;&#x8BB8;&#x7279;&#x6743;&#x5BB9;&#x5668;&#x3002;
+  --authorization-mode=&quot;AlwaysAllow&quot;: &#x5B89;&#x5168;&#x7AEF;&#x53E3;&#x6388;&#x6743;&#x63D2;&#x4EF6;&#x7684;&#x6709;&#x5E8F;&#x5217;&#x8868;&#xFF0C;&#x5206;&#x522B;&#x4EE5;&#x9017;&#x53F7;&#x5206;&#x9694;&#xFF0C;AlwaysAllow,AlwaysDeny,ABAC&#x3002;
+  --authorization-policy-file=&quot;&quot;: &#x6388;&#x6743;&#x7B56;&#x7565;&#x7684;CSV&#x6587;&#x4EF6;&#xFF0C;&#x4F7F;&#x7528;&#x4E8E;--authorization-mode=ABAC&#x6A21;&#x5F0F;&#x7684;&#x914D;&#x7F6E;&#x3002;
+  --basic-auth-file=&quot;&quot;: &#x5982;&#x679C;&#x914D;&#x7F6E;&#x8BE5;&#x9009;&#x9879;&#xFF0C;&#x8BE5;&#x6587;&#x4EF6;&#x4F1A;&#x901A;&#x8FC7;HTTP&#x57FA;&#x672C;&#x8BA4;&#x8BC1;&#x5141;&#x8BB8;API Server&#x5B89;&#x5168;&#x7AEF;&#x53E3;&#x7684;&#x8BF7;&#x6C42;&#x3002;
+  --bind-address=0.0.0.0: &#x670D;&#x52A1;--read-only-port&#x548C;--secure-port&#x7AEF;&#x53E3;&#x7684;IP&#x5730;&#x5740;&#x3002;&#x76F8;&#x5173;&#x63A5;&#x53E3;&#x5FC5;&#x987B;&#x662F;&#x5176;&#x5B83;&#x96C6;&#x7FA4;&#x901A;&#x8FC7;CLI/web&#x5BA2;&#x6237;&#x7AEF;&#x53EF;&#x8BBF;&#x95EE;&#x7684;&#x3002;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;0.0.0.0&#x3002;
+  --cert-dir=&quot;/var/run/kubernetes&quot;: TLS&#x8BC1;&#x4E66;&#x7684;&#x76EE;&#x5F55;&#xFF08;&#x9ED8;&#x8BA4;/var/run/kubernetes&#xFF09;&#x3002;&#x5982;&#x679C;&#x914D;&#x7F6E;--tls-cert-file&#x548C;--tls-private-key-file&#x4E24;&#x4E2A;&#x9009;&#x9879;&#xFF0C;&#x4F1A;&#x5FFD;&#x7565;&#x8BE5;&#x914D;&#x7F6E;--cert-dir&#x3002;
+  --client-ca-file=&quot;&quot;: &#x5982;&#x679C;&#x8BBE;&#x7F6E;&#xFF0C;&#x4EFB;&#x4F55;&#x63D0;&#x4EA4;&#x5BA2;&#x6237;&#x7AEF;&#x8BC1;&#x4E66;&#x7684;&#x8BF7;&#x6C42;&#x90FD;&#x4F1A;&#x9A8C;&#x8BC1;&#x4E0E;&#x76F8;&#x5173;&#x5BA2;&#x6237;&#x7AEF;&#x8BC1;&#x4E66;&#x7684;CommonName&#x7684;&#x8EAB;&#x4EFD;&#x3002;&#x8BE5;&#x5BA2;&#x6237;&#x7AEF;&#x8BC1;&#x4E66;&#x662F;&#x7531;client-ca-file&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x8BA4;&#x8BC1;&#x673A;&#x6784;&#x91CD;&#x7B7E;&#x7684;&#x3002;
+  --cloud-config=&quot;&quot;: &#x4E91;&#x63D0;&#x4F9B;&#x5546;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x8DEF;&#x5F84;&#xFF0C;&#x7A7A;&#x8868;&#x793A;&#x6CA1;&#x6709;&#x8BE5;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x3002;
+  --cloud-provider=&quot;&quot;: &#x4E91;&#x670D;&#x52A1;&#x7684;&#x63D0;&#x4F9B;&#x5546;&#xFF0C;&#x7A7A;&#x8868;&#x793A;&#x6CA1;&#x6709;&#x8BE5;&#x63D0;&#x4F9B;&#x5546;&#x3002;
+  --cluster-name=&quot;kubernetes&quot;: &#x96C6;&#x7FA4;&#x5B9E;&#x4F8B;&#x7684;&#x524D;&#x7F00;&#x3002;
+  --cors-allowed-origins=[]: CORS&#x7684;&#x5141;&#x8BB8;&#x8D77;&#x6E90;&#xFF08;allowed origins, &#x7FFB;&#x8BD1;&#x5F85;&#x8003;&#x8651;&#xFF09;&#x7684;&#x5217;&#x8868;&#xFF0C;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;&#x3002;&#x4E00;&#x4E2A;&#x5141;&#x8BB8;&#x8D77;&#x6E90;&#x53EF;&#x4EE5;&#x662F;&#x652F;&#x6301;&#x5B50;&#x57DF;&#x5339;&#x914D;&#x7684;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x3002;&#x5982;&#x679C;&#x8BE5;&#x5217;&#x8868;&#x662F;&#x7A7A;&#xFF0C;&#x5219;&#x4E0D;&#x542F;&#x7528;CORS&#x3002;
+  --etcd-config=&quot;&quot;: ETCD&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x4E0E;-etcd-servers&#x914D;&#x7F6E;&#x9879;&#x4E92;&#x65A5;&#x3002;
+  --etcd-prefix=&quot;/registry&quot;: ETCD&#x4E2D;&#x6240;&#x6709;&#x8D44;&#x6E90;&#x8DEF;&#x5F84;&#x7684;&#x524D;&#x7F00;&#x3002;
+  --etcd-servers=[]: ETCD&#x670D;&#x52A1;&#x5668;&#xFF08;http://ip:port&#xFF09;&#x5217;&#x8868;&#xFF0C;&#x4EE5;&#x9017;&#x53F7;&#x5206;&#x9694;&#x3002;&#x4E0E;-etcd-config&#x914D;&#x7F6E;&#x9879;&#x4E92;&#x65A5;&#x3002;
+  --etcd-servers-overrides=[]: &#x6BCF;&#x4E2A;&#x8D44;&#x6E90;ETCD&#x670D;&#x52A1;&#x5668;&#x8986;&#x76D6;&#x6587;&#x4EF6;&#xFF0C;&#x4EE5;&#x9017;&#x53F7;&#x5206;&#x9694;&#x3002;&#x72EC;&#x7ACB;&#x8986;&#x76D6;&#x683C;&#x5F0F;&#xFF0C;group/resource#servers&#xFF0C;&#x670D;&#x52A1;&#x5668;&#x662F;http://ip:port&#xFF0C;&#x4EE5;&#x5206;&#x53F7;&#x5206;&#x9694;&#x3002;
+  --event-ttl=1h0m0s: &#x4FDD;&#x7559;&#x4E8B;&#x4EF6;&#x7684;&#x65F6;&#x95F4;&#x503C;&#xFF0C;&#x9ED8;&#x8BA4;1&#x5C0F;&#x65F6;&#x3002;
+  --experimental-keystone-url=&quot;&quot;: &#x5982;&#x679C;Passed&#xFF0C;&#x6FC0;&#x6D3B;Keystone&#x8BA4;&#x8BC1;&#x63D2;&#x4EF6;&#x3002;
+  --external-hostname=&quot;&quot;: &#x4E3A;Master&#x751F;&#x6210;&#x5916;&#x90E8;URLs&#x4F7F;&#x7528;&#x7684;&#x4E3B;&#x673A;&#x540D;&#x3002;
+  --google-json-key=&quot;&quot;: &#x7528;&#x6237;Google Cloud Platform Service Account JSON Key&#x8BA4;&#x8BC1;&#x3002;
+  --insecure-bind-address=127.0.0.1&#xFF1A;&#x975E;&#x5B89;&#x5168;&#x7AEF;&#x53E3;&#xFF08;&#x6240;&#x6709;&#x63A5;&#x53E3;&#x90FD;&#x8BBE;&#x7F6E;&#x4E3A;0.0.0.0&#xFF09;&#x7684;&#x670D;&#x52A1;IP&#x5730;&#x5740;&#x3002;&#x9ED8;&#x8BA4;&#x662F;&#x672C;&#x5730;&#x5730;&#x5740;&#x3002;
+  --insecure-port=8080: &#x4E0D;&#x5B89;&#x5168;&#x4E14;&#x6CA1;&#x6709;&#x8BA4;&#x8BC1;&#x7684;&#x8FDB;&#x7A0B;&#x8BBF;&#x95EE;&#x7AEF;&#x53E3;&#xFF0C;&#x9ED8;&#x8BA4;8080&#x3002;&#x5047;&#x8BBE;&#x9632;&#x706B;&#x5899;&#x89C4;&#x5219;&#x8BBE;&#x7F6E;&#x8BE5;&#x7AEF;&#x53E3;&#x4ECE;&#x96C6;&#x7FA4;&#x5916;&#x90E8;&#x7981;&#x6B62;&#x8BBF;&#x95EE;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x96C6;&#x7FA4;&#x7684;&#x516C;&#x5171;&#x5730;&#x5740;&#x533A;&#xFF0C;443&#x7AEF;&#x53E3;&#x662F;&#x8BE5;&#x7AEF;&#x53E3;&#x7684;&#x4EE3;&#x7406;&#x3002;&#x8FD9;&#x662F;nginx&#x7684;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;&#x3002;
+  --kubelet-certificate-authority=&quot;&quot;: &#x8BC1;&#x4E66;&#x8DEF;&#x5F84;&#x3002;&#x8BC1;&#x4E66;&#x6388;&#x6743;&#x6587;&#x4EF6;&#x3002;
+  --kubelet-client-certificate=&quot;&quot;: TLS&#x5BA2;&#x6237;&#x7AEF;&#x8BC1;&#x4E66;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x3002;
+  --kubelet-client-key=&quot;&quot;: TLS&#x5BA2;&#x6237;&#x7AEF;&#x79D8;&#x94A5;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x3002;
+  --kubelet-https[=true]: &#x4F7F;&#x7528;https&#x5EFA;&#x7ACB;Kubelet&#x8FDE;&#x63A5;&#x3002;
+  --kubelet-port=10250: Kubelet&#x7AEF;&#x53E3;&#x3002;
+  --kubelet-timeout=5s: Kubelet&#x64CD;&#x4F5C;Timeout&#x503C;&#x3002;
+  --log-flush-frequency=5s: &#x65E5;&#x5FD7;&#x7F13;&#x51B2;&#x79D2;&#x6570;&#x7684;&#x6700;&#x5927;&#x503C;&#x3002;
+  --long-running-request-regexp=&quot;(/|^)((watch|proxy)(/|$)|(logs?|portforward|exec|attach)/?$)&quot;: &#x5339;&#x914D;&#x957F;&#x65F6;&#x95F4;&#x8FD0;&#x884C;&#x8BF7;&#x6C42;&#x7684;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x8BE5;&#x8BF7;&#x6C42;&#x4E0D;&#x5C5E;&#x4E8E;&#x6700;&#x5927;&#x673A;&#x8BF7;&#x6C42;&#x5904;&#x7406;&#x3002;
+  --master-service-namespace=&quot;default&quot;: Namespace&#xFF0C;&#x8BE5;Namespace&#x7684;Kubernetes&#x4E3B;&#x670D;&#x52A1;&#x5E94;&#x8BE5;&#x6CE8;&#x5165;Pod&#x3002;
+  --max-connection-bytes-per-sec=0: &#x5982;&#x679C;&#x975E;&#x96F6;&#xFF0C;&#x8868;&#x793A;&#x6BCF;&#x4E2A;&#x7528;&#x6237;&#x8FDE;&#x63A5;&#x7684;&#x6700;&#x5927;&#x503C;&#xFF0C;&#x5B57;&#x8282;&#x6570;/&#x79D2;&#xFF0C;&#x5F53;&#x524D;&#x53EA;&#x9002;&#x7528;&#x4E8E;&#x957F;&#x65F6;&#x95F4;&#x8FD0;&#x884C;&#x7684;&#x8BF7;&#x6C42;&#x3002;
+  --max-requests-inflight=400: &#x7ED9;&#x5B9A;&#x65F6;&#x95F4;&#x5185;&#x8FD0;&#x884C;&#x7684;&#x8BF7;&#x6C42;&#x7684;&#x6700;&#x5927;&#x503C;&#x3002;&#x5982;&#x679C;&#x8D85;&#x8FC7;&#x6700;&#x5927;&#x503C;&#xFF0C;&#x8BE5;&#x8BF7;&#x6C42;&#x5C31;&#x4F1A;&#x88AB;&#x62D2;&#x7EDD;&#x3002;&#x96F6;&#x8868;&#x793A;&#x6CA1;&#x6709;&#x9650;&#x5236;&#x3002;
+  --min-request-timeout=1800: &#x8FD9;&#x662F;&#x4E2A;&#x53EF;&#x9009;&#x5B57;&#x6BB5;&#xFF0C;&#x8868;&#x793A;&#x4E00;&#x4E2A;&#x8BF7;&#x6C42;&#x5904;&#x7406;&#x7684;&#x6700;&#x77ED;&#x65F6;&#x95F4;&#xFF0C;&#x5355;&#x4F4D;&#x662F;&#x79D2;&#x3002;&#x5728;&#x8D85;&#x65F6;&#x4E4B;&#x524D;&#xFF0C;&#x8FD9;&#x4E2A;&#x8BF7;&#x6C42;&#x5FC5;&#x987B;&#x662F;&#x6FC0;&#x6D3B;&#x7684;&#x3002;&#x76EE;&#x524D;&#xFF0C;&#x8BF7;&#x6C42;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x4F1A;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#x9AD8;&#x4E8E;&#x8BE5;&#x6570;&#x503C;&#x7684;&#x968F;&#x673A;&#x503C;&#x4F5C;&#x4E3A;&#x8FDE;&#x63A5;&#x8D85;&#x65F6;&#x7684;&#x503C;&#x8FDB;&#x884C;&#x5206;&#x6563;&#x8D1F;&#x8F7D;&#x3002;&#xFF08;An optional field indicating the minimum number of seconds a handler must keep a request open before timing it out. Currently only honored by the watch request handler, which picks a randomized value above this number as the connection timeout, to spread out load.-----&#x7FFB;&#x8BD1;&#x6709;&#x5F85;&#x8003;&#x8651;&#xFF09;
+  --oidc-ca-file=&quot;&quot;: &#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x8BE5;&#x9009;&#x9879;&#xFF0C;Oidc-ca-file&#x4E2D;&#x7684;&#x76F8;&#x5173;&#x673A;&#x6784;&#x4F1A;&#x9A8C;&#x8BC1;OpenID&#x670D;&#x52A1;&#x7684;&#x8BC1;&#x4E66;&#x3002;&#x5426;&#x5219;&#xFF0C;&#x4F1A;&#x4F7F;&#x7528;&#x4E3B;&#x673A;&#x7684;&#x6839;&#x8BC1;&#x4E66;&#x3002;
+  --oidc-client-id=&quot;&quot;: &#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x4E86;oidc-issuer-url&#x5B57;&#x6BB5;&#xFF0C;&#x8BE5;&#x5B57;&#x6BB5;&#xFF0C;OpenID&#x8FDE;&#x63A5;&#x5BA2;&#x6237;&#x7AEF;&#x7684;&#x5BA2;&#x6237;ID&#x4E5F;&#x5FC5;&#x987B;&#x8BBE;&#x7F6E;&#x3002;
+  --oidc-issuer-url=&quot;&quot;: OpenID&#x53D1;&#x884C;&#x7684;URL&#xFF0C;&#x53EA;&#x63A5;&#x53D7;HTTPS&#x534F;&#x8BAE;&#x3002;&#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x8BE5;&#x5B57;&#x6BB5;&#xFF0C;&#x5C06;&#x88AB;&#x7528;&#x6765;&#x9A8C;&#x8BC1;OIDC JSON Web Token&#xFF08;JWT&#xFF09;&#x3002;
+  --oidc-username-claim=&quot;sub&quot;: &#x3002;&#x9ED8;&#x8BA4;&#x503C;&#x4E4B;&#x5916;&#x7684;&#x90A3;&#x4E9B;&#x503C;&#xFF0C;&#x53EF;&#x80FD;&#x662F;&#x4E0D;&#x552F;&#x4E00;&#x7684;&#xFF0C;&#x53EF;&#x53D8;&#x7684;&#x3002;&#x8FD9;&#x4E2A;&#x6807;&#x5FD7;&#x8FD8;&#x5728;&#x5C1D;&#x8BD5;&#x4E2D;&#xFF0C;&#x8BE6;&#x60C5;&#x8BF7;&#x53C2;&#x8003;Authentication &#x90E8;&#x5206;&#x7684;&#x6587;&#x6863;&#x3002;
+  --profiling[=true]: &#x901A;&#x8FC7;web&#x63A5;&#x53E3;&#x8FDB;&#x884C;&#x5206;&#x6790; host:port/debug/pprof/&#x3002;
+  --runtime-config=: key=value&#x952E;&#x503C;&#x5BF9;&#x96C6;&#xFF0C;&#x63CF;&#x8FF0;&#x8FD0;&#x884C;&#x65F6;&#x914D;&#x7F6E;&#xFF0C;&#x4E5F;&#x4F1A;&#x56DE;&#x4F20;&#x8F93;&#x5230;apiserver&#x3002;apis/&lt;groupVersion&gt;&#x952E;&#x503C;&#x7528;&#x4E8E;&#x6253;&#x5F00;&#x6216;&#x8005;&#x5173;&#x95ED;&#x6307;&#x5B9A;&#x7684;api&#x7248;&#x672C;&#x3002;apis/&lt;groupVersion&gt;/&lt;resource&gt;&#x7528;&#x4E8E;&#x6253;&#x5F00;&#x3001;&#x5173;&#x95ED;&#x6307;&#x5B9A;&#x7684;&#x8D44;&#x6E90;&#x3002;api/all&#x548C;api/legacy&#x662F;&#x7279;&#x6B8A;&#x7684;&#x503C;&#xFF0C;&#x5206;&#x522B;&#x63A7;&#x5236;&#x6240;&#x6709;&#x548C;&#x9057;&#x7559;&#x7684;api&#x7248;&#x672C;&#x3002;
+  --secure-port=6443: &#x7528;&#x4E8E;HTTPS&#x7684;&#x8BA4;&#x8BC1;&#x548C;&#x6388;&#x6743;&#x3002;0&#x8868;&#x793A;&#x4E0D;&#x652F;&#x6301;HTTPS&#x670D;&#x52A1;&#x3002;
+  --service-account-key-file=&quot;&quot;: &#x8BE5;&#x6587;&#x4EF6;&#x5305;&#x542B;RPM-encoded x509 RSA&#x7684;&#x79C1;&#x94A5;&#x548C;&#x516C;&#x94A5;&#xFF0C;&#x7528;&#x4E8E;&#x9A8C;&#x8BC1;ServiceAccount&#x7684;Token&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#xFF0C;&#x4F1A;&#x4F7F;&#x7528;&#x8BE5;&#x914D;&#x7F6E;--tls-private-key-file&#x3002;
+  --service-account-lookup[=false]: true, &#x8868;&#x793A;&#x9A8C;&#x8BC1;Service Account&#x7684;Token&#x505A;&#x4E3A;Authentication&#x4E00;&#x90E8;&#x5206;&#x5728;ETCD&#x4E2D;&#x7684;&#x5B58;&#x5728;&#x6027;&#x3002;
+  --service-cluster-ip-range=&lt;nil&gt;: CIDR&#x6807;&#x8BB0;&#x7684;IP&#x8303;&#x56F4;&#xFF0C;&#x4ECE;&#x4E2D;&#x5206;&#x914D;IP&#x7ED9;&#x670D;&#x52A1;&#x96C6;&#x7FA4;&#x3002;&#x8BE5;&#x8303;&#x56F4;&#x4E0D;&#x80FD;&#x4E0E;&#x5206;&#x914D;&#x7ED9;Pod&#x8282;&#x70B9;&#x7684;&#x4EFB;&#x4F55;IP&#x8303;&#x56F4;&#x91CD;&#x53E0;&#x3002;
+  --service-node-port-range=: NodePort&#x53EF;&#x89C1;&#x6027;&#x670D;&#x52A1;&#x7684;&#x7AEF;&#x53E3;&#x8303;&#x56F4;&#xFF0C;&#x5305;&#x542B;&#x8303;&#x56F4;&#x7684;&#x4E24;&#x7AEF;&#x3002;&#x5982;&apos;30000-32767&apos;&#xFF0C;&#x5305;&#x542B;30000&#x548C;32767&#x7AEF;&#x53E3;&#x3002;
+  --ssh-keyfile=&quot;&quot;: &#x5982;&#x679C;&#x975E;&#x7A7A;&#xFF0C;&#x4F7F;&#x7528;&#x5B89;&#x5168;SSH&#x4EE3;&#x7406;&#x5230;&#x8BE5;&#x8282;&#x70B9;&#xFF0C;&#x7528;&#x8BE5;&#x79D8;&#x94A5;&#x6587;&#x4EF6;&#x3002;
+  --ssh-user=&quot;&quot;: &#x5982;&#x679C;&#x975E;&#x7A7A;&#xFF0C;&#x4F7F;&#x7528;&#x5B89;&#x5168;SSH&#x4EE3;&#x7406;&#x5230;&#x8BE5;&#x8282;&#x70B9;&#xFF0C;&#x7528;&#x8BE5;&#x7528;&#x6237;&#x540D;&#x3002;
+  --storage-versions=&quot;extensions/v1beta1,v1&quot;: &#x5B58;&#x50A8;&#x8D44;&#x6E90;&#x7684;&#x7248;&#x672C;&#x3002;&#x4E0D;&#x540C;&#x7684;&#x7EC4;&#x5B58;&#x50A8;&#x5728;&#x4E0D;&#x540C;&#x7684;&#x7248;&#x672C;&#x91CC;&#x9762;&#xFF0C;&#x6307;&#x5B9A;&#x683C;&#x5F0F;&quot;group1/version1,group2/version2...&quot;&#x3002;&#x8BE5;&#x6807;&#x5FD7;&#x9884;&#x8BA1;&#x51FA;&#x6CE8;&#x518C;&#x5728;&#x670D;&#x52A1;&#x5668;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x7EC4;&#x7684;&#x5B58;&#x50A8;&#x7248;&#x672C;&#x7684;&#x5B8C;&#x6574;&#x5217;&#x8868;&#x3002;&#x5B83;&#x9ED8;&#x8BA4;&#x662F;&#x6240;&#x6709;&#x6CE8;&#x518C;&#x7EC4;&#x7684;&#x9996;&#x9009;&#x7248;&#x672C;&#x5217;&#x8868;&#xFF0C;&#x6765;&#x81EA;KUBE_API_VERSIONS&#x53D8;&#x91CF;&#x3002;
+  --tls-cert-file=&quot;&quot;: &#x8BE5;&#x6587;&#x4EF6;&#x5305;&#x542B;HTTPS&#x7684;x509&#x8BC1;&#x4E66;&#x3002;(CA&#x8BC1;&#x4E66;&#xFF0C;&#x5982;&#x679C;&#x5B58;&#x5728;&#xFF0C;&#x8FDE;&#x63A5;&#x5728;&#x670D;&#x52A1;&#x5668;&#x8BC1;&#x4E66;&#x4E4B;&#x540E;&#xFF09;&#x3002;&#x5982;&#x679C;&#x652F;&#x6301;HTTPS&#x670D;&#x52A1;&#xFF0C;&#x4E14;&#x6CA1;&#x6709;&#x914D;&#x7F6E;--tls-cert-file&#x548C;--tls-private-key-file&#x9009;&#x9879;&#xFF0C;&#x4F1A;&#x4E3A;&#x516C;&#x5171;&#x5730;&#x5740;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x81EA;&#x7B7E;&#x7684;&#x8BC1;&#x4E66;&#x548C;&#x5BF9;&#x5E94;&#x7684;&#x79D8;&#x94A5;&#xFF0C;&#x4FDD;&#x5B58;&#x5728;/var/run/kubernetes&#x4E2D;&#x3002;
+  --tls-private-key-file=&quot;&quot;: &#x8BE5;&#x6587;&#x4EF6;&#x5305;&#x542B;x509&#x79C1;&#x94A5;&#x5339;&#x914D;&#x9879;--tls-cert-file.
+  --token-auth-file=&quot;&quot;: &#x8BE5;&#x6587;&#x4EF6;&#x4F7F;&#x7528;Token&#x9A8C;&#x8BC1;&#x4FDD;&#x62A4;API Server&#x7684;&#x5B89;&#x5168;&#x7AEF;&#x53E3;&#x3002;
+  --watch-cache[=true]: &#x53EF;&#x4EE5;&#x5728;API Server&#x67E5;&#x770B;&#x7F13;&#x5B58;&#x3002;
+</code></pre>
                     
                     </section>
                 
@@ -2513,8 +2564,10 @@
         </div>
 
         
+        <a href="./065-Administering Clusters.html" class="navigation navigation-prev " aria-label="Previous page: 第3.2.8节  Kubernetes集群管理指南：集群组件"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./067-Authorization.html" class="navigation navigation-next " aria-label="Next page: 第3.2.11节  授权插件"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

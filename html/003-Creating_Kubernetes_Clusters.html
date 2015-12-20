@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第2.2节  创建Kubernetes集群 | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./004-Local-machine Solutions.html" />
     
+    
+    <link rel="prev" href="./033-Overview and Concepts.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="2.2"
+        data-chapter-title="第2.2节  创建Kubernetes集群"
+        data-filepath="003-Creating_Kubernetes_Clusters.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -135,7 +137,7 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2" data-path="003-Creating_Kubernetes_Clusters.html">
+        <li class="chapter active" data-level="2.2" data-path="003-Creating_Kubernetes_Clusters.html">
             
                 
                     <a href="./003-Creating_Kubernetes_Clusters.html">
@@ -2492,17 +2494,411 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
+                        <h1 id="&#x521B;&#x5EFA;kubernetes&#x96C6;&#x7FA4;">&#x521B;&#x5EFA;Kubernetes&#x96C6;&#x7FA4;</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;razr</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x949F;&#x5065;&#x946B;</code></p>
+<p>Kubernetes&#x53EF;&#x4EE5;&#x5728;&#x591A;&#x79CD;&#x5E73;&#x53F0;&#x8FD0;&#x884C;&#xFF0C;&#x4ECE;&#x7B14;&#x8BB0;&#x672C;&#x7535;&#x8111;&#xFF0C;&#x5230;&#x4E91;&#x670D;&#x52A1;&#x5546;&#x7684;&#x865A;&#x62DF;&#x673A;&#xFF0C;&#x518D;&#x5230;&#x673A;&#x67B6;&#x4E0A;&#x7684;&#x88F8;&#x673A;&#x670D;&#x52A1;&#x5668;&#x3002;&#x8981;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;Kubernetes&#x96C6;&#x7FA4;&#xFF0C;&#x6839;&#x636E;&#x4E0D;&#x540C;&#x573A;&#x666F;&#x9700;&#x8981;&#x505A;&#x7684;&#x4E5F;&#x4E0D;&#x5C3D;&#x76F8;&#x540C;&#xFF0C;&#x53EF;&#x80FD;&#x662F;&#x8FD0;&#x884C;&#x4E00;&#x6761;&#x547D;&#x4EE4;&#xFF0C;&#x4E5F;&#x53EF;&#x80FD;&#x662F;&#x914D;&#x7F6E;&#x81EA;&#x5DF1;&#x7684;&#x5B9A;&#x5236;&#x96C6;&#x7FA4;&#x3002;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x5C06;&#x5F15;&#x5BFC;&#x4F60;&#x6839;&#x636E;&#x81EA;&#x5DF1;&#x7684;&#x9700;&#x8981;&#x9009;&#x62E9;&#x5408;&#x9002;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x3002;</p>
+<h2 id="&#x9009;&#x62E9;&#x6B63;&#x786E;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;">&#x9009;&#x62E9;&#x6B63;&#x786E;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;</h2>
+<p>&#x5982;&#x679C;&#x4F60;&#x53EA;&#x662F;&#x60F3;&#x8BD5;&#x4E00;&#x8BD5;Kubernetes&#xFF0C;&#x6211;&#x4EEC;&#x63A8;&#x8350;<a href="docker.md">&#x57FA;&#x4E8E;Docker&#x7684;&#x672C;&#x5730;</a>&#x65B9;&#x6848;&#x3002;</p>
+<p>&#x57FA;&#x4E8E;Docker&#x7684;&#x672C;&#x5730;&#x65B9;&#x6848;&#x662F;&#x4F17;&#x591A;&#x80FD;&#x591F;&#x5B8C;&#x6210;&#x5FEB;&#x901F;&#x642D;&#x5EFA;&#x7684;<a href="#&#x672C;&#x5730;&#x670D;&#x52A1;&#x5668;&#x65B9;&#x6848;">&#x672C;&#x5730;&#x96C6;&#x7FA4;</a>&#x65B9;&#x6848;&#x4E2D;&#x7684;&#x4E00;&#x79CD;&#xFF0C;&#x4F46;&#x662F;&#x5C40;&#x9650;&#x4E8E;&#x5355;&#x53F0;&#x673A;&#x5668;&#x3002;</p>
+<p>&#x5F53;&#x4F60;&#x51C6;&#x5907;&#x597D;&#x6269;&#x5C55;&#x5230;&#x591A;&#x53F0;&#x673A;&#x5668;&#x548C;&#x66F4;&#x9AD8;&#x53EF;&#x7528;&#x6027;&#x65F6;&#xFF0C;<a href="#&#x6258;&#x7BA1;&#x65B9;&#x6848;">&#x6258;&#x7BA1;</a>&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x662F;&#x6700;&#x5BB9;&#x6613;&#x642D;&#x5EFA;&#x548C;&#x7EF4;&#x62A4;&#x7684;&#x3002;</p>
+<p><a href="#&#x5168;&#x5957;&#x4E91;&#x7AEF;&#x65B9;&#x6848;">&#x5168;&#x5957;&#x4E91;&#x7AEF;&#x65B9;&#x6848;</a> &#x53EA;&#x9700;&#x8981;&#x5C11;&#x6570;&#x51E0;&#x4E2A;&#x547D;&#x4EE4;&#x5C31;&#x53EF;&#x4EE5;&#x5728;&#x66F4;&#x591A;&#x7684;&#x4E91;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x5546;&#x642D;&#x5EFA;Kubernetes&#x3002;</p>
+<p><a href="#&#x5B9A;&#x5236;&#x65B9;&#x6848;">&#x5B9A;&#x5236;&#x65B9;&#x6848;</a> &#x9700;&#x8981;&#x82B1;&#x8D39;&#x66F4;&#x591A;&#x7684;&#x7CBE;&#x529B;&#xFF0C;&#x4F46;&#x662F;&#x8986;&#x76D6;&#x4E86;&#x4ECE;&#x96F6;&#x5F00;&#x59CB;&#x642D;&#x5EFA;Kubernetes&#x96C6;&#x7FA4;&#x7684;&#x901A;&#x7528;&#x5EFA;&#x8BAE;&#x5230;&#x5206;&#x6B65;&#x9AA4;&#x7684;&#x7EC6;&#x8282;&#x6307;&#x5F15;&#x3002;</p>
+<h3 id="&#x672C;&#x5730;&#x670D;&#x52A1;&#x5668;&#x65B9;&#x6848;">&#x672C;&#x5730;&#x670D;&#x52A1;&#x5668;&#x65B9;&#x6848;</h3>
+<p>&#x672C;&#x5730;&#x670D;&#x52A1;&#x5668;&#x65B9;&#x6848;&#x518D;&#x4E00;&#x53F0;&#x7269;&#x7406;&#x673A;&#x4E0A;&#x521B;&#x5EFA;&#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x6216;&#x8005;&#x591A;&#x4E2A;Kubernetes&#x8282;&#x70B9;&#x7684;&#x5355;&#x673A;&#x96C6;&#x7FA4;&#x3002;&#x521B;&#x5EFA;&#x8FC7;&#x7A0B;&#x662F;&#x5168;&#x81EA;&#x52A8;&#x7684;&#xFF0C;&#x4E14;&#x4E0D;&#x9700;&#x8981;&#x4EFB;&#x4F55;&#x4E91;&#x670D;&#x52A1;&#x5546;&#x7684;&#x8D26;&#x6237;&#x3002;&#x4F46;&#x662F;&#x8FD9;&#x79CD;&#x5355;&#x673A;&#x96C6;&#x7FA4;&#x7684;&#x89C4;&#x6A21;&#x548C;&#x53EF;&#x7528;&#x6027;&#x90FD;&#x53D7;&#x9650;&#x4E8E;&#x5355;&#x53F0;&#x673A;&#x5668;&#x3002;</p>
+<p>&#x672C;&#x5730;&#x670D;&#x52A1;&#x5668;&#x65B9;&#x6848;&#x6709;&#xFF1A;</p>
 <ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
+<li><a href="docker.md">&#x672C;&#x5730;Docker</a>&#xFF08;&#x4E0A;&#x624B;&#x5EFA;&#x8BAE;&#xFF09;</li>
+<li><a href="vagrant.md">Vagrant</a> (&#x4EFB;&#x4F55;&#x652F;&#x6301;Vagrant&#x7684;&#x5E73;&#x53F0;&#xFF1A;Linux&#xFF0C;MacOS&#xFF0C;&#x6216;&#x8005;Windows&#x3002;)</li>
+<li><a href="locally.md">&#x65E0;&#x865A;&#x62DF;&#x673A;&#x672C;&#x5730;&#x96C6;&#x7FA4;</a> (Linux)</li>
 </ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
+<h3 id="&#x6258;&#x7BA1;&#x65B9;&#x6848;">&#x6258;&#x7BA1;&#x65B9;&#x6848;</h3>
+<p><a href="https://cloud.google.com/container-engine" target="_blank">Google Container Engine</a> &#x63D0;&#x4F9B;&#x521B;&#x5EFA;&#x597D;&#x7684;Kubernetes&#x96C6;&#x7FA4;&#x3002;</p>
+<h3 id="&#x5168;&#x5957;&#x4E91;&#x7AEF;&#x65B9;&#x6848;">&#x5168;&#x5957;&#x4E91;&#x7AEF;&#x65B9;&#x6848;</h3>
+<p>&#x4EE5;&#x4E0B;&#x65B9;&#x6848;&#x8BA9;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x51E0;&#x4E2A;&#x547D;&#x4EE4;&#x5C31;&#x5728;&#x5F88;&#x591A;IaaS&#x4E91;&#x670D;&#x52A1;&#x4E2D;&#x521B;&#x5EFA;Kubernetes&#x96C6;&#x7FA4;&#xFF0C;&#x5E76;&#x4E14;&#x6709;&#x5F88;&#x6D3B;&#x8DC3;&#x7684;&#x793E;&#x533A;&#x652F;&#x6301;&#x3002;</p>
+<ul>
+<li><a href="gce.md">GCE</a></li>
+<li><a href="aws.md">AWS</a></li>
+<li><a href="coreos/azure/README.md">Azure</a></li>
+</ul>
+<h3 id="&#x5B9A;&#x5236;&#x65B9;&#x6848;">&#x5B9A;&#x5236;&#x65B9;&#x6848;</h3>
+<p>Kubernetes&#x53EF;&#x4EE5;&#x5728;&#x4E91;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x5546;&#x548C;&#x88F8;&#x673A;&#x73AF;&#x5883;&#x8FD0;&#x884C;&#xFF0C;&#x5E76;&#x652F;&#x6301;&#x5F88;&#x591A;&#x57FA;&#x672C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x518D;&#x5982;&#x4E0B;&#x7684;&#x6307;&#x5357;&#x4E2D;&#x627E;&#x5230;&#x4E86;&#x7B26;&#x5408;&#x4F60;&#x9700;&#x8981;&#x7684;&#xFF0C;&#x53EF;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x3002;&#x67D0;&#x4E9B;&#x6307;&#x5357;&#x53EF;&#x80FD;&#x6709;&#x4E9B;&#x8FC7;&#x65F6;&#xFF0C;&#x4F46;&#x662F;&#x6BD4;&#x8D77;&#x4ECE;&#x96F6;&#x5F00;&#x59CB;&#x8FD8;&#x662F;&#x6709;&#x4E0D;&#x5C11;&#x53C2;&#x8003;&#x4EF7;&#x503C;&#x3002;&#x5982;&#x679C;&#x4F60;&#x786E;&#x5B9E;&#x56E0;&#x4E3A;&#x7279;&#x6B8A;&#x539F;&#x56E0;&#x6216;&#x56E0;&#x4E3A;&#x60F3;&#x4E86;&#x89E3;&#x5E95;&#x5C42;&#x539F;&#x7406;&#xFF0C;&#x60F3;&#x8981;&#x4ECE;&#x96F6;&#x5F00;&#x59CB;&#x642D;&#x5EFA;&#xFF0C;&#x53EF;&#x4EE5;&#x8BD5;&#x8BD5;&#x53C2;&#x8003;<a href="scratch.md">&#x4ECE;&#x96F6;&#x5F00;&#x59CB;</a>&#x6307;&#x5357;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x5BF9;&#x5728;&#x65B0;&#x7684;&#x5E73;&#x53F0;&#x652F;&#x6301;Kubernetes&#x611F;&#x5174;&#x8DA3;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x770B;&#x6211;&#x4EEC;&#x7684;<a href="../../docs/devel/writing-a-getting-started-guide.md">&#x5199;&#x65B0;&#x65B9;&#x6848;&#x7684;&#x5EFA;&#x8BAE;</a>&#x3002;</p>
+<h4 id="&#x4E91;">&#x4E91;</h4>
+<p>&#x4EE5;&#x4E0B;&#x662F;&#x4E0A;&#x6587;&#x6CA1;&#x6709;&#x5217;&#x51FA;&#x7684;&#x4E91;&#x670D;&#x52A1;&#x5546;&#x6216;&#x4E91;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x652F;&#x6301;&#x7684;&#x65B9;&#x6848;&#x3002;</p>
+<ul>
+<li><a href="coreos.md">AWS + coreos</a></li>
+<li><a href="coreos.md">GCE + CoreOS</a></li>
+<li><a href="juju.md">AWS + Ubuntu</a></li>
+<li><a href="juju.md">Joyent + Ubuntu</a></li>
+<li><a href="rackspace.md">Rackspace + CoreOS</a></li>
+</ul>
+<h4 id="&#x79C1;&#x6709;&#x865A;&#x62DF;&#x673A;">&#x79C1;&#x6709;&#x865A;&#x62DF;&#x673A;</h4>
+<ul>
+<li><a href="coreos.md">Vagrant</a>&#xFF08;&#x91C7;&#x7528;CoreOS&#x548C;flannel&#xFF09;</li>
+<li><a href="cloudstack.md">CloudStack</a>&#xFF08;&#x91C7;&#x7528;Ansible&#xFF0C;CoreOS&#x548C;flannel&#xFF09;</li>
+<li><a href="vsphere.md">Vmware</a>&#xFF08;&#x91C7;&#x7528;Debian&#xFF09;</li>
+<li><a href="juju.md">juju.md</a>&#xFF08;&#x91C7;&#x7528;Juju&#xFF0C;Ubuntu&#x548C;flannel&#xFF09;</li>
+<li><a href="coreos.md">Vmware</a>&#xFF08;&#x91C7;&#x7528;CoreOS&#x548C;flannel&#xFF09;</li>
+<li><a href="libvirt-coreos.md">libvirt-coreos.md</a>&#xFF08;&#x91C7;&#x7528;CoreO&#xFF09;</li>
+<li><a href="ovirt.md">oVirt</a></li>
+<li><a href="fedora/flannel_multi_node_cluster.md">libvirt</a>&#xFF08;&#x91C7;&#x7528;Fedora&#x548C;flannel&#xFF09;</li>
+<li><a href="fedora/flannel_multi_node_cluster.md">KVM</a>&#xFF08;&#x91C7;&#x7528;Fedora&#x548C;flannel&#xFF09;</li>
+</ul>
+<h4 id="&#x88F8;&#x673A;">&#x88F8;&#x673A;</h4>
+<ul>
+<li><a href="coreos/bare_metal_offline.md">Offline</a>&#xFF08;&#x65E0;&#x9700;&#x4E92;&#x8054;&#x7F51;&#xFF0C;&#x91C7;&#x7528;CoreOS&#x548C;flannel&#xFF09;</li>
+<li><a href="fedora/fedora_ansible_config.md">fedora/fedora_ansible_config.md</a></li>
+<li><a href="fedora/fedora_manual_config.md">Fedora&#x5355;&#x8282;&#x70B9;</a></li>
+<li><a href="fedora/flannel_multi_node_cluster.md">Fedora&#x591A;&#x8282;&#x70B9;</a></li>
+<li><a href="centos/centos_manual_config.md">Centos</a></li>
+<li><a href="ubuntu.md">Ubuntu</a></li>
+<li><a href="docker-multinode.md">Docker&#x591A;&#x8282;&#x70B9;</a></li>
+</ul>
+<h4 id="&#x96C6;&#x6210;">&#x96C6;&#x6210;</h4>
+<ul>
+<li><a href="mesos.md">Kubernetes on Mesos</a>&#xFF08;&#x91C7;&#x7528;GCE&#xFF09;</li>
+</ul>
+<h2 id="table-of-solutions">Table of Solutions</h2>
+<p>&#x4EE5;&#x4E0B;&#x7528;&#x8868;&#x683C;&#x5F62;&#x5F0F;&#x5217;&#x51FA;&#x4E0A;&#x9762;&#x7684;&#x6240;&#x6709;&#x65B9;&#x6848;&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>IaaS Provider</th>
+<th>Config. Mgmt</th>
+<th>OS</th>
+<th>Networking</th>
+<th>Docs</th>
+<th>Conforms</th>
+<th>Support Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GKE</td>
+<td></td>
+<td></td>
+<td>GCE</td>
+<td><a href="https://cloud.google.com/container-engine" target="_blank">docs</a></td>
+<td>[&#x2713;][3]</td>
+<td>Commercial</td>
+</tr>
+<tr>
+<td>Vagrant</td>
+<td>Saltstack</td>
+<td>Fedora</td>
+<td>flannel</td>
+<td><a href="vagrant.md">docs</a></td>
+<td>[&#x2713;][2]</td>
+<td>Project</td>
+</tr>
+<tr>
+<td>GCE</td>
+<td>Saltstack</td>
+<td>Debian</td>
+<td>GCE</td>
+<td><a href="gce.md">docs</a></td>
+<td>[&#x2713;][1]</td>
+<td>Project</td>
+</tr>
+<tr>
+<td>Azure</td>
+<td>CoreOS</td>
+<td>CoreOS</td>
+<td>Weave</td>
+<td><a href="coreos/azure/README.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/errordeveloper" target="_blank">@errordeveloper</a>, <a href="https://github.com/squillace" target="_blank">@squillace</a>, <a href="https://github.com/chanezon" target="_blank">@chanezon</a>, <a href="https://github.com/crossorigin" target="_blank">@crossorigin</a>)</td>
+</tr>
+<tr>
+<td>Docker Single Node</td>
+<td>custom</td>
+<td>N/A</td>
+<td>local</td>
+<td><a href="docker.md">docs</a></td>
+<td></td>
+<td>Project (<a href="https://github.com/brendandburns" target="_blank">@brendandburns</a>)</td>
+</tr>
+<tr>
+<td>Docker Multi Node</td>
+<td>Flannel</td>
+<td>N/A</td>
+<td>local</td>
+<td><a href="docker-multinode.md">docs</a></td>
+<td></td>
+<td>Project (<a href="https://github.com/brendandburns" target="_blank">@brendandburns</a>)</td>
+</tr>
+<tr>
+<td>Bare-metal</td>
+<td>Ansible</td>
+<td>Fedora</td>
+<td>flannel</td>
+<td><a href="fedora/fedora_ansible_config.md">docs</a></td>
+<td></td>
+<td>Project</td>
+</tr>
+<tr>
+<td>Digital Ocean</td>
+<td>custom</td>
+<td>Fedora</td>
+<td>Calico</td>
+<td><a href="fedora/fedora-calico.md">docs</a></td>
+<td></td>
+<td>Community (@djosborne)</td>
+</tr>
+<tr>
+<td>Bare-metal</td>
+<td>custom</td>
+<td>Fedora</td>
+<td><em>none</em></td>
+<td><a href="fedora/fedora_manual_config.md">docs</a></td>
+<td></td>
+<td>Project</td>
+</tr>
+<tr>
+<td>Bare-metal</td>
+<td>custom</td>
+<td>Fedora</td>
+<td>flannel</td>
+<td><a href="fedora/flannel_multi_node_cluster.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/aveshagarwal" target="_blank">@aveshagarwal</a>)</td>
+</tr>
+<tr>
+<td>libvirt</td>
+<td>custom</td>
+<td>Fedora</td>
+<td>flannel</td>
+<td><a href="fedora/flannel_multi_node_cluster.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/aveshagarwal" target="_blank">@aveshagarwal</a>)</td>
+</tr>
+<tr>
+<td>KVM</td>
+<td>custom</td>
+<td>Fedora</td>
+<td>flannel</td>
+<td><a href="fedora/flannel_multi_node_cluster.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/aveshagarwal" target="_blank">@aveshagarwal</a>)</td>
+</tr>
+<tr>
+<td>Mesos/Docker</td>
+<td>custom</td>
+<td>Ubuntu</td>
+<td>Docker</td>
+<td><a href="mesos-docker.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/mesosphere/kubernetes-mesos/blob/master/AUTHORS.md" target="_blank">Kubernetes-Mesos Authors</a>)</td>
+</tr>
+<tr>
+<td>Mesos/GCE</td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="mesos.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/mesosphere/kubernetes-mesos/blob/master/AUTHORS.md" target="_blank">Kubernetes-Mesos Authors</a>)</td>
+</tr>
+<tr>
+<td>AWS</td>
+<td>CoreOS</td>
+<td>CoreOS</td>
+<td>flannel</td>
+<td><a href="coreos.md">docs</a></td>
+<td></td>
+<td>Community</td>
+</tr>
+<tr>
+<td>GCE</td>
+<td>CoreOS</td>
+<td>CoreOS</td>
+<td>flannel</td>
+<td><a href="coreos.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/pires" target="_blank">@pires</a>)</td>
+</tr>
+<tr>
+<td>Vagrant</td>
+<td>CoreOS</td>
+<td>CoreOS</td>
+<td>flannel</td>
+<td><a href="coreos.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/pires" target="_blank">@pires</a>, <a href="https://github.com/AntonioMeireles" target="_blank">@AntonioMeireles</a>)</td>
+</tr>
+<tr>
+<td>Bare-metal (Offline)</td>
+<td>CoreOS</td>
+<td>CoreOS</td>
+<td>flannel</td>
+<td><a href="coreos/bare_metal_offline.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/jeffbean" target="_blank">@jeffbean</a>)</td>
+</tr>
+<tr>
+<td>Bare-metal</td>
+<td>CoreOS</td>
+<td>CoreOS</td>
+<td>Calico</td>
+<td><a href="coreos/bare_metal_calico.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/caseydavenport" target="_blank">@caseydavenport</a>)</td>
+</tr>
+<tr>
+<td>CloudStack</td>
+<td>Ansible</td>
+<td>CoreOS</td>
+<td>flannel</td>
+<td><a href="cloudstack.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/runseb" target="_blank">@runseb</a>)</td>
+</tr>
+<tr>
+<td>Vmware</td>
+<td></td>
+<td>Debian</td>
+<td>OVS</td>
+<td><a href="vsphere.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/pietern" target="_blank">@pietern</a>)</td>
+</tr>
+<tr>
+<td>Bare-metal</td>
+<td>custom</td>
+<td>CentOS</td>
+<td><em>none</em></td>
+<td><a href="centos/centos_manual_config.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/coolsvap" target="_blank">@coolsvap</a>)</td>
+</tr>
+<tr>
+<td>AWS</td>
+<td>Juju</td>
+<td>Ubuntu</td>
+<td>flannel</td>
+<td><a href="juju.md">docs</a></td>
+<td></td>
+<td><a href="https://github.com/whitmo/bundle-kubernetes" target="_blank">Community</a> ( <a href="https://github.com/whitmo" target="_blank">@whit</a>, <a href="https://github.com/mbruzek" target="_blank">@matt</a>, <a href="https://github.com/chuckbutler" target="_blank">@chuck</a> )</td>
+</tr>
+<tr>
+<td>OpenStack/HPCloud</td>
+<td>Juju</td>
+<td>Ubuntu</td>
+<td>flannel</td>
+<td><a href="juju.md">docs</a></td>
+<td></td>
+<td><a href="https://github.com/whitmo/bundle-kubernetes" target="_blank">Community</a> ( <a href="https://github.com/whitmo" target="_blank">@whit</a>, <a href="https://github.com/mbruzek" target="_blank">@matt</a>, <a href="https://github.com/chuckbutler" target="_blank">@chuck</a> )</td>
+</tr>
+<tr>
+<td>Joyent</td>
+<td>Juju</td>
+<td>Ubuntu</td>
+<td>flannel</td>
+<td><a href="juju.md">docs</a></td>
+<td></td>
+<td><a href="https://github.com/whitmo/bundle-kubernetes" target="_blank">Community</a> ( <a href="https://github.com/whitmo" target="_blank">@whit</a>, <a href="https://github.com/mbruzek" target="_blank">@matt</a>, <a href="https://github.com/chuckbutler" target="_blank">@chuck</a> )</td>
+</tr>
+<tr>
+<td>AWS</td>
+<td>Saltstack</td>
+<td>Ubuntu</td>
+<td>OVS</td>
+<td><a href="aws.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/justinsb" target="_blank">@justinsb</a>)</td>
+</tr>
+<tr>
+<td>Azure</td>
+<td>Saltstack</td>
+<td>Ubuntu</td>
+<td>OpenVPN</td>
+<td><a href="azure.md">docs</a></td>
+<td></td>
+<td>Community</td>
+</tr>
+<tr>
+<td>Bare-metal</td>
+<td>custom</td>
+<td>Ubuntu</td>
+<td>Calico</td>
+<td><a href="ubuntu-calico.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/djosborne" target="_blank">@djosborne</a>)</td>
+</tr>
+<tr>
+<td>Bare-metal</td>
+<td>custom</td>
+<td>Ubuntu</td>
+<td>flannel</td>
+<td><a href="ubuntu.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/resouer" target="_blank">@resouer</a>, <a href="https://github.com/WIZARD-CXY" target="_blank">@WIZARD-CXY</a>)</td>
+</tr>
+<tr>
+<td>Local</td>
+<td></td>
+<td></td>
+<td><em>none</em></td>
+<td><a href="locally.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/preillyme" target="_blank">@preillyme</a>)</td>
+</tr>
+<tr>
+<td>libvirt/KVM</td>
+<td>CoreOS</td>
+<td>CoreOS</td>
+<td>libvirt/KVM</td>
+<td><a href="libvirt-coreos.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/lhuard1A" target="_blank">@lhuard1A</a>)</td>
+</tr>
+<tr>
+<td>oVirt</td>
+<td></td>
+<td></td>
+<td></td>
+<td><a href="ovirt.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/simon3z" target="_blank">@simon3z</a>)</td>
+</tr>
+<tr>
+<td>Rackspace</td>
+<td>CoreOS</td>
+<td>CoreOS</td>
+<td>flannel</td>
+<td><a href="rackspace.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/doublerr" target="_blank">@doublerr</a>)</td>
+</tr>
+<tr>
+<td>any</td>
+<td>any</td>
+<td>any</td>
+<td>any</td>
+<td><a href="scratch.md">docs</a></td>
+<td></td>
+<td>Community (<a href="https://github.com/erictune" target="_blank">@erictune</a>)</td>
+</tr>
+</tbody>
+</table>
+<p><em>&#x6CE8;&#x610F;</em>&#xFF1A;&#x4EE5;&#x4E0A;&#x8868;&#x683C;&#x6309;&#x7167;&#x652F;&#x6301;&#x7EA7;&#x522B;&#x548C;&#x6D4B;&#x8BD5;&#x53CA;&#x4F7F;&#x7528;&#x7684;&#x7248;&#x672C;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#x3002;</p>
+<p>&#x8868;&#x683C;&#x4E2D;&#x5217;&#x8BF4;&#x660E;&#xFF1A;</p>
+<ul>
+<li><strong>IaaS Provider</strong> &#x662F;&#x6307;&#x63D0;&#x4F9B;Kubernetes&#x8FD0;&#x884C;&#x73AF;&#x5883;&#x7684;&#x865A;&#x62DF;&#x673A;&#x6216;&#x7269;&#x7406;&#x673A;&#xFF08;&#x8282;&#x70B9;&#xFF09;&#x8D44;&#x6E90;&#x7684;&#x63D0;&#x4F9B;&#x5546;&#x3002;</li>
+<li><strong>OS</strong> &#x662F;&#x6307;&#x8282;&#x70B9;&#x4E0A;&#x8FD0;&#x884C;&#x7684;&#x57FA;&#x7840;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;</li>
+<li><strong>Config. Mgmt</strong> &#x662F;&#x6307;&#x8282;&#x70B9;&#x4E0A;&#x5B89;&#x88C5;&#x548C;&#x7BA1;&#x7406;Kubernetes&#x8F6F;&#x4EF6;&#x7684;&#x7684;&#x914D;&#x7F6E;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;&#x3002;</li>
+<li><strong>Networking</strong> &#x662F;&#x6307;&#x5B9E;&#x73B0;<a href="../../docs/admin/networking.md">&#x7F51;&#x7EDC;&#x6A21;&#x578B;</a>&#x7684;&#x8F6F;&#x4EF6;&#x3002; <em>none</em> &#x8868;&#x793A;&#x53EA;&#x652F;&#x6301;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#xFF0C;&#x6216;&#x652F;&#x6301;&#x5355;&#x7269;&#x7406;&#x8282;&#x70B9;&#x4E0A;&#x7684;&#x865A;&#x62DF;&#x673A;&#x8282;&#x70B9;&#x3002;</li>
+<li><strong>Conformance</strong> &#x8868;&#x793A;&#x4F7F;&#x7528;&#x8BE5;&#x79CD;&#x914D;&#x7F6E;&#x521B;&#x5EFA;&#x7684;&#x96C6;&#x7FA4;&#x662F;&#x5426;&#x901A;&#x8FC7;&#x4E86;&#x9879;&#x76EE;&#x4E00;&#x81F4;&#x6027;&#x6D4B;&#x8BD5;&#xFF0C;&#x652F;&#x6301;Kubernetes v1.0.0&#x7684;API&#x548C;&#x57FA;&#x672C;&#x7279;&#x6027;&#x3002;</li>
+<li>Support Levels&#xFF08;&#x652F;&#x6301;&#x7EA7;&#x522B;&#xFF09;<ul>
+<li><strong>Project</strong>&#xFF1A;Kubernetes&#x8D21;&#x732E;&#x8005;&#x4EEC;&#x7ECF;&#x5E38;&#x4F7F;&#x7528;&#x8BE5;&#x914D;&#x7F6E;&#xFF0C;&#x6240;&#x4EE5;&#x901A;&#x5E38;&#x6700;&#x65B0;&#x7684;&#x7248;&#x672C;&#x53EF;&#x4F7F;&#x7528;&#x3002;</li>
+<li><strong>Commercial</strong>&#xFF1A;&#x67D0;&#x4E9B;&#x5382;&#x5546;&#x8D1F;&#x8D23;&#x5728;&#x81EA;&#x5DF1;&#x7684;&#x5E73;&#x53F0;&#x652F;&#x6301;&#x3002;</li>
+<li><strong>Community</strong>&#xFF1A;&#x5728;&#x793E;&#x533A;&#x4E2D;&#x6709;&#x6D3B;&#x8DC3;&#x652F;&#x6301;&#xFF0C;&#x4F46;&#x53EF;&#x80FD;&#x6700;&#x65B0;&#x7248;&#x672C;&#x4E0D;&#x9002;&#x7528;&#x3002;</li>
+<li><strong>Inactive</strong>: &#x5BF9;&#x4E8E;&#x521D;&#x6B21;&#x4F7F;&#x7528;Kubernetes&#x7684;&#x7528;&#x6237;&#x4E0D;&#x63A8;&#x8350;&#xFF0C;&#x5E76;&#x4E14;&#x6709;&#x53EF;&#x80FD;&#x5728;&#x5C06;&#x6765;&#x88AB;&#x79FB;&#x9664;&#x3002;</li>
+</ul>
+</li>
+<li><strong>Notes</strong> &#x8BF4;&#x660E;&#xFF0C;&#x6BD4;&#x5982;&#x9002;&#x7528;&#x7684;Kubernetes&#x7248;&#x672C;&#x3002;</li>
+</ul>
 
                     
                     </section>
@@ -2513,8 +2909,10 @@
         </div>
 
         
+        <a href="./033-Overview and Concepts.html" class="navigation navigation-prev " aria-label="Previous page: 第2.1节  Kubernetes概览"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./004-Local-machine Solutions.html" class="navigation navigation-next " aria-label="Next page: 第2.3节  从本地环境起步"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

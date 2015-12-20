@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第3.1.37节  使用kubectl exec检查容器中的环境变量 | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./058-Connect with Proxies.html" />
     
+    
+    <link rel="prev" href="./054-Web Interface.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="4.37"
+        data-chapter-title="第3.1.37节  使用kubectl exec检查容器中的环境变量"
+        data-filepath="057-Container_Access_exec.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -948,7 +950,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.37" data-path="057-Container_Access_exec.html">
+        <li class="chapter active" data-level="4.37" data-path="057-Container_Access_exec.html">
             
                 
                     <a href="./057-Container_Access_exec.html">
@@ -2492,17 +2494,37 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
-<ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
-</ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
+                        <h1 id="&#x4F7F;&#x7528;kubectl-exec&#x68C0;&#x67E5;&#x5BB9;&#x5668;&#x4E2D;&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;">&#x4F7F;&#x7528;kubectl exec&#x68C0;&#x67E5;&#x5BB9;&#x5668;&#x4E2D;&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;&#x674E;&#x6602;</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p>Kubernetes&#x901A;&#x8FC7;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x6765;&#x66B4;&#x9732;<a href="http://kubernetes.io/v1.0/docs/user-guide/services.html#environment-variables" target="_blank">services</a>&#x3002;&#x4F7F;<code>&#x7528;kubectl exec</code>&#x53BB;&#x68C0;&#x67E5;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x4F1A;&#x5F88;&#x65B9;&#x4FBF;&#x3002;</p>
+<p>&#x9996;&#x5148;&#x6211;&#x4EEC;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;pod&#x548C;&#x4E00;&#x4E2A;service&#xFF0C;</p>
+<pre><code>$ kubectl create -f examples/guestbook/redis-master-controller.yaml
+$ kubectl create -f examples/guestbook/redis-master-service.yaml
+</code></pre><p>&#x7B49;&#x5230;pod&#x7684;&#x72B6;&#x6001;&#x4E3A;Running&#x548C;Ready&#xFF0C;</p>
+<pre><code>$ kubectl get pod
+NAME                 READY     REASON       RESTARTS   AGE
+redis-master-ft9ex   1/1       Running      0          12s
+</code></pre><p>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x68C0;&#x67E5;pod&#x7684;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x4E86;&#xFF0C;</p>
+<pre><code>$ kubectl exec redis-master-ft9ex env
+...
+REDIS_MASTER_SERVICE_PORT=6379
+REDIS_MASTER_SERVICE_HOST=10.0.0.219
+...
+</code></pre><h1 id="&#x4F7F;&#x7528;kubectl-exec&#x68C0;&#x67E5;&#x6302;&#x8F7D;&#x7684;&#x6570;&#x636E;&#x5377;&#xFF08;volume&#xFF09;">&#x4F7F;&#x7528;kubectl exec&#x68C0;&#x67E5;&#x6302;&#x8F7D;&#x7684;&#x6570;&#x636E;&#x5377;&#xFF08;volume&#xFF09;</h1>
+<p>&#x4F7F;&#x7528;<code>kubectl exec</code>&#x68C0;&#x67E5;&#x4F60;&#x5E0C;&#x671B;&#x6302;&#x8F7D;&#x7684;&#x6570;&#x636E;&#x5377;&#xFF08;volume&#xFF09;&#x540C;&#x6837;&#x5F88;&#x65B9;&#x4FBF;&#x3002;&#x9996;&#x5148;&#x8FD8;&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;pod&#x5E76;&#x4E14;&#x6302;&#x8F7D;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5377;&#x5230;&#x8FD9;&#x4E2A;pod&#x7684;/data/redis&#x76EE;&#x5F55;&#xFF0C;</p>
+<pre><code>kubectl create -f docs/user-guide/walkthrough/pod-redis.yaml
+</code></pre><p>&#x7B49;&#x5F85;pod&#x72B6;&#x6001;&#x4E3A;Running&#x548C;Ready&#xFF0C;</p>
+<pre><code>$ kubectl get pods
+NAME      READY     REASON    RESTARTS   AGE
+storage   1/1       Running   0          1m
+</code></pre><p>&#x7136;&#x540E;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>kubectl exec</code>&#x53BB;&#x9A8C;&#x8BC1;&#x6570;&#x636E;&#x5377;&#x5DF2;&#x7ECF;&#x6302;&#x8F7D;&#x5230;&#x4E86;/data/redis&#x76EE;&#x5F55;&#xFF0C;</p>
+<pre><code>$ kubectl exec storage ls /data
+redis
+</code></pre><h1 id="&#x4F7F;&#x7528;kubectl-exec&#x5728;pod&#x4E2D;&#x6253;&#x5F00;&#x4E00;&#x4E2A;bash&#x7EC8;&#x7AEF;">&#x4F7F;&#x7528;kubectl exec&#x5728;pod&#x4E2D;&#x6253;&#x5F00;&#x4E00;&#x4E2A;bash&#x7EC8;&#x7AEF;</h1>
+<p>&#x5728;pod&#x4E2D;&#x6253;&#x5F00;&#x4E00;&#x4E2A;&#x7EC8;&#x7AEF;&#x6BD5;&#x7ADF;&#x624D;&#x662F;&#x6700;&#x76F4;&#x63A5;&#x68C0;&#x67E5;pod&#x7684;&#x65B9;&#x5F0F;&#x3002;&#x5047;&#x8BBE;pod&#x5DF2;&#x7ECF;&#x5728;&#x8FD0;&#x884C;&#xFF0C;</p>
+<pre><code>$ kubectl exec -ti storage -- bash
+root@storage:/data#
+</code></pre><p>&#x5982;&#x4E0A;&#x6240;&#x505A;&#xFF0C;&#x4F60;&#x5C31;&#x53EF;&#x4EE5;&#x6253;&#x5F00;pod&#x7684;&#x7EC8;&#x7AEF;&#x4E86;&#x3002;</p>
 
                     
                     </section>
@@ -2513,8 +2535,10 @@
         </div>
 
         
+        <a href="./054-Web Interface.html" class="navigation navigation-prev " aria-label="Previous page: 第3.1.34节  Kubernetes UI"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./058-Connect with Proxies.html" class="navigation navigation-next " aria-label="Next page: 第3.1.38节  应用：kubectl proxy和apiserver proxy"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

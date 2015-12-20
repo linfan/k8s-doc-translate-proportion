@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第3.2.14节  Admission Controller | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./071-Administrating Service Accounts.html" />
     
+    
+    <link rel="prev" href="./069-Accessing the API.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="5.14"
+        data-chapter-title="第3.2.14节  Admission Controller"
+        data-filepath="070-Admission Controllers.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -1185,7 +1187,7 @@
             
         </li>
     
-        <li class="chapter " data-level="5.14" data-path="070-Admission Controllers.html">
+        <li class="chapter active" data-level="5.14" data-path="070-Admission Controllers.html">
             
                 
                     <a href="./070-Admission Controllers.html">
@@ -2492,18 +2494,75 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
+                        <h1 id="admission-controller">Admission Controller</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;Nancy</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p>&#x76EE;&#x5F55;</p>
 <ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
+<li>Admission Controller&#x300E;&#x53C2;&#x89C1;&#x4EE5;&#x4E0B;&#x5185;&#x5BB9;&#x300F;<ul>
+<li>Admission Controller&#x662F;&#x4EC0;&#x4E48;&#xFF1F;&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;&#x4EC0;&#x4E48;&#x662F;Admission Controller&#x201D;&#x300F;</li>
+<li>&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528;Admission Controller&#xFF1F;&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528;Admission Controller&#x201D;&#x300F;</li>
+<li>&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x63A5;&#x5165;&#x63A7;&#x5236;&#x63D2;&#x4EF6;&#xFF1F;&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;&#x5982;&#x4F55;&#x63A5;&#x5165;&#x8BE5;&#x63D2;&#x4EF6;&#x201D;&#x300F;</li>
+<li>&#x6BCF;&#x4E2A;&#x63D2;&#x4EF6;&#x7684;&#x529F;&#x80FD;&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;&#x6BCF;&#x4E2A;&#x63D2;&#x4EF6;&#x7684;&#x529F;&#x80FD;&#x662F;&#x4EC0;&#x4E48;&#x201D;&#x300F;</li>
+<li>AlwaysAdmit&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;AlwaysAdmin&#x63D2;&#x4EF6;&#x201D;&#x300F;</li>
+<li>AlwaysDeny&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;AlwaysDeny&#x63D2;&#x4EF6;&#x201D;&#x300F;</li>
+<li>DenyExecOnPrivileged (&#x5E9F;&#x5F03;)&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;DenyExecOnPrivileged (&#x5E9F;&#x5F03;)&#x63D2;&#x4EF6;&#x201D;&#x300F;</li>
+<li>DenyEscalatingExec&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;DenyEscalatingExec&#x63D2;&#x4EF6;&#x201D;&#x300F;</li>
+<li>ServiceAccount&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;ServiceAccount&#x63D2;&#x4EF6;&#x201D;&#x300F;</li>
+<li>SecurityContextDeny&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;SecurityContextDeny&#x63D2;&#x4EF6;&#x201D;&#x300F;</li>
+<li>ResourceQuota&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;ResourceQuota&#x63D2;&#x4EF6;&#x201D;&#x300F;</li>
+<li>LimitRanger&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;LimitRanger&#x63D2;&#x4EF6;&#x201D;&#x300F;</li>
+<li>NamespaceExists (&#x5E9F;&#x5F03;)&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;NamespaceExists&#xFF08;&#x5E9F;&#x5F03;&#xFF09;&#x63D2;&#x4EF6;&#x201D;&#x300F;</li>
+<li>NamespaceAutoProvision (&#x5E9F;&#x5F03;)&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;NamespaceAutoProvision (&#x5E9F;&#x5F03;)&#x63D2;&#x4EF6;&#x201D;&#x300F;</li>
+<li>NamespaceLifecycle&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;NamespaceLifecycle&#x63D2;&#x4EF6;&#x201D;&#x300F;</li>
+<li>&#x662F;&#x5426;&#x6709;&#x63A8;&#x8350;&#x7684;&#x63D2;&#x4EF6;&#x96C6;&#x5408;&#xFF1F;&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;&#x662F;&#x5426;&#x6709;&#x63A8;&#x8350;&#x7684;&#x63D2;&#x4EF6;&#x96C6;&#x5408;&#x201D;&#x300F;</li>
 </ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
-
+</li>
+</ul>
+<h2 id="&#x4EC0;&#x4E48;&#x662F;admission-controller&#xFF1F;">&#x4EC0;&#x4E48;&#x662F;Admission Controller&#xFF1F;</h2>
+<p>Admission Controller&#x63D2;&#x4EF6;&#x662F;&#x4E00;&#x6BB5;&#x4EE3;&#x7801;&#xFF0C;&#x5176;&#x62E6;&#x622A;Kubernetes API&#x670D;&#x52A1;&#x7684;&#x8BF7;&#x6C42;&#x65E9;&#x4E8E;&#x5BF9;&#x8C61;&#x7684;&#x6301;&#x4E45;&#x6027;&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x8BF7;&#x6C42;&#x7684;&#x8BA4;&#x8BC1;&#x548C;&#x6388;&#x6743;&#x4E4B;&#x540E;&#x3002;&#x63D2;&#x4EF6;&#x4EE3;&#x7801;&#x4F4D;&#x4E8E;API&#x670D;&#x52A1;&#x8FDB;&#x7A0B;&#x4E2D;&#xFF0C;&#x4F1A;&#x7F16;&#x8BD1;&#x6210;&#x4E8C;&#x8FDB;&#x5236;&#x4EE5;&#x4FBF;&#x6B64;&#x65F6;&#x4F7F;&#x7528;&#x3002;</p>
+<p>&#x96C6;&#x7FA4;&#x5728;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x8BF7;&#x6C42;&#x4E4B;&#x524D;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;Admission Controller&#x63D2;&#x4EF6;&#x90FD;&#x4F1A;&#x6309;&#x5E8F;&#x8FD0;&#x884C;&#x3002;&#x5982;&#x679C;&#x8FD9;&#x4E2A;&#x5E8F;&#x5217;&#x4E2D;&#x7684;&#x67D0;&#x4E2A;&#x63D2;&#x4EF6;&#x62D2;&#x7EDD;&#x8BE5;&#x8BF7;&#x6C42;&#xFF0C;&#x5219;&#x6574;&#x4E2A;&#x7684;&#x8BF7;&#x6C42;&#x90FD;&#x4F1A;&#x88AB;&#x7ACB;&#x523B;&#x62D2;&#x7EDD;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x9519;&#x8BEF;&#x7ED9;&#x7528;&#x6237;&#x3002;</p>
+<p>Admission Controller&#x63D2;&#x4EF6;&#x5728;&#x67D0;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#x4E5F;&#x8BB8;&#x4F1A;&#x6539;&#x53D8;&#x4F20;&#x8FDB;&#x6765;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x914D;&#x7F6E;&#x7CFB;&#x7EDF;&#x9ED8;&#x8BA4;&#x503C;&#x3002;&#x6B64;&#x5916;&#xFF0C;Admission Controller&#x63D2;&#x4EF6;&#x4E5F;&#x8BB8;&#x4F1A;&#x6539;&#x53D8;&#x8BF7;&#x6C42;&#x5904;&#x7406;&#x4E2D;&#x7684;&#x90E8;&#x5206;&#x76F8;&#x5173;&#x8D44;&#x6E90;&#x53BB;&#x505A;&#x4E9B;&#x4E8B;&#x60C5;&#xFF0C;&#x6BD4;&#x5982;&#x589E;&#x91CF;&#x914D;&#x989D;&#x7684;&#x4F7F;&#x7528;&#x3002;</p>
+<h2 id="&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528;admission-controller&#xFF1F;">&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528;Admission Controller&#xFF1F;</h2>
+<p>Kubernetes&#x4E2D;&#x8BB8;&#x591A;&#x9AD8;&#x7EA7;&#x529F;&#x80FD;&#x9700;&#x8981;&#x6FC0;&#x6D3B;Admission Controller&#x63D2;&#x4EF6;&#xFF0C;&#x4EE5;&#x4FBF;&#x66F4;&#x597D;&#x7684;&#x652F;&#x6301;&#x8BE5;&#x529F;&#x80FD;&#x3002;&#x603B;&#x4E4B;&#xFF0C;&#x6CA1;&#x6709;&#x6B63;&#x786E;&#x914D;&#x7F6E;Admission Controller&#x63D2;&#x4EF6;&#x7684;Kubernetes API&#x670D;&#x52A1;&#x662F;&#x4E0D;&#x5B8C;&#x6574;&#x7684;&#x670D;&#x52A1;&#xFF0C;&#x5F88;&#x591A;&#x7528;&#x6237;&#x671F;&#x671B;&#x7684;&#x670D;&#x52A1;&#x662F;&#x4E0D;&#x652F;&#x6301;&#x7684;&#x3002;</p>
+<h2 id="&#x5982;&#x4F55;&#x63A5;&#x5165;&#x8BE5;&#x63D2;&#x4EF6;&#xFF1F;">&#x5982;&#x4F55;&#x63A5;&#x5165;&#x8BE5;&#x63D2;&#x4EF6;&#xFF1F;</h2>
+<p>Kubernetes API &#x670D;&#x52A1;&#x5668;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;admission-control&#xFF0C;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;&#xFF0C;&#x5728;&#x96C6;&#x7FA4;&#x4E2D;&#x4FEE;&#x6539;&#x5BF9;&#x8C61;&#x4E4B;&#x524D;&#xFF0C;&#x8C03;&#x7528;&#x8BB8;&#x53EF;&#x63A7;&#x5236;&#x9009;&#x9879;&#x7684;&#x6709;&#x5E8F;&#x5217;&#x8868;&#x3002;</p>
+<h2 id="&#x6BCF;&#x4E2A;&#x63D2;&#x4EF6;&#x7684;&#x529F;&#x80FD;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;">&#x6BCF;&#x4E2A;&#x63D2;&#x4EF6;&#x7684;&#x529F;&#x80FD;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h2>
+<h3 id="alwaysadmin&#x63D2;&#x4EF6;">AlwaysAdmin&#x63D2;&#x4EF6;<em>**</em></h3>
+<p>&#x4F7F;&#x7528;&#x63D2;&#x4EF6;&#x672C;&#x8EAB;&#x5904;&#x7406;&#x6240;&#x6709;&#x8BF7;&#x6C42;&#x3002;</p>
+<h3 id="alwaysdeny&#x63D2;&#x4EF6;">AlwaysDeny&#x63D2;&#x4EF6;<em>**</em></h3>
+<p>&#x62D2;&#x7EDD;&#x6240;&#x6709;&#x8BF7;&#x6C42;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x6D4B;&#x8BD5;&#x3002;</p>
+<h3 id="denyexeconprivileged-&#x5E9F;&#x5F03;&#x63D2;&#x4EF6;">DenyExecOnPrivileged (&#x5E9F;&#x5F03;)&#x63D2;&#x4EF6;<em>**</em></h3>
+<p>&#x5982;&#x679C;&#x4E00;&#x4E2A;Pod&#x6709;&#x4E00;&#x4E2A;&#x7279;&#x6743;Container&#xFF0C;&#x8BE5;&#x63D2;&#x4EF6;&#x5C31;&#x4F1A;&#x62E6;&#x622A;&#x6240;&#x6709;&#x7684;&#x8BF7;&#x6C42;&#xFF0C;&#x5728;&#x8BE5;Pod&#x4E2D;&#x6267;&#x884C;&#x4E00;&#x4E2A;&#x547D;&#x4EE4;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x7684;&#x96C6;&#x7FA4;&#x652F;&#x6301;&#x7279;&#x6743;Container&#xFF0C;&#x800C;&#x4E14;&#x4F60;&#x60F3;&#x8981;&#x9650;&#x5236;&#x7EC8;&#x7AEF;&#x7528;&#x6237;&#x5728;&#x90A3;&#x4E9B;Container&#x4E2D;&#x6267;&#x884C;&#x547D;&#x4EE4;&#x7684;&#x6743;&#x9650;&#xFF0C;&#x6211;&#x4EEC;&#x5F3A;&#x70C8;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#x8BE5;&#x63D2;&#x4EF6;&#x3002;</p>
+<p>&#x8BE5;&#x529F;&#x80FD;&#x5DF2;&#x7ECF;&#x5408;&#x5E76;&#x5230;DenyEscalatingExec&#x63D2;&#x4EF6;&#x300E;&#x53C2;&#x89C1;&#x4E0B;&#x6587;&#x201C;DenyEscalatingExec&#x63D2;&#x4EF6;&#x201D;&#x300F;)</p>
+<h3 id="denyescalatingexec&#x63D2;&#x4EF6;">DenyEscalatingExec&#x63D2;&#x4EF6;<em>**</em></h3>
+<p>&#x8BE5;&#x63D2;&#x4EF6;&#x62D2;&#x7EDD;&#x6267;&#x884C;&#x548C;&#x9644;&#x52A0;&#x4EE4;&#x5230;&#x5141;&#x8BB8;&#x4E3B;&#x673A;&#x8BBF;&#x95EE;&#x7684;&#x4E14;&#x6709;&#x5347;&#x7EA7;&#x7279;&#x6743;&#x7684;Pod&#x3002;&#x5305;&#x542B;&#x542B;&#x6709;&#x8FD0;&#x884C;&#x7279;&#x6743;&#x7684;Pod&#xFF0C;&#x6709;&#x8BBF;&#x95EE;&#x4E3B;&#x673A;PID Namespace&#x7684;&#x6743;&#x9650;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x7684;&#x96C6;&#x7FA4;&#x652F;&#x6301;&#x542B;&#x6709;&#x5347;&#x7EA7;&#x7279;&#x6743;&#x7684;Container&#xFF0C;&#x800C;&#x4E14;&#x4F60;&#x60F3;&#x8981;&#x9650;&#x5236;&#x7EC8;&#x7AEF;&#x7528;&#x6237;&#x5728;&#x8FD9;&#x4E9B;Container&#x4E2D;&#x6267;&#x884C;&#x547D;&#x4EE4;&#x7684;&#x80FD;&#x529B;&#xFF0C;&#x6211;&#x4EEC;&#x5F3A;&#x70C8;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#x8BE5;&#x63D2;&#x4EF6;&#x3002;</p>
+<h3 id="serviceaccount&#x63D2;&#x4EF6;">ServiceAccount&#x63D2;&#x4EF6;<em>**</em></h3>
+<p>&#x8FD9;&#x4E2A;&#x63D2;&#x4EF6;&#x5B9E;&#x73B0;&#x4E86;<a href="http://kubernetes.io/v1.1/docs/user-guide/service-accounts.html" target="_blank">serviceAccounts</a>&#x7684;&#x81EA;&#x52A8;&#x5316;&#x3002;&#x5982;&#x679C;&#x4F60;&#x6253;&#x7B97;&#x4F7F;&#x7528;Kubernetes ServiceAccount&#x5BF9;&#x8C61;&#xFF0C;&#x6211;&#x4EEC;&#x5F3A;&#x70C8;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#x8BE5;&#x63D2;&#x4EF6;&#x3002;</p>
+<h3 id="securitycontextdeny&#x63D2;&#x4EF6;">SecurityContextDeny&#x63D2;&#x4EF6;<em>**</em></h3>
+<p><a href="http://kubernetes.io/v1.1/docs/user-guide/security-context.html" target="_blank">SecurityContext</a>&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E9B;&#x4E0D;&#x9002;&#x7528;&#x4E8E;Container&#x7684;&#x9009;&#x9879;&#xFF0C;&#x8FD9;&#x4E2A;&#x63D2;&#x4EF6;&#x5C06;&#x4F1A;&#x62D2;&#x7EDD;&#x4EFB;&#x4F55;&#x542B;&#x6709;&#x8BE5;SecurityContext&#x7684;Pod&#x3002;</p>
+<h3 id="resourcequota&#x63D2;&#x4EF6;">ResourceQuota&#x63D2;&#x4EF6;<em>**</em></h3>
+<p>&#x8BE5;&#x63D2;&#x4EF6;&#x4F1A;&#x68C0;&#x67E5;&#x4F20;&#x5165;&#x7684;&#x8BF7;&#x6C42;&#xFF0C;&#x786E;&#x4FDD;&#x5176;&#x4E0D;&#x8FDD;&#x53CD;&#x4EFB;&#x4F55;Namespace&#x4E2D;ResourceQuota&#x5BF9;&#x8C61;&#x679A;&#x4E3E;&#x7684;&#x7EA6;&#x675F;&#x6761;&#x4EF6;&#x3002;&#x5982;&#x679C;&#x4F60;&#x5728;Kubernetes&#x5F00;&#x53D1;&#x4E2D;&#x6B63;&#x5728;&#x4F7F;&#x7528;ResourceQuota&#x5BF9;&#x8C61;&#xFF0C;&#x4F60;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x8BE5;&#x63D2;&#x4EF6;&#x5B9E;&#x73B0;&#x914D;&#x989D;&#x7EA6;&#x675F;&#x6761;&#x4EF6;&#x3002;</p>
+<p>&#x67E5;&#x770B;<a href="http://kubernetes.io/v1.1/docs/design/admission_control_resource_quota.html" target="_blank">resourceQuota&#x8BBE;&#x8BA1;&#x6587;&#x6863;</a>&#x548C;<a href="http://kubernetes.io/v1.1/docs/admin/resourcequota/README.html" target="_blank">Resource Quota&#x793A;&#x4F8B;</a>&#x4E86;&#x89E3;&#x66F4;&#x591A;&#x7EC6;&#x8282;&#x3002;</p>
+<p>&#x5F3A;&#x70C8;&#x5EFA;&#x8BAE;&#x914D;&#x7F6E;&#x8BE5;&#x63D2;&#x4EF6;&#x5728;Admission Controller&#x63D2;&#x4EF6;&#x7684;&#x5E8F;&#x5217;&#x4E2D;&#x3002;This is so that quota is not prematurely incremented only for the request to be rejected later in admission control&#x3002;&#xFF08;&#x8BE5;&#x53E5;&#x8BDD;&#x7FFB;&#x8BD1;&#x6709;&#x5F85;&#x8003;&#x8651;&#xFF09;</p>
+<h3 id="limitranger&#x63D2;&#x4EF6;">LimitRanger&#x63D2;&#x4EF6;<em>**</em></h3>
+<p>&#x8BE5;&#x63D2;&#x4EF6;&#x4F1A;&#x68C0;&#x67E5;&#x4F20;&#x5165;&#x7684;&#x8BF7;&#x6C42;&#xFF0C;&#x786E;&#x4FDD;&#x5176;&#x4E0D;&#x8FDD;&#x53CD;&#x4EFB;&#x4F55;Namespace&#x4E2D;LimitRange&#x5BF9;&#x8C61;&#x679A;&#x4E3E;&#x7684;&#x7EA6;&#x675F;&#x6761;&#x4EF6;&#x3002;&#x5982;&#x679C;&#x4F60;&#x5728;Kubernetes&#x5F00;&#x53D1;&#x4E2D;&#x6B63;&#x5728;&#x4F7F;&#x7528;LimitRange&#x5BF9;&#x8C61;&#xFF0C;&#x4F60;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x8BE5;&#x63D2;&#x4EF6;&#x5B9E;&#x73B0;&#x7EA6;&#x675F;&#x6761;&#x4EF6;&#x3002;LimitRange&#x4E5F;&#x7ECF;&#x5E38;&#x7528;&#x4E8E;Pod&#x4E2D;&#x9ED8;&#x8BA4;&#x8D44;&#x6E90;&#x8BF7;&#x6C42;&#xFF0C;&#x4E0D;&#x4F1A;&#x6307;&#x5B9A;&#x54EA;&#x4E00;&#x4E2A;&#x8BF7;&#x6C42;&#x3002;&#x76EE;&#x524D;&#xFF0C;&#x9ED8;&#x8BA4;LimitRange&#xFF0C;&#x5728;&#x9ED8;&#x8BA4;&#x7684;Namespace&#x4E2D;&#x5BF9;&#x6240;&#x6709;&#x7684;Pod&#xFF0C;&#x9700;&#x8981;0.1CPU&#x3002;</p>
+<p>&#x67E5;&#x9605;<a href="http://kubernetes.io/v1.1/docs/design/admission_control_limit_range.html" target="_blank">LimitRange&#x8BBE;&#x8BA1;&#x6587;&#x6863;</a>&#x548C;<a href="http://kubernetes.io/v1.1/docs/admin/limitrange/" target="_blank">&#x7528;&#x4F8B;</a>&#xFF0C;&#x4E86;&#x89E3;&#x66F4;&#x591A;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;&#x3002;</p>
+<h3 id="namespaceexists&#xFF08;&#x5E9F;&#x5F03;&#xFF09;&#x63D2;&#x4EF6;">NamespaceExists&#xFF08;&#x5E9F;&#x5F03;&#xFF09;&#x63D2;&#x4EF6;<em>**</em></h3>
+<p>&#x8BE5;&#x63D2;&#x4EF6;&#x4F1A;&#x68C0;&#x67E5;&#x6240;&#x6709;&#x4F20;&#x5165;&#x7684;&#x8BF7;&#x6C42;&#xFF0C;&#x5C1D;&#x8BD5;&#x5728;Kubernetes Namespace&#x4E2D;&#x521B;&#x5EFA;&#x8D44;&#x6E90;&#xFF0C;&#x5982;&#x679C;&#x8BE5;Namespace&#x4E0D;&#x662F;&#x5F53;&#x524D;&#x521B;&#x5EFA;&#x7684;&#xFF0C;&#x8BE5;&#x63D2;&#x4EF6;&#x4F1A;&#x62D2;&#x7EDD;&#x8FD9;&#x4E2A;&#x8BF7;&#x6C42;&#x3002;&#x6211;&#x4EEC;&#x5F3A;&#x70C8;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#x8BE5;&#x63D2;&#x4EF6;&#xFF0C;&#x786E;&#x4FDD;&#x6570;&#x636E;&#x7684;&#x5B8C;&#x6574;&#x6027;&#x3002;</p>
+<p>Admission Controller&#x7684;&#x8BE5;&#x529F;&#x80FD;&#x5DF2;&#x7ECF;&#x5E76;&#x5165;NamespaceLifecycle&#x63D2;&#x4EF6;&#x3002;</p>
+<h3 id="namespaceautoprovision-&#x5E9F;&#x5F03;&#x63D2;&#x4EF6;">NamespaceAutoProvision (&#x5E9F;&#x5F03;)&#x63D2;&#x4EF6;<em>**</em></h3>
+<p>&#x8BE5;&#x63D2;&#x4EF6;&#x4F1A;&#x68C0;&#x67E5;&#x6240;&#x6709;&#x4F20;&#x5165;&#x7684;&#x8BF7;&#x6C42;&#xFF0C;&#x5C1D;&#x8BD5;&#x5728;Kubernetes Namespace&#x4E2D;&#x521B;&#x5EFA;&#x8D44;&#x6E90;&#xFF0C;&#x5982;&#x679C;Namespace&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;Namespace&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5F3A;&#x70C8;&#x5EFA;&#x8BAE;NamespaceExists&#x63D2;&#x4EF6;&#x4F18;&#x5148;&#x7EA7;&#x9AD8;&#x4E8E;NamespaceAutoProvision&#x63D2;&#x4EF6;&#x3002;</p>
+<h3 id="namespacelifecycle&#x63D2;&#x4EF6;">NamespaceLifecycle&#x63D2;&#x4EF6;<em>**</em></h3>
+<p>&#x5982;&#x679C;Namespace&#x5DF2;&#x7ECF;&#x7EC8;&#x6B62;&#xFF0C;&#x5219;&#x4E0D;&#x80FD;&#x5728;&#x5176;&#x4E2D;&#x521B;&#x5EFA;&#x65B0;&#x7684;Namespace&#xFF0C;&#x8BE5;&#x63D2;&#x4EF6;&#x4F1A;&#x5F3A;&#x5236;&#x8BE5;&#x64CD;&#x4F5C;&#x3002;</p>
+<p>&#x5220;&#x9664;&#x4E00;&#x4E2A;Namespace&#x4F1A;&#x7EC8;&#x6B62;&#x4E00;&#x7CFB;&#x5217;&#x64CD;&#x4F5C;&#xFF0C;&#x79FB;&#x9664;&#x8BE5;Namespace&#x4E2D;&#x6240;&#x6709;&#x5BF9;&#x8C61;&#xFF08;Pod&#xFF0C;&#x670D;&#x52A1;&#x7B49;&#x7B49;&#xFF09;&#x3002;&#x4E3A;&#x4E86;&#x52A0;&#x5F3A;&#x8BE5;&#x8FC7;&#x7A0B;&#x7684;&#x5B8C;&#x6574;&#x6027;&#xFF0C;&#x6211;&#x4EEC;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#x8BE5;&#x63D2;&#x4EF6;&#x3002;</p>
+<h2 id="&#x662F;&#x5426;&#x6709;&#x63A8;&#x8350;&#x7684;&#x63D2;&#x4EF6;&#x96C6;&#x5408;&#xFF1F;">&#x662F;&#x5426;&#x6709;&#x63A8;&#x8350;&#x7684;&#x63D2;&#x4EF6;&#x96C6;&#x5408;&#xFF1F;</h2>
+<p>&#x662F;&#x7684;&#x3002;</p>
+<p>Kubernetes1.0&#xFF0C;&#x6211;&#x4EEC;&#x5F3A;&#x70C8;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x7684;&#x8BB8;&#x53EF;&#x63A7;&#x5236;&#x63D2;&#x4EF6;&#x96C6;&#x5408;&#xFF08;&#x6309;&#x987A;&#x5E8F;&#x6392;&#x5217;&#xFF09;&#xFF1A;</p>
+<pre><code>--admission_control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota
+</code></pre>
                     
                     </section>
                 
@@ -2513,8 +2572,10 @@
         </div>
 
         
+        <a href="./069-Accessing the API.html" class="navigation navigation-prev " aria-label="Previous page: 第3.2.13节  API Server端口配置"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./071-Administrating Service Accounts.html" class="navigation navigation-next " aria-label="Next page: 第3.2.15节  Service Accounts集群管理指南"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第2.5节 使用Vagrant | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./007-Local_No-VM.html" />
     
+    
+    <link rel="prev" href="./005-Local_Docker-based.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="2.5"
+        data-chapter-title="第2.5节 使用Vagrant"
+        data-filepath="006-Vagrant.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -180,7 +182,7 @@
             
         </li>
     
-        <li class="chapter " data-level="2.5" data-path="006-Vagrant.html">
+        <li class="chapter active" data-level="2.5" data-path="006-Vagrant.html">
             
                 
                     <a href="./006-Vagrant.html">
@@ -2492,17 +2494,223 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
-<ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
-</ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
+                        <h1 id="&#x4F7F;&#x7528;vagrant">&#x4F7F;&#x7528;Vagrant</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;&#x5362;&#x6587;&#x6CC9;</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p>&#x4F7F;&#x7528;Vagrant&#xFF08;&#x548C;VirtualBox&#xFF09;&#x8FD0;&#x884C;Kubernetes&#x662F;&#x5728;&#x672C;&#x5730;&#x673A;&#x5668;&#xFF08;Linux&#xFF0C;Mac OS X&#xFF09;&#x8FDB;&#x884C;&#x8FD0;&#x884C;/&#x6D4B;&#x8BD5;/&#x5F00;&#x53D1;&#x7684;&#x7B80;&#x5355;&#x65B9;&#x6CD5;&#x3002;</p>
+<h2 id="&#x9884;&#x5907;&#x77E5;&#x8BC6;">&#x9884;&#x5907;&#x77E5;&#x8BC6;</h2>
+<ol>
+<li>&#x4ECE;<a href="http://www.vagrantup.com/downloads.html" target="_blank">http://www.vagrantup.com/downloads.html</a>&#x4E0B;&#x8F7D;&#x6700;&#x65B0;&#x7248;<code>Vagrant</code>&gt;=1.6.2</li>
+<li>&#x4E0B;&#x8F7D;&#x4EE5;&#x4E0B;&#x4E2D;&#x7684;&#x4E00;&#x9879;&#xFF1A;<ol>
+<li>&#x4ECE;<a href="http://www.vagrantup.com/downloads.html" target="_blank">http://www.vagrantup.com/downloads.html</a>&#x4E0B;&#x8F7D;4.3.28&#x7248;&#x672C;&#x7684;VirtualBox</li>
+<li>&#x7248;&#x672C;&#x53F7;&gt;=5&#x7684;<a href="https://www.vmware.com/products/fusion/" target="_blank">VMWare Fusion</a>&#x548C;&#x5408;&#x9002;&#x7684;<a href="https://www.vagrantup.com/vmware" target="_blank">Vagrant VMWare Fusion provider</a></li>
+<li>&#x7248;&#x672C;&#x53F7;&gt;=9&#x7684;<a href="https://www.vmware.com/products/workstation/" target="_blank">VMWare Workstation</a>&#x4EE5;&#x53CA;<a href="https://www.vagrantup.com/vmware" target="_blank">Vagrant VMWare Fusion provider</a></li>
+<li>&#x7248;&#x672C;&#x53F7;&gt;=9&#x7684;<a href="https://www.parallels.com/products/desktop/" target="_blank">Parallels Desktop</a>&#x4EE5;&#x53CA;<a href="https://parallels.github.io/vagrant-parallels/" target="_blank">Vagrant Parallels provider</a></li>
+<li>&#x652F;&#x6301;&#x786C;&#x4EF6;&#x865A;&#x62DF;&#x5316;&#x5E76;&#x4E14;&#x5E26;&#x6709;<code>libvirt</code>&#x7684;KVM&#x3002;<a href="https://github.com/pradels/vagrant-libvirt" target="_blank">Vagrant-libvirt</a>&#xFF0C;&#x4E3A;fedora&#x63D0;&#x4F9B;&#x5B98;&#x65B9;&#x7684;rpm&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<code>yum install vagrant-libvirt</code>&#x547D;&#x4EE4;&#x5B89;&#x88C5;</li>
+</ol>
+</li>
+</ol>
+<h2 id="&#x8BBE;&#x7F6E;">&#x8BBE;&#x7F6E;</h2>
+<p>&#x7B80;&#x5355;&#x8FD0;&#x884C;&#x4E0B;&#x5217;&#x4EE3;&#x7801;&#x5C31;&#x80FD;&#x591F;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x96C6;&#x7FA4;</p>
+<pre><code class="lang-sh"><span class="hljs-built_in">export</span> KUBERNETES_PROVIDER=vagrant
+curl <span class="hljs-operator">-s</span>S https://get.k8s.io | bash
+</code></pre>
+<p>&#x6216;&#x8005;&#xFF0C;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0B;&#x8F7D;<a href="https://github.com/GoogleCloudPlatform/kubernetes/releases" target="_blank">Kubernetes&#x53D1;&#x884C;&#x7248;</a>&#x3001;&#x89E3;&#x538B;&#x5F52;&#x6863;&#x6587;&#x4EF6;&#x3002;&#x6253;&#x5F00;&#x7EC8;&#x7AEF;&#x8FD0;&#x884C;&#x547D;&#x4EE4;&#x542F;&#x52A8;&#x672C;&#x5730;&#x96C6;&#x7FA4;&#xFF1A;</p>
+<pre><code class="lang-sh"><span class="hljs-built_in">cd</span> kubernetes
+
+<span class="hljs-built_in">export</span> KUBERNETES_PROVIDER=vagrant
+./cluster/kube-up.sh
+</code></pre>
+<p>&#x73AF;&#x5883;&#x53D8;&#x91CF;<strong>KUBERNETES_PROVIDER</strong>&#x7528;&#x6765;&#x544A;&#x8BC9;&#x6240;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x96C6;&#x7FA4;&#x7BA1;&#x7406;&#x811A;&#x672C;&#x8BE5;&#x4F7F;&#x7528;&#x54EA;&#x4E00;&#x4E2A;&#x811A;&#x672C;&#x7BA1;&#x7406;&#x5668;&#xFF08;&#x6BD4;&#x5982;Vagrant&#xFF09;&#x3002;&#x5982;&#x679C;&#x4F60;&#x5FD8;&#x8BB0;&#x8BBE;&#x7F6E;&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;&#xFF0C;&#x9ED8;&#x8BA4;&#x5047;&#x8BBE;&#x4F60;&#x8FD0;&#x884C;Google Compute Engine&#x4E0A;&#x8FD0;&#x884C;k8s&#x3002;</p>
+<p>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;Vagrant&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5355;&#x72EC;&#x7684;master VM&#xFF08;&#x88AB;&#x79F0;&#x4E3A;kubernetes-master&#xFF09;&#xFF0C;&#x4EE5;&#x53CA;&#x4E00;&#x4E2A;&#x8282;&#x70B9;VM&#xFF08;&#x88AB;&#x79F0;&#x4E3A;kubernetes-minion-1&#xFF09;&#x3002;&#x6BCF;&#x4E2A;VM&#x4F1A;&#x5360;&#x7528;1G&#x5185;&#x5B58;&#xFF0C;&#x6240;&#x4EE5;&#x786E;&#x4FDD;&#x4F60;&#x6709;&#x81F3;&#x5C11;2G-4G&#x7684;&#x7A7A;&#x4F59;&#x5185;&#x5B58;&#xFF08;&#x4EE5;&#x53CA;&#x5408;&#x9002;&#x7684;&#x7A7A;&#x95F2;&#x786C;&#x76D8;&#x7A7A;&#x95F4;&#xFF09;&#x3002;</p>
+<p>Vagrant&#x4F1A;&#x63D0;&#x4F9B;&#x96C6;&#x7FA4;&#x4E2D;&#x6BCF;&#x53F0;&#x673A;&#x5668;&#x8FD0;&#x884C;Kuberbetes&#x6240;&#x6709;&#x5FC5;&#x987B;&#x7684;&#x7EC4;&#x4EF6;&#x3002;&#x6BCF;&#x53F0;&#x673A;&#x5668;&#x4F1A;&#x82B1;&#x8D39;&#x51E0;&#x5206;&#x949F;&#x5B8C;&#x6210;&#x521D;&#x59CB;&#x5316;&#x8BBE;&#x7F6E;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x4E0B;&#x8F7D;&#x4E86;&#x591A;&#x4E2A;Vagrant provider&#xFF0C;Kubernetes&#x901A;&#x5E38;&#x4F1A;&#x9009;&#x62E9;&#x6700;&#x6070;&#x5F53;&#x7684;&#x90A3;&#x4E2A;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;<strong>VAGRANT_DEFAULT_PROVIDER</strong>&#x7684;&#x503C;&#x6765;&#x8BA9;Kubernetes&#x4F7F;&#x7528;&#x54EA;&#x4E2A;Vagrant provider:</p>
+<pre><code class="lang-sh"><span class="hljs-built_in">export</span> VAGRANT_DEFAULT_PROVIDER=parallels
+<span class="hljs-built_in">export</span> KUBERNETES_PROVIDER=vagrant
+./cluster/kube-up.sh
+</code></pre>
+<p>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#x6BCF;&#x4E2A;&#x96C6;&#x7FA4;&#x4E2D;&#x7684;VM&#x8FD0;&#x884C;Fedora&#x7CFB;&#x7EDF;&#x3002;</p>
+<p>&#x901A;&#x8FC7;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x8FDE;&#x63A5;master&#x6216;&#x4EFB;&#x610F;&#x8282;&#x70B9;&#xFF1A;</p>
+<pre><code class="lang-sh">vagrant ssh master
+vagrant ssh minion-<span class="hljs-number">1</span>
+</code></pre>
+<p>&#x5982;&#x679C;&#x4F60;&#x8FD0;&#x884C;&#x8D85;&#x8FC7;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E0B;&#x9762;&#x547D;&#x4EE4;&#x8FDE;&#x63A5;&#x5176;&#x5B83;&#x8282;&#x70B9;&#xFF1A;</p>
+<pre><code class="lang-sh">vagrant ssh minion-<span class="hljs-number">2</span>
+vagrant ssh minion-<span class="hljs-number">3</span>
+</code></pre>
+<p>&#x96C6;&#x7FA4;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x4F1A;&#x4E0B;&#x8F7D;<strong>docker daemon</strong>&#x548C;<strong>kubelet</strong>&#x3002;</p>
+<blockquote>
+<p>The master node instantiates the Kubernetes master components as pods on the machine.(<code>&#x8FD9;&#x53E5;&#x7FFB;&#x8BD1;&#x5F85;&#x8BA8;&#x8BBA;</code>)</p>
+</blockquote>
+<p>master&#x8282;&#x70B9;&#x4F1A;&#x5B9E;&#x4F8B;&#x5316;Kubernetes master &#x7EC4;&#x4EF6;&#x4F5C;&#x4E3A;<code>pods</code>&#x8FD0;&#x884C;&#x5728;&#x673A;&#x5668;&#x4E0A;&#x3002;</p>
+<p>&#x67E5;&#x770B;kubernetes-master&#x4E0A;&#x7684;&#x670D;&#x52A1;&#x72B6;&#x6001;&#x6216;&#x8005;&#x65E5;&#x5FD7;&#xFF1A;</p>
+<pre><code class="lang-sh">[vagrant@kubernetes-master ~] $ vagrant ssh master
+[vagrant@kubernetes-master ~] $ sudo su
+
+[root@kubernetes-master ~] $ systemctl status kubelet
+[root@kubernetes-master ~] $ journalctl -ru kubelet
+
+[root@kubernetes-master ~] $ systemctl status docker
+[root@kubernetes-master ~] $ journalctl -ru docker
+
+[root@kubernetes-master ~] $ tail <span class="hljs-operator">-f</span> /var/<span class="hljs-built_in">log</span>/kube-apiserver.log
+[root@kubernetes-master ~] $ tail <span class="hljs-operator">-f</span> /var/<span class="hljs-built_in">log</span>/kube-controller-manager.log
+[root@kubernetes-master ~] $ tail <span class="hljs-operator">-f</span> /var/<span class="hljs-built_in">log</span>/kube-scheduler.log
+</code></pre>
+<p>&#x67E5;&#x770B;&#x4EFB;&#x610F;&#x8282;&#x70B9;&#x7684;&#x670D;&#x52A1;&#x72B6;&#x6001;&#xFF1A;</p>
+<pre><code class="lang-sh">[vagrant@kubernetes-master ~] $ vagrant ssh minion-<span class="hljs-number">1</span>
+[vagrant@kubernetes-master ~] $ sudo su
+
+[root@kubernetes-master ~] $ systemctl status kubelet
+[root@kubernetes-master ~] $ journalctl -ru kubelet
+
+[root@kubernetes-master ~] $ systemctl status docker
+[root@kubernetes-master ~] $ journalctl -ru docker
+</code></pre>
+<h2 id="&#x4F7F;&#x7528;vagrant&#x4E0E;kubernetes&#x96C6;&#x7FA4;&#x4EA4;&#x4E92;">&#x4F7F;&#x7528;Vagrant&#x4E0E;kubernetes&#x96C6;&#x7FA4;&#x4EA4;&#x4E92;</h2>
+<p>&#x542F;&#x52A8;&#x597D;&#x4F60;&#x7684;kubernetes&#x96C6;&#x7FA4;&#x540E;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5E38;&#x7528;&#x7684;Vagrant&#x547D;&#x4EE4;&#x7BA1;&#x7406;&#x96C6;&#x7FA4;&#x4E2D;&#x7684;&#x8282;&#x70B9;&#x3002;</p>
+<p>&#x6E90;&#x4EE3;&#x7801;&#x6539;&#x53D8;&#x540E;&#x63A8;&#x9001;&#x66F4;&#x65B0;&#x5230;Kubernetes&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre><code class="lang-sh">./cluster/kube-push.sh
+</code></pre>
+<p>&#x6682;&#x505C;&#x4E0E;&#x91CD;&#x542F;&#x96C6;&#x7FA4;&#xFF1A;</p>
+<pre><code class="lang-sh">vagrant halt
+./cluster/kube-up.sh
+</code></pre>
+<p>&#x5220;&#x9664;&#x96C6;&#x7FA4;&#xFF1A;</p>
+<pre><code class="lang-sh">vagrant destroy
+</code></pre>
+<p>&#x4E00;&#x65E6;&#x4F60;&#x7684;Vgrant&#x673A;&#x5668;&#x8FD0;&#x884C;&#x5E76;&#x4E14;&#x63D0;&#x4F9B;&#x76F8;&#x5E94;&#x8D44;&#x6E90;&#xFF0C;&#x7B2C;&#x4E00;&#x4EF6;&#x8981;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#x5C31;&#x662F;&#x68C0;&#x67E5;&#x80FD;&#x5426;&#x4F7F;&#x7528;<strong>kubectl.sh</strong>&#x811A;&#x672C;&#x3002;</p>
+<p>&#x4F60;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x5148;&#x7F16;&#x8BD1;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;make&#x547D;&#x4EE4;&#xFF1A;</p>
+<pre><code class="lang-sh">$ ./cluster/kubectl.sh get nodes
+
+NAME                LABELS
+<span class="hljs-number">10.245</span>.<span class="hljs-number">1.4</span>          &lt;none&gt;
+<span class="hljs-number">10.245</span>.<span class="hljs-number">1.5</span>          &lt;none&gt;
+<span class="hljs-number">10.245</span>.<span class="hljs-number">1.3</span>          &lt;none&gt;
+</code></pre>
+<h2 id="&#x9A8C;&#x8BC1;&#x4F60;&#x7684;master">&#x9A8C;&#x8BC1;&#x4F60;&#x7684;master</h2>
+<p>&#x5F53;&#x6211;&#x4EEC;&#x4F7F;&#x7528;vagrant provider&#x7BA1;&#x7406;Kubernetes&#x65F6;&#xFF0C;<strong>cluster/kubectl.sh</strong>&#x811A;&#x672C;&#x4F1A;&#x521B;&#x5EFA;&#x8BC1;&#x4E66;&#x4FDD;&#x5B58;&#x5728;<code>home</code>&#x6216;<code>&#xFF5E;</code>&#xFF08;ps&#xFF1A;Linux&#x4E2D;&#x4F7F;&#x7528;<code>&#xFF5E;</code>&#x8868;&#x793A;&#x5F53;&#x524D;&#x7528;&#x6237;&#x7684;&#x5BB6;&#x76EE;&#x5F55;&#xFF09;&#x76EE;&#x5F55;&#x4E0B;&#x7684;<strong>.kubernetes_vagrant_auth</strong>&#x6587;&#x4EF6;&#x4E2D;&#xFF0C;&#x8FD9;&#x6837;&#x4EE5;&#x540E;&#x5C31;&#x4E0D;&#x4F1A;&#x51FA;&#x73B0;&#x9A8C;&#x8BC1;&#x7684;&#x63D0;&#x793A;&#x4E86;&#x3002;</p>
+<pre><code class="lang-sh">cat ~/.kubernetes_vagrant_auth
+{ <span class="hljs-string">&quot;User&quot;</span>: <span class="hljs-string">&quot;vagrant&quot;</span>,
+  <span class="hljs-string">&quot;Password&quot;</span>: <span class="hljs-string">&quot;vagrant&quot;</span>,
+  <span class="hljs-string">&quot;CAFile&quot;</span>: <span class="hljs-string">&quot;/home/k8s_user/.kubernetes.vagrant.ca.crt&quot;</span>,
+  <span class="hljs-string">&quot;CertFile&quot;</span>: <span class="hljs-string">&quot;/home/k8s_user/.kubecfg.vagrant.crt&quot;</span>,
+  <span class="hljs-string">&quot;KeyFile&quot;</span>: <span class="hljs-string">&quot;/home/k8s_user/.kubecfg.vagrant.key&quot;</span>
+}
+</code></pre>
+<p>&#x73B0;&#x5728;&#x4F60;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;<strong>cluster/kubectl.sh</strong>&#x811A;&#x672C;&#x4E86;&#x3002;&#x4F8B;&#x5982;&#x4F7F;&#x7528;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x5217;&#x51FA;&#x5DF2;&#x7ECF;&#x542F;&#x52A8;&#x7684;&#x8282;&#x70B9;&#xFF1A;</p>
+<pre><code class="lang-sh">./cluster/kubectl.sh get nodes
+</code></pre>
+<h2 id="&#x8FD0;&#x884C;&#x5BB9;&#x5668;">&#x8FD0;&#x884C;&#x5BB9;&#x5668;</h2>
+<p>&#x4F60;&#x7684;&#x96C6;&#x7FA4;&#x5DF2;&#x7ECF;&#x8FD0;&#x884C;&#x8D77;&#x6765;&#x4E86;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5217;&#x51FA;&#x96C6;&#x7FA4;&#x4E2D;&#x7684;&#x8282;&#x70B9;&#xFF1A;</p>
+<pre><code class="lang-sh">$ ./cluster/kubectl.sh get nodes
+
+NAME                 LABELS
+<span class="hljs-number">10.245</span>.<span class="hljs-number">2.4</span>           &lt;none&gt;
+<span class="hljs-number">10.245</span>.<span class="hljs-number">2.3</span>           &lt;none&gt;
+<span class="hljs-number">10.245</span>.<span class="hljs-number">2.2</span>           &lt;none&gt;
+</code></pre>
+<p>&#x73B0;&#x5728;&#x5F00;&#x59CB;&#x8FD0;&#x884C;&#x4E00;&#x4E9B;&#x5BB9;&#x5668;&#x5427;&#xFF01;</p>
+<p>&#x73B0;&#x5728;&#x4F60;&#x53EF;&#x4EE5;&#x7528;<strong>cluster/kube-*.sh</strong>&#x7684;&#x4EFB;&#x4F55;&#x547D;&#x4EE4;&#x6765;&#x4E0E;&#x4F60;&#x7684;VMs&#x4EA4;&#x4E92;&#x3002;&#x542F;&#x52A8;&#x5BB9;&#x5668;&#x4E4B;&#x524D;&#x5E76;&#x6CA1;&#x6709;<code>pods</code>&#x3001;<code>&#x670D;&#x52A1;</code>&#x548C;<code>&#x590D;&#x5236;&#x63A7;&#x5236;&#x5668;</code>&#xFF1A;</p>
+<pre><code class="lang-sh">$ ./cluster/kubectl.sh get pods
+NAME        READY     STATUS    RESTARTS   AGE
+
+$ ./cluster/kubectl.sh get services
+NAME   LABELS   SELECTOR   IP(S)   PORT(S)
+
+$ ./cluster/kubectl.sh get replicationcontrollers
+CONTROLLER   CONTAINER(S)   IMAGE(S)   SELECTOR   REPLICAS
+</code></pre>
+<p>&#x542F;&#x52A8;&#x4E00;&#x4E2A;&#x8FD0;&#x884C;nginx&#x3001;&#x4F7F;&#x7528;&#x590D;&#x5236;&#x63A7;&#x5236;&#x5668;&#x5E76;&#x4E14;&#x526F;&#x672C;&#x6570;&#x4E3A;3&#x7684;&#x5BB9;&#x5668;&#xFF1A;</p>
+<pre><code class="lang-sh">$ ./cluster/kubectl.sh run my-nginx --image=nginx --replicas=<span class="hljs-number">3</span> --port=<span class="hljs-number">80</span>
+</code></pre>
+<p>&#xFF08;&#x6B64;&#x65F6;&#xFF09;&#x5217;&#x51FA;pods&#xFF0C;&#x4F1A;&#x770B;&#x5230;3&#x4E2A;&#x5BB9;&#x5668;&#x5DF2;&#x7ECF;&#x88AB;&#x542F;&#x52A8;&#x4E86;&#xFF0C;&#x5E76;&#x4E14;&#x5904;&#x4E8E;&#x7B49;&#x5F85;&#x72B6;&#x6001;&#xFF1A;</p>
+<pre><code>$ ./cluster/kubectl.sh get pods
+NAME             READY     STATUS    RESTARTS   AGE
+my-nginx-5kq0g   0/1       Pending   0          10s
+my-nginx-gr3hh   0/1       Pending   0          10s
+my-nginx-xql4j   0/1       Pending   0          10s
+</code></pre><p>&#x4F60;&#x9700;&#x8981;&#x7B49;&#x5F85;&#xFF08;Vagrant&#xFF09;&#x5206;&#x914D;&#x597D;&#x8D44;&#x6E90;&#xFF0C;&#x8FD9;&#x65F6;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x547D;&#x4EE4;&#x6765;&#x76D1;&#x6D4B;&#x8282;&#x70B9;&#xFF1A;</p>
+<pre><code class="lang-sh">$ vagrant ssh minion-<span class="hljs-number">1</span> -c <span class="hljs-string">&apos;sudo docker images&apos;</span>
+kubernetes-minion-<span class="hljs-number">1</span>:
+    REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+    &lt;none&gt;              &lt;none&gt;              <span class="hljs-number">96864</span>a7d2df3        <span class="hljs-number">26</span> hours ago        <span class="hljs-number">204.4</span> MB
+    google/cadvisor     latest              e0575e677c50        <span class="hljs-number">13</span> days ago         <span class="hljs-number">12.64</span> MB
+    kubernetes/pause    latest              <span class="hljs-number">6</span>c4579af347b        <span class="hljs-number">8</span> weeks ago         <span class="hljs-number">239.8</span> kB
+</code></pre>
+<p>&#x4E0B;&#x8F7D;&#x597D;docker nginx&#x955C;&#x50CF;&#x540E;&#x5BB9;&#x5668;&#x5C31;&#x4F1A;&#x542F;&#x52A8;&#xFF0C;&#x901A;&#x8FC7;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#x67E5;&#x770B;&#xFF1A;</p>
+<pre><code class="lang-sh">$ vagrant ssh minion-<span class="hljs-number">1</span> -c <span class="hljs-string">&apos;sudo docker ps&apos;</span>
+kubernetes-minion-<span class="hljs-number">1</span>:
+    CONTAINER ID        IMAGE                     COMMAND                CREATED             STATUS              PORTS                    NAMES
+    dbe79bf6e25b        nginx:latest              <span class="hljs-string">&quot;nginx&quot;</span>                <span class="hljs-number">21</span> seconds ago      Up <span class="hljs-number">19</span> seconds                                k8s--mynginx.<span class="hljs-number">8</span>c5b8a3a--<span class="hljs-number">7813</span>c8bd_-_3ffe_-_11e4_-_9036_-_0800279696e1.etcd--<span class="hljs-number">7813</span>c8bd_-_3ffe_-_11e4_-_9036_-_0800279696e1--fcfa837f
+    fa0e29c94501        kubernetes/pause:latest   <span class="hljs-string">&quot;/pause&quot;</span>               <span class="hljs-number">8</span> minutes ago       Up <span class="hljs-number">8</span> minutes        <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>:<span class="hljs-number">8080</span>-&gt;<span class="hljs-number">80</span>/tcp     k8s--net.a90e7ce4--<span class="hljs-number">7813</span>c8bd_-_3ffe_-_11e4_-_9036_-_0800279696e1.etcd--<span class="hljs-number">7813</span>c8bd_-_3ffe_-_11e4_-_9036_-_0800279696e1--baf5b21b
+    aa2ee3ed844a        google/cadvisor:latest    <span class="hljs-string">&quot;/usr/bin/cadvisor&quot;</span>    <span class="hljs-number">38</span> minutes ago      Up <span class="hljs-number">38</span> minutes                                k8s--cadvisor.<span class="hljs-number">9</span>e90d182--cadvisor_-_agent.file--<span class="hljs-number">4626</span>b3a2
+    <span class="hljs-number">65</span>a3a926f357        kubernetes/pause:latest   <span class="hljs-string">&quot;/pause&quot;</span>               <span class="hljs-number">39</span> minutes ago      Up <span class="hljs-number">39</span> minutes       <span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>:<span class="hljs-number">4194</span>-&gt;<span class="hljs-number">8080</span>/tcp   k8s--net.c5ba7f0e--cadvisor_-_agent.file--<span class="hljs-number">342</span>fd561
+</code></pre>
+<p>&#x8FD9;&#x65F6;&#x518D;&#x6B21;&#x5217;&#x4E3E;pods&#x3001;&#x670D;&#x52A1;&#x548C;&#x590D;&#x5236;&#x63A7;&#x5236;&#x5668;&#xFF0C;&#x4F1A;&#x770B;&#x5230;&#xFF1A;</p>
+<pre><code class="lang-sh">$ ./cluster/kubectl.sh get pods
+NAME             READY     STATUS    RESTARTS   AGE
+my-nginx-<span class="hljs-number">5</span>kq0g   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>       Running   <span class="hljs-number">0</span>          <span class="hljs-number">1</span>m
+my-nginx-gr3hh   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>       Running   <span class="hljs-number">0</span>          <span class="hljs-number">1</span>m
+my-nginx-xql4j   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>       Running   <span class="hljs-number">0</span>          <span class="hljs-number">1</span>m
+
+$ ./cluster/kubectl.sh get services
+NAME   LABELS   SELECTOR   IP(S)   PORT(S)
+
+$ ./cluster/kubectl.sh get replicationcontrollers
+CONTROLLER   CONTAINER(S)   IMAGE(S)   SELECTOR       REPLICAS
+my-nginx     my-nginx       nginx      run=my-nginx   <span class="hljs-number">3</span>
+</code></pre>
+<p>&#x6211;&#x4EEC;&#x6CA1;&#x6709;&#x542F;&#x52A8;&#x4EFB;&#x4F55;&#x670D;&#x52A1;&#xFF0C;&#x56E0;&#x6B64;&#x5217;&#x4E3E;&#x670D;&#x52A1;&#x662F;&#x4EC0;&#x4E48;&#x4E5F;&#x6CA1;&#x6709;&#x3002;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x770B;&#x5230;3&#x4E2A;&#x526F;&#x672C;&#x6B63;&#x5E38;&#x663E;&#x793A;&#x3002;&#x67E5;&#x770B;<a href="http://kubernetes.io/v1.0/examples/guestbook/README.html" target="_blank">guestbook</a>&#x4E86;&#x89E3;&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x670D;&#x52A1;&#x3002;&#x73B0;&#x5728;&#x4F60;&#x5DF2;&#x7ECF;&#x53EF;&#x4EE5;&#x5C1D;&#x8BD5;&#x589E;&#x52A0;&#x6216;&#x51CF;&#x5C11;&#x526F;&#x672C;&#x4E86;&#xFF1A;</p>
+<pre><code class="lang-sh">$ ./cluster/kubectl.sh scale rc my-nginx --replicas=<span class="hljs-number">2</span>
+$ ./cluster/kubectl.sh get pods
+NAME             READY     STATUS    RESTARTS   AGE
+my-nginx-<span class="hljs-number">5</span>kq0g   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>       Running   <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m
+my-nginx-gr3hh   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>       Running   <span class="hljs-number">0</span>          <span class="hljs-number">2</span>m
+</code></pre>
+<p>&#x795D;&#x8D3A;&#x4F60;&#xFF01;</p>
+<h2 id="&#x89E3;&#x51B3;&#x5E38;&#x89C1;&#x95EE;&#x9898;">&#x89E3;&#x51B3;&#x5E38;&#x89C1;&#x95EE;&#x9898;</h2>
+<h3 id="&#x6211;&#x4E00;&#x76F4;&#x5728;&#x4E0B;&#x8F7D;&#xFF08;&#x5F88;&#x5927;&#x7684;&#xFF09;box&#xFF08;ps&#xFF1A;box&#x6307;vagrant&#x5C01;&#x88C5;&#x597D;&#x7684;vm&#xFF0C;&#x53EF;&#x4EE5;&#x4E0B;&#x8F7D;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#xFF0C;&#x4E0D;&#x7528;&#x81EA;&#x5DF1;&#x518D;&#x4ECE;iso&#x5B89;&#x88C5;&#xFF09;">&#x6211;&#x4E00;&#x76F4;&#x5728;&#x4E0B;&#x8F7D;&#xFF08;&#x5F88;&#x5927;&#x7684;&#xFF09;box&#xFF08;ps&#xFF1A;box&#x6307;vagrant&#x5C01;&#x88C5;&#x597D;&#x7684;vm&#xFF0C;&#x53EF;&#x4EE5;&#x4E0B;&#x8F7D;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#xFF0C;&#x4E0D;&#x7528;&#x81EA;&#x5DF1;&#x518D;&#x4ECE;iso&#x5B89;&#x88C5;&#xFF09;</h3>
+<p>Vagrantfile&#x9ED8;&#x8BA4;&#x4ECE;S3&#x4E0B;&#x8F7D;box&#x3002;&#x5F53;&#x8C03;&#x7528;<strong>kube-up.sh</strong>&#x811A;&#x672C;&#x662F;&#x4F60;&#x53EF;&#x4EE5;&#x63D0;&#x4F9B;name&#x548C;&#x53EF;&#x9009;&#x7684;&#x8FDE;&#x63A5;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x6765;&#x4FEE;&#x6539;&#x4E0B;&#x8F7D;&#x7AD9;&#x70B9;&#xFF1A;</p>
+<pre><code class="lang-sh"><span class="hljs-built_in">export</span> KUBERNETES_BOX_NAME=choose_your_own_name_<span class="hljs-keyword">for</span>_your_kuber_box
+<span class="hljs-built_in">export</span> KUBERNETES_BOX_URL=path_of_your_kuber_box
+<span class="hljs-built_in">export</span> KUBERNETES_PROVIDER=vagrant
+./cluster/kube-up.sh
+</code></pre>
+<h3 id="&#x6211;&#x53EA;&#x662F;&#x521B;&#x5EFA;&#x4E86;&#x96C6;&#x7FA4;&#xFF0C;&#x4F46;&#x662F;&#x9047;&#x5230;&#x6388;&#x6743;&#x9519;&#x8BEF;">&#x6211;&#x53EA;&#x662F;&#x521B;&#x5EFA;&#x4E86;&#x96C6;&#x7FA4;&#xFF0C;&#x4F46;&#x662F;&#x9047;&#x5230;&#x6388;&#x6743;&#x9519;&#x8BEF;</h3>
+<p>&#x5F88;&#x53EF;&#x80FD;&#x4F60;&#x6B63;&#x8BD5;&#x56FE;&#x8FDE;&#x63A5;&#x7684;&#x96C6;&#x7FA4;&#x4E2D;&#x7684;<strong>~/.kubernetes_vagrant_auth</strong>&#x6587;&#x4EF6;&#x4E0D;&#x6B63;&#x786E;&#xFF1A;</p>
+<pre><code class="lang-sh">rm ~/.kubernetes_vagrant_auth
+</code></pre>
+<p>&#x4F7F;&#x7528;<strong>kubectl.sh</strong>&#x521B;&#x5EFA;&#x6B63;&#x786E;&#x7684;&#x8BC1;&#x4E66;&#xFF1A;</p>
+<pre><code class="lang-sh">cat ~/.kubernetes_vagrant_auth
+{
+  <span class="hljs-string">&quot;User&quot;</span>: <span class="hljs-string">&quot;vagrant&quot;</span>,
+  <span class="hljs-string">&quot;Password&quot;</span>: <span class="hljs-string">&quot;vagrant&quot;</span>
+}
+</code></pre>
+<h3 id="&#x6211;&#x5DF2;&#x7ECF;&#x521B;&#x5EFA;&#x4E86;&#x96C6;&#x7FA4;&#xFF0C;&#x4F46;&#x662F;&#x770B;&#x4E0D;&#x5230;&#x8FD0;&#x884C;&#x7684;&#x5BB9;&#x5668;&#xFF01;">&#x6211;&#x5DF2;&#x7ECF;&#x521B;&#x5EFA;&#x4E86;&#x96C6;&#x7FA4;&#xFF0C;&#x4F46;&#x662F;&#x770B;&#x4E0D;&#x5230;&#x8FD0;&#x884C;&#x7684;&#x5BB9;&#x5668;&#xFF01;</h3>
+<p>&#x5982;&#x679C;&#x662F;&#x4F60;&#x7B2C;&#x4E00;&#x6B21;&#x521B;&#x5EFA;&#x96C6;&#x7FA4;&#xFF0C;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x4E0A;&#x7684;<strong>kubelet</strong>&#x4F1A;&#x5236;&#x5B9A;&#x4E00;&#x4E2A;docker&#x4E0B;&#x8F7D;&#x955C;&#x50CF;&#x548C;&#x4F9D;&#x8D56;&#x955C;&#x50CF;&#x7684;&#x65F6;&#x95F4;&#x8868;&#x3002;&#x8FD9;&#x53EF;&#x80FD;&#x4F1A;&#x5360;&#x7528;&#x5F88;&#x591A;&#x65F6;&#x95F4;&#x5E76;&#x4E14;&#x63A8;&#x8FDF;&#x521D;&#x59CB;&#x5316;pod&#x3001;&#x5206;&#x914D;&#x8D44;&#x6E90;&#x3002;</p>
+<h3 id="&#x6211;&#x60F3;&#x4FEE;&#x6539;kubernetes&#x4EE3;&#x7801;">&#x6211;&#x60F3;&#x4FEE;&#x6539;Kubernetes&#x4EE3;&#x7801;</h3>
+<p>&#x4F60;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x96C6;&#x7FA4;&#x6765;<code>hacking</code>&#xFF0C;&#x53C2;&#x8003;<a href="http://kubernetes.io/v1.0/docs/devel/developer-guides/vagrant.html" target="_blank">vagrant developer guide</a></p>
+<h3 id="&#x5DF2;&#x7ECF;&#x8FD0;&#x884C;vagrant-up&#x547D;&#x4EE4;&#xFF0C;&#x4F46;&#x662F;&#x8282;&#x70B9;&#x6CA1;&#x6709;&#x751F;&#x6548;">&#x5DF2;&#x7ECF;&#x8FD0;&#x884C;Vagrant up&#x547D;&#x4EE4;&#xFF0C;&#x4F46;&#x662F;&#x8282;&#x70B9;&#x6CA1;&#x6709;&#x751F;&#x6548;</h3>
+<p>&#xFF08;<code>vagrant ssh minion-1</code>&#xFF09;&#x8FDE;&#x63A5;&#x5230;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x67E5;&#x770B;&#x65E5;&#x5FD7;&#x548C;salt minion&#x65E5;&#x5FD7;&#xFF08;<code>sudo cat /var/log/salt/minion</code>&#xFF09;</p>
+<h3 id="&#x6211;&#x60F3;&#x4FEE;&#x6539;&#x8282;&#x70B9;&#x6570;">&#x6211;&#x60F3;&#x4FEE;&#x6539;&#x8282;&#x70B9;&#x6570;</h3>
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x63A7;&#x5236;&#x901A;&#x8FC7;&#x4E3B;&#x673A;&#x4E0A;&#x73AF;&#x5883;&#x53D8;&#x91CF;<strong>NUM_MINIONS</strong>&#x5B9E;&#x4F8B;&#x5316;&#x7684;&#x8282;&#x70B9;&#x7684;&#x6570;&#x91CF;&#x3002;&#x5982;&#x679C;&#x4F60;&#x8BA1;&#x5212;&#x4F7F;&#x7528;&#x526F;&#x672C;&#xFF0C;&#x6211;&#x4EEC;&#x5F3A;&#x70C8;&#x652F;&#x6301;&#x4F60;&#x542F;&#x52A8;&#x8DB3;&#x591F;&#x7684;&#x8282;&#x70B9;&#x6765;&#x6EE1;&#x8DB3;&#x6700;&#x5927;&#x53EF;&#x80FD;&#x7684;&#x526F;&#x672C;&#x5927;&#x5C0F;&#x3002;&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x6253;&#x7B97;&#x4F7F;&#x7528;&#x526F;&#x672C;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x8FD0;&#x884C;&#x5355;&#x4E2A;&#x8282;&#x70B9;&#x6765;&#x8282;&#x7701;&#x4E00;&#x4E9B;&#x7CFB;&#x7EDF;&#x8D44;&#x6E90;&#x3002;&#x53EA;&#x9700;&#x8981;&#x8BBE;&#x7F6E;<strong>NUM_MINIONS</strong>&#x4E3A;1&#xFF1A;</p>
+<pre><code class="lang-sh"><span class="hljs-built_in">export</span> NUM_MINIONS=<span class="hljs-number">1</span>
+</code></pre>
+<h3 id="&#x6211;&#x60F3;&#x7ED9;&#x6211;&#x7684;vms&#x5206;&#x914D;&#x66F4;&#x591A;&#x5185;&#x5B58;">&#x6211;&#x60F3;&#x7ED9;&#x6211;&#x7684;VMs&#x5206;&#x914D;&#x66F4;&#x591A;&#x5185;&#x5B58;</h3>
+<p>&#x4F7F;&#x7528;&#x73AF;&#x5883;&#x53D8;&#x91CF;<strong>KUBERNETES_MEMORY</strong>&#x63A7;&#x5236;&#x5206;&#x914D;&#x7ED9;&#x865A;&#x62DF;&#x673A;&#x7684;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x3002;&#x53EA;&#x9700;&#x8981;&#x628A;&#x5B83;&#x8BBE;&#x7F6E;&#x4E3A;&#x4F60;&#x60F3;&#x8981;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code class="lang-sh"><span class="hljs-built_in">export</span> KUBERNETES_MEMORY=<span class="hljs-number">2048</span>
+</code></pre>
+<p>&#x5982;&#x679C;&#x4F60;&#x60F3;&#x8981;&#x66F4;&#x7EC6;&#x7C92;&#x5EA6;&#x7684;&#x63A7;&#x5236;&#x5185;&#x5B58;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5355;&#x72EC;&#x8BBE;&#x7F6E;master&#x548C;&#x8282;&#x70B9;&#x7684;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;</p>
+<pre><code class="lang-sh"><span class="hljs-built_in">export</span> KUBERNETES_MASTER_MEMORY=<span class="hljs-number">1536</span>
+<span class="hljs-built_in">export</span> KUBERNETES_MINION_MEMORY=<span class="hljs-number">2048</span>
+</code></pre>
+<h3 id="&#x8FD0;&#x884C;vagrant&#x4F7F;vm&#x5F85;&#x673A;&#xFF0C;&#x4F46;&#x662F;&#x5931;&#x6548;">&#x8FD0;&#x884C;vagrant&#x4F7F;VM&#x5F85;&#x673A;&#xFF0C;&#x4F46;&#x662F;&#x5931;&#x6548;</h3>
+<p><strong>vagrant suspend</strong>&#x547D;&#x4EE4;&#x5F88;&#x53EF;&#x80FD;&#x5F04;&#x6DF7;&#x4E86;&#x7F51;&#x7EDC;&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x4E0D;&#x652F;&#x6301;&#x8FD9;&#x6761;&#x547D;&#x4EE4;&#x3002;</p>
+<h3 id="&#x6211;&#x60F3;&#x901A;&#x8FC7;vagrant&#x901A;&#x8FC7;nfs&#x540C;&#x6B65;&#x6587;&#x4EF6;">&#x6211;&#x60F3;&#x901A;&#x8FC7;vagrant&#x901A;&#x8FC7;NFS&#x540C;&#x6B65;&#x6587;&#x4EF6;</h3>
+<p>&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x73AF;&#x5883;&#x53D8;&#x91CF;<strong>KUBERNETES_VAGRANT_USE_NFS</strong>&#x7684;&#x503C;&#x4E3A;true&#x6765;&#x4FDD;&#x8BC1;vagrant&#x4F7F;&#x7528;nfs&#x540C;&#x6B65;&#x865A;&#x62DF;&#x673A;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x3002;nfs&#x6BD4;virtualbox&#x548C;vmware&#x7684;<code>&#x5171;&#x4EAB;&#x6587;&#x4EF6;&#x5939;</code>&#x90FD;&#x8981;&#x5FEB;&#x5E76;&#x4E14;&#x4E0D;&#x9700;&#x8981;&#x989D;&#x5916;&#x7684;&#x8BBE;&#x7F6E;&#x3002;&#x53EF;&#x4EE5;&#x9605;&#x8BFB;<a href="http://docs.vagrantup.com/v2/synced-folders/nfs.html" target="_blank">vagrant docs</a>&#x83B7;&#x53D6;&#x5728;&#x4E3B;&#x673A;&#x4E0A;&#x914D;&#x7F6E;nfs&#x7684;&#x7EC6;&#x8282;&#x3002;&#x8FD9;&#x9879;&#x8BBE;&#x7F6E;&#x4E0D;&#x4F1A;&#x5F71;&#x54CD;libvirt provider&#xFF0C;&#x5B83;&#x9ED8;&#x8BA4;&#x4F7F;&#x7528;nfs&#xFF1A;</p>
+<pre><code class="lang-sh"><span class="hljs-built_in">export</span> KUBERNETES_VAGRANT_USE_NFS=<span class="hljs-literal">true</span>
+</code></pre>
 
                     
                     </section>
@@ -2513,8 +2721,10 @@
         </div>
 
         
+        <a href="./005-Local_Docker-based.html" class="navigation navigation-prev " aria-label="Previous page: 第2.4节 基于Docker本地运行Kubernetes"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./007-Local_No-VM.html" class="navigation navigation-next " aria-label="Next page: 第2.6节 从本地运行k8s开始 v1.0"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

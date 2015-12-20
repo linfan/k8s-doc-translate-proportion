@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第5.2.17节  kubectl delete | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./149-kubectl_describe.html" />
     
+    
+    <link rel="prev" href="./147-kubectl_create.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="11.17"
+        data-chapter-title="第5.2.17节  kubectl delete"
+        data-filepath="148-kubectl_delete.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -2129,7 +2131,7 @@
             
         </li>
     
-        <li class="chapter " data-level="11.17" data-path="148-kubectl_delete.html">
+        <li class="chapter active" data-level="11.17" data-path="148-kubectl_delete.html">
             
                 
                     <a href="./148-kubectl_delete.html">
@@ -2492,17 +2494,70 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
+                        <h2 id="kubectl-delete">kubectl delete</h2>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;hurf</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p>&#x901A;&#x8FC7;&#x6587;&#x4EF6;&#x540D;&#x3001;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x5165;&#x3001;&#x8D44;&#x6E90;&#x540D;&#x6216;&#x8005;label selector&#x5220;&#x9664;&#x8D44;&#x6E90;&#x3002;</p>
+<h3 id="&#x6458;&#x8981;">&#x6458;&#x8981;</h3>
+<p>&#x901A;&#x8FC7;&#x6587;&#x4EF6;&#x540D;&#x3001;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x5165;&#x3001;&#x8D44;&#x6E90;&#x540D;&#x6216;&#x8005;label selector&#x5220;&#x9664;&#x8D44;&#x6E90;&#x3002;
+&#x63A5;&#x53D7;JSON&#x548C;YAML&#x683C;&#x5F0F;&#x7684;&#x63CF;&#x8FF0;&#x6587;&#x4EF6;&#x3002;</p>
+<p>&#x53EA;&#x80FD;&#x6307;&#x5B9A;&#x4EE5;&#x4E0B;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x4E2D;&#x7684;&#x4E00;&#x79CD;&#xFF1A;&#x6587;&#x4EF6;&#x540D;&#x3001;&#x8D44;&#x6E90;&#x7C7B;&#x578B;&#x548C;&#x540D;&#x79F0;&#x3001;&#x8D44;&#x6E90;&#x7C7B;&#x578B;&#x548C;label selector&#x3002;
+&#x6CE8;&#x610F;&#xFF1A;delete&#x547D;&#x4EE4;&#x4E0D;&#x68C0;&#x67E5;&#x8D44;&#x6E90;&#x7248;&#x672C;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x4EBA;&#x5728;&#x4F60;&#x8FDB;&#x884C;&#x5220;&#x9664;&#x64CD;&#x4F5C;&#x7684;&#x540C;&#x65F6;&#x8FDB;&#x884C;&#x66F4;&#x65B0;&#x64CD;&#x4F5C;&#xFF0C;&#x4ED6;&#x6240;&#x505A;&#x7684;&#x66F4;&#x65B0;&#x5C06;&#x968F;&#x8D44;&#x6E90;&#x540C;&#x65F6;&#x88AB;&#x5220;&#x9664;&#x3002;</p>
+<pre><code>kubectl delete ([-f FILENAME] | TYPE [(NAME | -l label | --all)])
+</code></pre><h3 id="&#x793A;&#x4F8B;">&#x793A;&#x4F8B;</h3>
+<pre><code># &#x901A;&#x8FC7;pod.json&#x6587;&#x4EF6;&#x4E2D;&#x6307;&#x5B9A;&#x7684;&#x8D44;&#x6E90;&#x7C7B;&#x578B;&#x548C;&#x540D;&#x79F0;&#x5220;&#x9664;&#x4E00;&#x4E2A;pod
+$ kubectl delete -f ./pod.json
+
+# &#x901A;&#x8FC7;&#x63A7;&#x5236;&#x53F0;&#x8F93;&#x5165;&#x7684;JSON&#x6240;&#x6307;&#x5B9A;&#x7684;&#x8D44;&#x6E90;&#x7C7B;&#x578B;&#x548C;&#x540D;&#x79F0;&#x5220;&#x9664;&#x4E00;&#x4E2A;pod
+$ cat pod.json | kubectl delete -f -
+
+# &#x5220;&#x9664;&#x6240;&#x6709;&#x540D;&#x4E3A;&#x201C;baz&#x201D;&#x548C;&#x201C;foo&#x201D;&#x7684;pod&#x548C;service
+$ kubectl delete pod,service baz foo
+
+# &#x5220;&#x9664;&#x6240;&#x6709;&#x5E26;&#x6709;lable name=myLabel&#x7684;pod&#x548C;service
+$ kubectl delete pods,services -l name=myLabel
+
+# &#x5220;&#x9664;UID&#x4E3A;1234-56-7890-234234-456456&#x7684;pod
+$ kubectl delete pod 1234-56-7890-234234-456456
+
+# &#x5220;&#x9664;&#x6240;&#x6709;&#x7684;pod
+$ kubectl delete pods --all
+</code></pre><h3 id="&#x9009;&#x9879;">&#x9009;&#x9879;</h3>
+<pre><code>      --all[=false]: &#x4F7F;&#x7528;[-all]&#x9009;&#x62E9;&#x6240;&#x6709;&#x6307;&#x5B9A;&#x7684;&#x8D44;&#x6E90;&#x3002;
+      --cascade[=true]: &#x5982;&#x679C;&#x4E3A;true&#xFF0C;&#x7EA7;&#x8054;&#x5220;&#x9664;&#x6307;&#x5B9A;&#x8D44;&#x6E90;&#x6240;&#x7BA1;&#x7406;&#x7684;&#x5176;&#x4ED6;&#x8D44;&#x6E90;&#xFF08;&#x4F8B;&#x5982;&#xFF1A;&#x88AB;replication controller&#x7BA1;&#x7406;&#x7684;&#x6240;&#x6709;pod&#xFF09;&#x3002;&#x9ED8;&#x8BA4;&#x4E3A;true&#x3002;
+  -f, --filename=[]: &#x7528;&#x4EE5;&#x6307;&#x5B9A;&#x5F85;&#x5220;&#x9664;&#x8D44;&#x6E90;&#x7684;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x76EE;&#x5F55;&#x540D;&#x6216;&#x8005;URL&#x3002;
+      --grace-period=-1: &#x5B89;&#x5168;&#x5220;&#x9664;&#x8D44;&#x6E90;&#x524D;&#x7B49;&#x5F85;&#x7684;&#x79D2;&#x6570;&#x3002;&#x5982;&#x679C;&#x4E3A;&#x8D1F;&#x503C;&#x5219;&#x5FFD;&#x7565;&#x8BE5;&#x9009;&#x9879;&#x3002;
+      --ignore-not-found[=false]: &#x5F53;&#x5F85;&#x5220;&#x9664;&#x8D44;&#x6E90;&#x672A;&#x627E;&#x5230;&#x65F6;&#xFF0C;&#x4E5F;&#x8BA4;&#x4E3A;&#x5220;&#x9664;&#x6210;&#x529F;&#x3002;&#x5982;&#x679C;&#x8BBE;&#x7F6E;&#x4E86;--all&#x9009;&#x9879;&#xFF0C;&#x5219;&#x9ED8;&#x8BA4;&#x4E3A;true&#x3002;
+  -o, --output=&quot;&quot;: &#x8F93;&#x51FA;&#x683C;&#x5F0F;&#xFF0C;&#x4F7F;&#x7528;&#x201C;-o name&#x201D;&#x6765;&#x8F93;&#x51FA;&#x7B80;&#x77ED;&#x683C;&#x5F0F;&#xFF08;&#x8D44;&#x6E90;&#x7C7B;&#x578B;/&#x8D44;&#x6E90;&#x540D;&#xFF09;&#x3002;
+  -l, --selector=&quot;&quot;: &#x7528;&#x4E8E;&#x8FC7;&#x6EE4;&#x8D44;&#x6E90;&#x7684;Label&#x3002;
+      --timeout=0: &#x5220;&#x9664;&#x8D44;&#x6E90;&#x7684;&#x8D85;&#x65F6;&#x8BBE;&#x7F6E;&#xFF0C;0&#x8868;&#x793A;&#x6839;&#x636E;&#x5F85;&#x5220;&#x9664;&#x8D44;&#x6E90;&#x7684;&#x5927;&#x5C0F;&#x7531;&#x7CFB;&#x7EDF;&#x51B3;&#x5B9A;&#x3002;
+</code></pre><h3 id="&#x7EE7;&#x627F;&#x81EA;&#x7236;&#x547D;&#x4EE4;&#x7684;&#x9009;&#x9879;">&#x7EE7;&#x627F;&#x81EA;&#x7236;&#x547D;&#x4EE4;&#x7684;&#x9009;&#x9879;</h3>
+<pre><code>      --alsologtostderr[=false]: &#x540C;&#x65F6;&#x8F93;&#x51FA;&#x65E5;&#x5FD7;&#x5230;&#x6807;&#x51C6;&#x9519;&#x8BEF;&#x63A7;&#x5236;&#x53F0;&#x548C;&#x6587;&#x4EF6;&#x3002;
+      --api-version=&quot;&quot;: &#x548C;&#x670D;&#x52A1;&#x7AEF;&#x4EA4;&#x4E92;&#x4F7F;&#x7528;&#x7684;API&#x7248;&#x672C;&#x3002;
+      --certificate-authority=&quot;&quot;: &#x7528;&#x4EE5;&#x8FDB;&#x884C;&#x8BA4;&#x8BC1;&#x6388;&#x6743;&#x7684;.cert&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x3002;
+      --client-certificate=&quot;&quot;: TLS&#x4F7F;&#x7528;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x8BC1;&#x4E66;&#x8DEF;&#x5F84;&#x3002;
+      --client-key=&quot;&quot;: TLS&#x4F7F;&#x7528;&#x7684;&#x5BA2;&#x6237;&#x7AEF;&#x5BC6;&#x94A5;&#x8DEF;&#x5F84;&#x3002;
+      --cluster=&quot;&quot;: &#x6307;&#x5B9A;&#x4F7F;&#x7528;&#x7684;kubeconfig&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x96C6;&#x7FA4;&#x540D;&#x3002;
+      --context=&quot;&quot;: &#x6307;&#x5B9A;&#x4F7F;&#x7528;&#x7684;kubeconfig&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x73AF;&#x5883;&#x540D;&#x3002;
+      --insecure-skip-tls-verify[=false]: &#x5982;&#x679C;&#x4E3A;true&#xFF0C;&#x5C06;&#x4E0D;&#x4F1A;&#x68C0;&#x67E5;&#x670D;&#x52A1;&#x5668;&#x51ED;&#x8BC1;&#x7684;&#x6709;&#x6548;&#x6027;&#xFF0C;&#x8FD9;&#x4F1A;&#x5BFC;&#x81F4;&#x4F60;&#x7684;HTTPS&#x94FE;&#x63A5;&#x53D8;&#x5F97;&#x4E0D;&#x5B89;&#x5168;&#x3002;
+      --kubeconfig=&quot;&quot;: &#x547D;&#x4EE4;&#x884C;&#x8BF7;&#x6C42;&#x4F7F;&#x7528;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x3002;
+      --log-backtrace-at=:0: &#x5F53;&#x65E5;&#x5FD7;&#x957F;&#x5EA6;&#x8D85;&#x8FC7;&#x5B9A;&#x4E49;&#x7684;&#x884C;&#x6570;&#x65F6;&#xFF0C;&#x5FFD;&#x7565;&#x5806;&#x6808;&#x4FE1;&#x606F;&#x3002;
+      --log-dir=&quot;&quot;: &#x5982;&#x679C;&#x4E0D;&#x4E3A;&#x7A7A;&#xFF0C;&#x5C06;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;&#x5199;&#x5165;&#x6B64;&#x76EE;&#x5F55;&#x3002;
+      --log-flush-frequency=5s: &#x5237;&#x65B0;&#x65E5;&#x5FD7;&#x7684;&#x6700;&#x5927;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x3002;
+      --logtostderr[=true]: &#x8F93;&#x51FA;&#x65E5;&#x5FD7;&#x5230;&#x6807;&#x51C6;&#x9519;&#x8BEF;&#x63A7;&#x5236;&#x53F0;&#xFF0C;&#x4E0D;&#x8F93;&#x51FA;&#x5230;&#x6587;&#x4EF6;&#x3002;
+      --match-server-version[=false]: &#x8981;&#x6C42;&#x670D;&#x52A1;&#x7AEF;&#x548C;&#x5BA2;&#x6237;&#x7AEF;&#x7248;&#x672C;&#x5339;&#x914D;&#x3002;
+      --namespace=&quot;&quot;: &#x5982;&#x679C;&#x4E0D;&#x4E3A;&#x7A7A;&#xFF0C;&#x547D;&#x4EE4;&#x5C06;&#x4F7F;&#x7528;&#x6B64;namespace&#x3002;
+      --password=&quot;&quot;: API Server&#x8FDB;&#x884C;&#x7B80;&#x5355;&#x8BA4;&#x8BC1;&#x4F7F;&#x7528;&#x7684;&#x5BC6;&#x7801;&#x3002;
+  -s, --server=&quot;&quot;: Kubernetes API Server&#x7684;&#x5730;&#x5740;&#x548C;&#x7AEF;&#x53E3;&#x53F7;&#x3002;
+      --stderrthreshold=2: &#x9AD8;&#x4E8E;&#x6B64;&#x7EA7;&#x522B;&#x7684;&#x65E5;&#x5FD7;&#x5C06;&#x88AB;&#x8F93;&#x51FA;&#x5230;&#x9519;&#x8BEF;&#x63A7;&#x5236;&#x53F0;&#x3002;
+      --token=&quot;&quot;: &#x8BA4;&#x8BC1;&#x5230;API Server&#x4F7F;&#x7528;&#x7684;&#x4EE4;&#x724C;&#x3002;
+      --user=&quot;&quot;: &#x6307;&#x5B9A;&#x4F7F;&#x7528;&#x7684;kubeconfig&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x7528;&#x6237;&#x540D;&#x3002;
+      --username=&quot;&quot;: API Server&#x8FDB;&#x884C;&#x7B80;&#x5355;&#x8BA4;&#x8BC1;&#x4F7F;&#x7528;&#x7684;&#x7528;&#x6237;&#x540D;&#x3002;
+      --v=0: &#x6307;&#x5B9A;&#x8F93;&#x51FA;&#x65E5;&#x5FD7;&#x7684;&#x7EA7;&#x522B;&#x3002;
+      --vmodule=: &#x6307;&#x5B9A;&#x8F93;&#x51FA;&#x65E5;&#x5FD7;&#x7684;&#x6A21;&#x5757;&#xFF0C;&#x683C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;pattern=N&#xFF0C;&#x4F7F;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;&#x3002;
+</code></pre><h3 id="&#x53C2;&#x89C1;">&#x53C2;&#x89C1;</h3>
 <ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
+<li><a href="kubectl.md">kubectl</a>     - &#x4F7F;&#x7528;kubectl&#x6765;&#x7BA1;&#x7406;Kubernetes&#x96C6;&#x7FA4;&#x3002;</li>
 </ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
 
                     
                     </section>
@@ -2513,8 +2568,10 @@
         </div>
 
         
+        <a href="./147-kubectl_create.html" class="navigation navigation-prev " aria-label="Previous page: 第5.2.16节  kubectl create"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./149-kubectl_describe.html" class="navigation navigation-next " aria-label="Next page: 第5.2.18节  kubectl describe"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

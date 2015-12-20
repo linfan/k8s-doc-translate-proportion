@@ -5,9 +5,9 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>介紹 | Kubernetes中文文档</title>
+        <title>第4.2.10节 Kubernetes DNS 实例实战 | Kubernetes中文文档</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="description" content="Kubernetes文档的中文译本,由DockOne社区组织翻译。">
+        <meta name="description" content="">
         <meta name="generator" content="GitBook 2.6.4">
         
         
@@ -41,8 +41,10 @@
         
     
     
-    <link rel="next" href="./002-whatisk8s.html" />
+    <link rel="next" href="./127-Exploring Pods.html" />
     
+    
+    <link rel="prev" href="./114-Running your first containers in Kubernetes.html" />
     
 
         
@@ -51,9 +53,9 @@
         
         
     <div class="book"
-        data-level="0"
-        data-chapter-title="介紹"
-        data-filepath="README.md"
+        data-level="8.10"
+        data-chapter-title="第4.2.10节 Kubernetes DNS 实例实战"
+        data-filepath="115-Kubernetes DNS example.md"
         data-basepath="."
         data-revision="Sun Dec 20 2015 13:40:07 GMT+0800 (CST)"
         data-innerlanguage="">
@@ -71,7 +73,7 @@
 
             
     
-        <li class="chapter active" data-level="0" data-path="index.html">
+        <li class="chapter " data-level="0" data-path="index.html">
             
                 
                     <a href="./index.html">
@@ -1653,7 +1655,7 @@
             
         </li>
     
-        <li class="chapter " data-level="8.10" data-path="115-Kubernetes DNS example.html">
+        <li class="chapter active" data-level="8.10" data-path="115-Kubernetes DNS example.html">
             
                 
                     <a href="./115-Kubernetes DNS example.html">
@@ -2492,18 +2494,114 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;">Kubernetes&#x4E2D;&#x6587;&#x6587;&#x6863;</h1>
-<p>Kubernetes&#x6587;&#x6863;&#x7684;&#x4E2D;&#x6587;&#x8BD1;&#x672C;&#x3002;</p>
-<p>&#x7531;DockOne&#x793E;&#x533A;&#x7EC4;&#x7EC7;&#x7FFB;&#x8BD1;&#x3002;</p>
-<h1 id="&#x7248;&#x672C;-v11">&#x7248;&#x672C; v1.1</h1>
-<hr>
-<ul>
-<li>&#x539F;&#x59CB;&#x6587;&#x6863;&#x94FE;&#x63A5;&#xFF1A;<a href="http://kubernetes.io/v1.1/index.html" target="_blank">http://kubernetes.io/v1.1/index.html</a></li>
-<li>&#x6700;&#x65B0;&#x6587;&#x6863;GitHub&#x76EE;&#x5F55;&#xFF1A;<a href="https://github.com/kubernetes/kubernetes/tree/master/docs" target="_blank">https://github.com/kubernetes/kubernetes/tree/master/docs</a></li>
-<li>&#x611F;&#x8C22;&#x8FD9;&#x4EFD;&#x6587;&#x6863;&#x7684;<a href="authors">&#x4E2D;&#x6587;&#x8BD1;&#x8005;&#x4EEC;</a></li>
-</ul>
-<p><img src="images/Cover.png" alt="Kubernetes&#x6587;&#x6863;"></p>
+                        <h1 id="kubernetes-dns-&#x5B9E;&#x4F8B;&#x5B9E;&#x6218;">Kubernetes DNS &#x5B9E;&#x4F8B;&#x5B9E;&#x6218;</h1>
+<p><code>&#x8BD1;&#x8005;&#xFF1A;&#x949F;&#x5065;&#x946B;</code> <code>&#x6821;&#x5BF9;&#xFF1A;&#x65E0;</code></p>
+<p>&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x597D;&#x73A9;&#x7684;&#x4F8B;&#x5B50;&#x6765;&#x6F14;&#x793A;&#x5982;&#x4F55;&#x4F7F;&#x7528;kubernetes DNS</p>
+<h2 id="&#x7B2C;0&#x6B65;-&#x524D;&#x63D0;&#x6761;&#x4EF6;">&#x7B2C;0&#x6B65;: &#x524D;&#x63D0;&#x6761;&#x4EF6;</h2>
+<p>&#x5F53;&#x524D;&#x4F8B;&#x5B50;&#x4F1A;&#x5047;&#x8BBE;&#x4F60;&#x5DF2;&#x7ECF;&#x4ECE;&#x4ED3;&#x5E93;&#x83B7;&#x53D6;&#x5E76;&#x542F;&#x52A8;&#x4E86;&#x4E00;&#x4E2A;Kubernetes&#x96C6;&#x7FA4;&#x3002;&#x8BF7;&#x786E;&#x4FDD;&#x5DF2;&#x7ECF;&#x5728;&#x8BBE;&#x7F6E;&#x4E2D;&#x542F;&#x52A8;&#x4E86;DNS, &#x5177;&#x4F53;&#x8BF7;&#x79FB;&#x6B65;<a href="https://releases.k8s.io/v1.0.6/cluster/addons/dns" target="_blank">DNS &#x6587;&#x6863;</a>:</p>
+<pre><code>$ cd kubernetes
+$ hack/dev-build-and-up.sh
+</code></pre><h2 id="&#x7B2C;&#x4E00;&#x6B65;-&#x521B;&#x5EFA;&#x4E24;&#x4E2A;namespace">&#x7B2C;&#x4E00;&#x6B65;: &#x521B;&#x5EFA;&#x4E24;&#x4E2A;namespace</h2>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x4F1A;&#x660E;&#x767D;&#x96C6;&#x7FA4;&#x7684;DNS&#x5982;&#x4F55;&#x5728;&#x8DE8;&#x591A;&#x4E2A;namespace&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x5DE5;&#x4F5C;&#xFF0C;&#x9996;&#x5148;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x521B;&#x5EFA;&#x4E24;&#x4E2A;namespace:</p>
+<pre><code>$ kubectl create -f examples/cluster-dns/namespace-dev.yaml
+$ kubectl create -f examples/cluster-dns/namespace-prod.yaml
+</code></pre><p>&#x73B0;&#x5728;&#x6211;&#x4EEC;&#x5217;&#x51FA;&#x6240;&#x6709;&#x7684; namespaces:</p>
+<pre><code>$ kubectl get namespaces
+NAME          LABELS             STATUS
+default       &lt;none&gt;             Active
+development   name=development   Active
+production    name=production    Active
+</code></pre><p>For kubectl client to work with each namespace, we define two contexts:
+&#x4E3A;&#x4E86;&#x8BA9;kubectl&#x5BA2;&#x6237;&#x7AEF;&#x64CD;&#x4F5C;&#x6BCF;&#x4E00;&#x4E2A;&#x4E0D;&#x540C;&#x7684;namespace&#xFF0C;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x4E86;&#x4E24;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;&#x73AF;&#x5883;&#xFF1A;</p>
+<pre><code>$ kubectl config set-context dev --namespace=development --cluster=${CLUSTER_NAME} --user=${USER_NAME}
+$ kubectl config set-context prod --namespace=production --cluster=${CLUSTER_NAME} --user=${USER_NAME}
+</code></pre><p>You can view your cluster name and user name in kubernetes config at ~/.kube/config.</p>
+<h2 id="step-two-create-backend-replication-controller-in-each-namespace">Step Two: Create backend replication controller in each namespace</h2>
+<p>Use the file examples/cluster-dns/dns-backend-rc.yaml to create a backend server replication controller in each namespace.</p>
+<pre><code>$ kubectl config use-context dev
+$ kubectl create -f examples/cluster-dns/dns-backend-rc.yaml
+</code></pre><p>Once that&apos;s up you can list the pod in the cluster:</p>
+<pre><code>$ kubectl get rc
+CONTROLLER    CONTAINER(S)   IMAGE(S)              SELECTOR           REPLICAS
+dns-backend   dns-backend    ddysher/dns-backend   name=dns-backend   1
+</code></pre><p>Now repeat the above commands to create a replication controller in prod namespace:</p>
+<pre><code>$ kubectl config use-context prod
+$ kubectl create -f examples/cluster-dns/dns-backend-rc.yaml
+$ kubectl get rc
+CONTROLLER    CONTAINER(S)   IMAGE(S)              SELECTOR           REPLICAS
+dns-backend   dns-backend    ddysher/dns-backend   name=dns-backend   1
+</code></pre><h2 id="step-three-create-backend-service">Step Three: Create backend service</h2>
+<p>Use the file examples/cluster-dns/dns-backend-service.yaml to create a service for the backend server.</p>
+<pre><code>$ kubectl config use-context dev
+$ kubectl create -f
+examples/cluster-dns/dns-backend-service.yaml
+</code></pre><p>Once that&apos;s up you can list the service in the cluster:</p>
+<pre><code>$ kubectl get service dns-backend
+NAME          LABELS    SELECTOR           IP(S)          PORT(S)
+dns-backend   &lt;none&gt;    name=dns-backend   10.0.236.129   8000/TCP
+</code></pre><p>Again, repeat the same process for prod namespace:</p>
+<pre><code>$ kubectl config use-context prod
+$ kubectl create -f examples/cluster-dns/dns-backend-service.yaml
+$ kubectl get service dns-backend
+NAME          LABELS    SELECTOR           IP(S)         PORT(S)
+dns-backend   &lt;none&gt;    name=dns-backend   10.0.35.246   8000/TCP
+</code></pre><h2 id="step-four-create-client-pod-in-one-namespace">Step Four: Create client pod in one namespace</h2>
+<p>Use the file examples/cluster-dns/dns-frontend-pod.yaml to create a client pod in dev namespace. The client pod will make a connection to backend and exit. Specifically, it tries to connect to address <a href="http://dns-backend.development.cluster.local:8000" target="_blank">http://dns-backend.development.cluster.local:8000</a>.</p>
+<pre><code>$ kubectl config use-context dev
+$ kubectl create -f
+examples/cluster-dns/dns-frontend-pod.yaml
+</code></pre><p>Once that&apos;s up you can list the pod in the cluster:</p>
+<pre><code>$ kubectl get pods dns-frontend
+NAME           READY     STATUS       RESTARTS   AGE
+dns-frontend   0/1       ExitCode:0   0          1m
+</code></pre><p>Wait until the pod succeeds, then we can see the output from the client pod:</p>
+<pre><code>$ kubectl logs dns-frontend
+2015-05-07T20:13:54.147664936Z 10.0.236.129
+2015-05-07T20:13:54.147721290Z Send request to: http://dns-backend.development.cluster.local:8000
+2015-05-07T20:13:54.147733438Z &lt;Response [200]&gt;
+2015-05-07T20:13:54.147738295Z Hello World!
+</code></pre><p>Please refer to the source code about the log. First line prints out the ip address associated with the service in dev namespace; remaining lines print out our request and server response.</p>
+<p>If we switch to prod namespace with the same pod config, we&apos;ll see the same result, i.e. dns will resolve across namespace.</p>
+<pre><code>$ kubectl config use-context prod
+$ kubectl create -f examples/cluster-dns/dns-frontend-pod.yaml
+$ kubectl logs dns-frontend
+2015-05-07T20:13:54.147664936Z 10.0.236.129
+2015-05-07T20:13:54.147721290Z Send request to: http://dns-backend.development.cluster.local:8000
+2015-05-07T20:13:54.147733438Z &lt;Response [200]&gt;
+2015-05-07T20:13:54.147738295Z Hello World!
+</code></pre><p>Note about default namespace
+If you prefer not using namespace, then all your services can be addressed using default namespace, e.g. <a href="http://dns-backend.default.cluster.local:8000" target="_blank">http://dns-backend.default.cluster.local:8000</a>, or shorthand version <a href="http://dns-backend:8000" target="_blank">http://dns-backend:8000</a></p>
+<h2 id="tl-dr">tl; dr;</h2>
+<p>For those of you who are impatient, here is the summary of the commands we ran in this tutorial. Remember to set first $CLUSTER_NAME and $USER_NAME to the values found in ~/.kube/config.</p>
+<pre><code># create dev and prod namespaces
+kubectl create -f examples/cluster-dns/namespace-dev.yaml
+kubectl create -f examples/cluster-dns/namespace-prod.yaml
 
+# create two contexts
+kubectl config set-context dev --namespace=development --cluster=${CLUSTER_NAME} --user=${USER_NAME}
+kubectl config set-context prod --namespace=production --cluster=${CLUSTER_NAME} --user=${USER_NAME}
+
+# create two backend replication controllers
+kubectl config use-context dev
+kubectl create -f examples/cluster-dns/dns-backend-rc.yaml
+kubectl config use-context prod
+kubectl create -f examples/cluster-dns/dns-backend-rc.yaml
+
+# create backend services
+kubectl config use-context dev
+kubectl create -f examples/cluster-dns/dns-backend-service.yaml
+kubectl config use-context prod
+kubectl create -f examples/cluster-dns/dns-backend-service.yaml
+
+# create a pod in each namespace and get its output
+kubectl config use-context dev
+kubectl create -f examples/cluster-dns/dns-frontend-pod.yaml
+kubectl logs dns-frontend
+
+kubectl config use-context prod
+kubectl create -f examples/cluster-dns/dns-frontend-pod.yaml
+kubectl logs dns-frontend
+</code></pre>
                     
                     </section>
                 
@@ -2513,8 +2611,10 @@
         </div>
 
         
+        <a href="./114-Running your first containers in Kubernetes.html" class="navigation navigation-prev " aria-label="Previous page: 第4.2.9节 在Kubernetes上运行你的第一个容器"><i class="fa fa-angle-left"></i></a>
         
-        <a href="./002-whatisk8s.html" class="navigation navigation-next navigation-unique" aria-label="Next page: 第1.1节  什么是Kubernetes？"><i class="fa fa-angle-right"></i></a>
+        
+        <a href="./127-Exploring Pods.html" class="navigation navigation-next " aria-label="Next page: 第4.2.22节  滚动升级示例"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
