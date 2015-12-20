@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://www.pengyaou.com/LegendsZ/eg/chart.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<style type="text/css">
+#Main{
+	width: 800px;
+	height: 500px;
+	border: 1px solid #ccc;
+	margin: 0 auto;
+	margin-top: 50px;
+	overflow:hidden;
+}
+#mainDiv {
+	width:100%;
+	height:500px;
+	margin-top:-30px;
+}
+.center {
+    width:800px;
+    margin:0 auto;
+}
+</style>
+<title>Kubernetes文档翻译贡献比率</title>
+<style type="text/css">html {-webkit-filter: invert(0%) !important; }img, video, object {-webkit-filter: invert(0%) !important; }</style><style type="text/css">html {-webkit-filter: invert(0%) !important; }img, video, object {-webkit-filter: invert(0%) !important; }</style></head>
+
+<body>
+<center>
+    <iframe src="./title.html" width="800" height="100" class="center" frameborder="0" scrolling="no"> </iframe>
+</center>
+<div id="Main">
+    <div id="mainDiv" style="overflow: hidden; text-align: left;">
+    </div>
+</div> 
+
+<script type="text/javascript" src="./proportion_files/amcharts.js"></script>
+<script type="text/javascript" src="./proportion_files/data.js"></script>
+<script type="text/javascript">
+window.onload=function() {
+	MakeChart(json);
+}
+//根据json数据生成饼状图，并将饼状图显示到div中
+function MakeChart(value) {
+    chartData = eval(value);
+	//饼状图
+    chart = new AmCharts.AmPieChart();
+    chart.dataProvider = chartData;
+	//标题数据
+    chart.titleField = "name";
+	//值数据
+    chart.valueField = "value";
+	//边框线颜色
+    chart.outlineColor = "#fff";
+	//边框线的透明度
+    chart.outlineAlpha = .8;
+	//边框线的狂宽度
+    chart.outlineThickness = 1;
+    chart.depth3D = 20;
+    chart.angle = 30;
+    chart.write("mainDiv");
+}
+</script>
+
+</body></html>
